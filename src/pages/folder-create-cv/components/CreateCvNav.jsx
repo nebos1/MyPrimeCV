@@ -1,10 +1,28 @@
 import "./CreateCvNav.css";
 import * as Icons from "../../../folder-lucide-icons/lucide-icons";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import InlineDocumentTitle from "../../../components/InlineDocumentTitle";
+import { ExportPreviewPdf } from "../../../components/folder-document-preview/export-pdf";
 
 function CreateCvNav({ title, templateName, onTitleChange, onImport, saveStatus, onRetrySave }) {
     const importInputRef = useRef(null);
+    const [exporting, setExporting] = useState(false);
+
+    async function DownloadPdf() {
+        setExporting(true);
+        try {
+            await ExportPreviewPdf(title);
+        } catch (error) {
+            window.alert(error.message || "The PDF could not be prepared. Please try again.");
+        } finally {
+            setExporting(false);
+        }
+    }
+
+    let downloadText = "Download PDF";
+    if (exporting) {
+        downloadText = "Preparing PDF...";
+    }
 
     function GoBack() {
         window.history.back();
@@ -73,9 +91,10 @@ function CreateCvNav({ title, templateName, onTitleChange, onImport, saveStatus,
                     onChange={ImportFromFile}
                     hidden
                 />
-                <button type="button" className="create-cv-download-btn">
+                <button type="button" className="create-cv-download-btn" onClick={DownloadPdf} disabled={exporting}
+                    title="Download your document as an A4 PDF">
                     <Icons.DownloadLucideIcon className="create-cv-nav-icon" />
-                    Download PDF
+                    {downloadText}
                 </button>
             </div>
         </div>

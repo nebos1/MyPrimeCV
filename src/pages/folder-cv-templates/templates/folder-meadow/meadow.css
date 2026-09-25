@@ -1,0 +1,573 @@
+.maya-template {
+    width: 100%;
+    max-width: 34rem;
+    aspect-ratio: 210 / 297;
+    overflow: hidden;
+    padding: 2.4rem;
+    color: #182528;
+    background: #ffffff;
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
+    box-shadow: 0 1rem 3rem rgba(40, 47, 44, 0.14);
+}
+
+.maya-template,
+.maya-template * {
+    box-sizing: border-box;
+}
+
+.maya-template-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.maya-template-person {
+    display: flex;
+    min-width: 0;
+    flex: 1 1 auto;
+    align-items: center;
+    gap: 0.9rem;
+}
+
+.maya-template-person > div {
+    min-width: 0;
+}
+
+.maya-template-photo {
+    display: grid;
+    width: 3.65rem;
+    height: 3.65rem;
+    flex: 0 0 auto;
+    place-items: center;
+    overflow: hidden;
+    border-radius: 50%;
+    color: #ffffff;
+    background: #d94e42;
+    font-size: 0.75rem;
+    font-weight: 900;
+}
+
+.maya-template-photo-image {
+    background: transparent;
+}
+
+.maya-template-photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.maya-template-person h1 {
+    max-width: 100%;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.48rem;
+    line-height: 1;
+    overflow-wrap: anywhere;
+}
+
+.maya-template-person p {
+    max-width: 100%;
+    margin-top: 0.35rem;
+    color: #d94e42;
+    font-size: 0.68rem;
+    font-weight: 850;
+    overflow-wrap: anywhere;
+}
+
+.maya-template-contact {
+    display: grid;
+    width: min(9rem, 42%);
+    min-width: 0;
+    flex: 0 1 9rem;
+    justify-items: end;
+    margin-left: auto;
+    padding-top: 0.15rem;
+    text-align: right;
+    gap: 0.3rem;
+}
+
+.maya-template-contact > span {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    color: #718083;
+    font-size: 0.5rem;
+    overflow-wrap: anywhere;
+    text-align: right;
+    word-break: break-word;
+}
+
+.maya-template-line {
+    height: 0.16rem;
+    margin: 1.1rem 0 1.3rem;
+    background: #d94e42;
+}
+
+.maya-template-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1.65fr) minmax(8rem, 0.75fr);
+    gap: 1.4rem;
+}
+
+.maya-template-content > * {
+    min-width: 0;
+}
+
+.maya-template-main {
+    min-width: 0;
+}
+
+.maya-template-section,
+.maya-template-job,
+.maya-template-education,
+.maya-template-project {
+    min-width: 0;
+    max-width: 100%;
+}
+
+.maya-template-section {
+    font-size: 0.55rem;
+}
+
+.maya-template-section + .maya-template-section {
+    margin-top: 1.2rem;
+}
+
+.maya-template-section h2,
+.maya-template-sidebar h2 {
+    color: #176b62;
+    font-size: 0.52rem;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.maya-template-section > p {
+    max-width: 100%;
+    margin-top: 0.45rem;
+    color: #586668;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1em;
+    line-height: 1.55;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.maya-template-job {
+    font-size: 0.46rem;
+    margin-top: 0.7rem;
+    padding-top: 0.7rem;
+    border-top: 0.0625rem solid #dedfd9;
+}
+
+.maya-template-job-heading,
+.maya-template-education {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) fit-content(45%);
+    align-items: flex-start;
+    gap: 0.8rem;
+}
+
+.maya-template-job-heading > div,
+.maya-template-education > div {
+    min-width: 0;
+    font-size: 0.46rem;
+}
+
+.maya-template-job h3,
+.maya-template-education h3,
+.maya-template-project h3 {
+    max-width: 100%;
+    font-size: 0.58rem;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.maya-template-job-heading > div > span,
+.maya-template-education > div > span,
+.maya-template-project > span {
+    display: block;
+    max-width: 100%;
+    margin-top: 0.15rem;
+    color: #d94e42;
+    font-size: 0.46rem;
+    font-weight: 800;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.maya-template-job-heading > div > .maya-template-entry-extra,
+.maya-template-education > div > .maya-template-entry-extra {
+    color: #586668;
+}
+
+.maya-template-entry-side-meta {
+    display: grid;
+    min-width: 0;
+    max-width: 100%;
+    justify-items: end;
+    text-align: right;
+    gap: 0.12rem;
+}
+
+.maya-template-job-heading small,
+.maya-template-education small,
+.maya-template-entry-location {
+    min-width: 0;
+    max-width: 100%;
+    font-size: 0.47rem;
+    overflow: hidden;
+    text-align: right;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.maya-template-job-heading small,
+.maya-template-education small {
+    color: #8c9697;
+}
+
+.maya-template-entry-location {
+    color: #586668;
+    font-weight: 800;
+}
+
+.maya-template-job ul {
+    max-width: 100%;
+    margin: 0.45rem 0 0;
+    padding-left: 0.8rem;
+    color: #586668;
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+.maya-template-job .cv-description-list,
+.maya-template-project .cv-description-list {
+    max-width: 100%;
+    color: #586668;
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+.maya-template-job li,
+.maya-template .cv-description-list li {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.maya-template-job li + li {
+    margin-top: 0.15rem;
+}
+
+.maya-template-education {
+    margin-top: 0.7rem;
+    padding-top: 0.7rem;
+    border-top: 0.0625rem solid #dedfd9;
+}
+
+.maya-template-project {
+    font-size: 0.46rem;
+    margin-top: 0.7rem;
+    padding-top: 0.7rem;
+    border-top: 0.0625rem solid #dedfd9;
+}
+
+.maya-template-project p {
+    max-width: 100%;
+    margin-top: 0.4rem;
+    color: #586668;
+    font-size: 1em;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.maya-template-sidebar {
+    min-width: 0;
+    max-width: 100%;
+    padding-left: 1.1rem;
+    border-left: 0.0625rem solid #dedfd9;
+}
+
+.maya-template-sidebar section + section {
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 0.0625rem solid #dedfd9;
+}
+
+.maya-template-sidebar ul {
+    display: grid;
+    margin-top: 0.55rem;
+    padding: 0;
+    list-style: none;
+    gap: 0.38rem;
+}
+
+.maya-template-sidebar li {
+    position: relative;
+    display: flex;
+    min-width: 0;
+    max-width: 100%;
+    flex-wrap: wrap;
+    padding-left: 0.6rem;
+    color: #586668;
+    font-size: 0.47rem;
+    font-weight: 750;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.3rem;
+}
+
+.maya-template-sidebar li > .cv-knowledge-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    width: 100%;
+    min-width: 0;
+    flex: 1 1 auto;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.maya-template-sidebar .cv-knowledge-label {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.maya-template-sidebar .cv-knowledge-row > .cv-rating {
+    justify-self: end;
+    margin-left: 0;
+}
+
+.maya-template-sidebar li::before {
+    position: absolute;
+    top: 0.38em;
+    left: 0;
+    width: 0.25rem;
+    height: 0.25rem;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    background: #d94e42;
+    content: "";
+}
+
+.maya-template-language {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    min-width: 0;
+    max-width: 100%;
+    align-items: center;
+    margin-top: 0.55rem;
+    font-size: 0.47rem;
+    gap: 0.3rem;
+}
+
+.maya-template-language-name {
+    min-width: 0;
+    color: #586668;
+    font-size: 0.47rem;
+    font-weight: 750;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.maya-template-language > small,
+.maya-template-language-meta {
+    display: inline-flex;
+    align-items: center;
+    justify-self: end;
+    margin-left: 0;
+    color: #8c9697;
+    font-size: 0.47rem;
+    white-space: nowrap;
+    gap: 0.2rem;
+}
+
+.maya-template .cv-rating {
+    display: inline-flex;
+    max-width: 100%;
+    flex: 0 0 auto;
+    white-space: nowrap;
+}
+
+.maya-template-sidebar p {
+    max-width: 100%;
+    margin-top: 0.5rem;
+    color: #586668;
+    font-size: 0.43rem;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.maya-template-sidebar a {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+@media (max-width: 36rem) {
+    .maya-template {
+        padding: 1.5rem;
+    }
+
+    .maya-template-header {
+        gap: 1rem;
+    }
+
+    .maya-template-content {
+        grid-template-columns: minmax(0, 1.55fr) minmax(6.5rem, 0.75fr);
+        gap: 0.9rem;
+    }
+
+    .maya-template-sidebar {
+        padding-left: 0.75rem;
+    }
+}
+
+.template-card-preview .maya-template {
+    padding: 1.25rem;
+}
+
+.template-card-preview .maya-template-header {
+    gap: 0.85rem;
+}
+
+.template-card-preview .maya-template-person {
+    gap: 0.55rem;
+}
+
+.template-card-preview .maya-template-photo {
+    width: 2.15rem;
+    height: 2.15rem;
+    font-size: 0.55rem;
+}
+
+.template-card-preview .maya-template-person h1 {
+    font-size: 1.18rem;
+}
+
+.template-card-preview .maya-template-person p {
+    margin-top: 0.18rem;
+    font-size: 0.48rem;
+}
+
+.template-card-preview .maya-template-contact {
+    gap: 0.14rem;
+}
+
+.template-card-preview .maya-template-contact > span {
+    font-size: 0.34rem;
+    gap: 0.18rem;
+}
+
+.template-card-preview .maya-template-line {
+    height: 0.12rem;
+    margin: 0.62rem 0 0.7rem;
+}
+
+.template-card-preview .maya-template-content {
+    grid-template-columns: minmax(0, 1.55fr) minmax(6.2rem, 0.8fr);
+    gap: 0.75rem;
+}
+
+.template-card-preview .maya-template-section + .maya-template-section {
+    margin-top: 0.55rem;
+}
+
+.template-card-preview .maya-template-section {
+    font-size: 0.38rem;
+}
+
+.template-card-preview .maya-template-section h2,
+.template-card-preview .maya-template-sidebar h2 {
+    font-size: 0.36rem;
+}
+
+.template-card-preview .maya-template-section > p {
+    margin-top: 0.24rem;
+    font-size: 0.38rem;
+    line-height: 1.35;
+}
+
+.template-card-preview .maya-template-job,
+.template-card-preview .maya-template-education,
+.template-card-preview .maya-template-project {
+    font-size: 0.34rem;
+    margin-top: 0.38rem;
+    padding-top: 0.38rem;
+}
+
+.template-card-preview .maya-template-job h3,
+.template-card-preview .maya-template-education h3,
+.template-card-preview .maya-template-project h3 {
+    font-size: 0.42rem;
+}
+
+.template-card-preview .maya-template-job-heading span,
+.template-card-preview .maya-template-education span,
+.template-card-preview .maya-template-project span {
+    margin-top: 0.08rem;
+    font-size: 0.32rem;
+}
+
+.template-card-preview .maya-template-job-heading small,
+.template-card-preview .maya-template-education small {
+    font-size: 0.3rem;
+}
+
+.template-card-preview .maya-template-job ul {
+    margin-top: 0.25rem;
+    padding-left: 0.55rem;
+    font-size: 0.34rem;
+    line-height: 1.32;
+}
+
+.template-card-preview .maya-template-job li + li {
+    margin-top: 0.08rem;
+}
+
+.template-card-preview .maya-template-project p {
+    margin-top: 0.22rem;
+    font-size: 0.34rem;
+    line-height: 1.32;
+}
+
+.template-card-preview .maya-template-sidebar {
+    padding-left: 0.7rem;
+}
+
+.template-card-preview .maya-template-sidebar section + section {
+    margin-top: 0.62rem;
+    padding-top: 0.5rem;
+}
+
+.template-card-preview .maya-template-sidebar ul {
+    margin-top: 0.28rem;
+    gap: 0.18rem;
+}
+
+.template-card-preview .maya-template-sidebar li {
+    font-size: 0.34rem;
+    gap: 0.22rem;
+}
+
+.template-card-preview .maya-template-sidebar li::before {
+    width: 0.18rem;
+    height: 0.18rem;
+}
+
+.template-card-preview .maya-template-language {
+    margin-top: 0.28rem;
+    font-size: 0.32rem;
+}
+
+.template-card-preview .maya-template-language span,
+.template-card-preview .maya-template-language small,
+.template-card-preview .maya-template-sidebar p {
+    font-size: 0.32rem;
+}

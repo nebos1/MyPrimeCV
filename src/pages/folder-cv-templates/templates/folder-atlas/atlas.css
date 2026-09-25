@@ -1,0 +1,572 @@
+.atlas-template {
+    width: 100%;
+    max-width: 34rem;
+    aspect-ratio: 210 / 297;
+    overflow: hidden;
+    color: #1d2729;
+    background: #f7f8f6;
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
+    box-shadow: 0 1rem 3rem rgba(28, 39, 42, 0.14);
+}
+
+.atlas-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 7.25rem;
+    padding: 2rem 2.2rem 1.5rem;
+    color: #ffffff;
+    background: #182528;
+    gap: 1.8rem;
+}
+
+.atlas-header-label {
+    color: #85c7b8;
+    font-size: 0.42rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.atlas-header h1 {
+    margin-top: 0.35rem;
+    font-size: 1.65rem;
+    letter-spacing: -0.04em;
+}
+
+.atlas-header p {
+    margin-top: 0.5rem;
+    max-width: 18rem;
+    color: #c7d3d1;
+    font-size: 0.48rem;
+    line-height: 1.5;
+}
+
+.atlas-summary {
+    max-width: 18rem;
+    margin-top: 0.5rem;
+}
+
+.atlas-summary p {
+    margin: 0;
+    color: #c7d3d1;
+    font-size: 0.5rem;
+    line-height: 1.5;
+}
+
+.atlas-contact {
+    display: grid;
+    align-content: start;
+    padding-left: 1.1rem;
+    border-left: 0.0625rem solid rgba(255, 255, 255, 0.2);
+    gap: 0.28rem;
+}
+
+.atlas-contact strong {
+    margin-bottom: 0.18rem;
+    color: #f1c75b;
+    font-size: 0.43rem;
+    text-transform: uppercase;
+}
+
+.atlas-contact span {
+    color: #c7d3d1;
+    font-size: 0.45rem;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+}
+
+.atlas-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 0 2.2rem;
+    transform: translateY(-0.8rem);
+    box-shadow: 0 0.5rem 1.4rem rgba(24, 37, 40, 0.12);
+}
+
+.atlas-metrics div {
+    padding: 0.7rem;
+    text-align: center;
+    background: #ffffff;
+    border-right: 0.0625rem solid #e1e4e1;
+}
+
+.atlas-metrics .atlas-metric-last {
+    border-right: 0;
+}
+
+.atlas-metrics strong {
+    display: block;
+    color: #d94e42;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1rem;
+    font-style: italic;
+}
+
+.atlas-metrics span {
+    display: block;
+    margin-top: 0.14rem;
+    color: #748082;
+    font-size: 0.38rem;
+    font-weight: 750;
+}
+
+.atlas-layout {
+    display: grid;
+    grid-template-columns: 1fr 9rem;
+    padding: 0.45rem 2.2rem 1.8rem;
+    gap: 1.4rem;
+}
+
+.atlas-section + .atlas-section {
+    margin-top: 1.2rem;
+}
+
+.atlas-section h2,
+.atlas-sidebar h2 {
+    color: #176b62;
+    font-size: 0.47rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.atlas-role {
+    display: grid;
+    grid-template-columns: 0.8rem 1fr;
+    margin-top: 0.75rem;
+    gap: 0.55rem;
+}
+
+.atlas-role-line {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.atlas-role-line::after {
+    position: absolute;
+    top: 0.55rem;
+    bottom: -0.9rem;
+    width: 0.0625rem;
+    background: #cfd6d2;
+    content: "";
+}
+
+.atlas-role-last .atlas-role-line::after {
+    display: none;
+}
+
+.atlas-role-line span {
+    position: relative;
+    z-index: 1;
+    width: 0.42rem;
+    height: 0.42rem;
+    border: 0.1rem solid #f7f8f6;
+    border-radius: 50%;
+    background: #d94e42;
+}
+
+.atlas-role-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.8rem;
+}
+
+.atlas-role-heading h3,
+.atlas-case h3,
+.atlas-sidebar h3 {
+    font-size: 0.54rem;
+}
+
+.atlas-role-heading p {
+    margin-top: 0.14rem;
+    color: #d94e42;
+    font-size: 0.43rem;
+    font-weight: 800;
+}
+
+.atlas-role-heading small,
+.atlas-sidebar small {
+    color: #8a9495;
+    font-size: 0.46rem;
+    text-align: right;
+    white-space: nowrap;
+}
+
+.atlas-entry-side-meta {
+    display: grid;
+    justify-items: end;
+    align-content: start;
+    min-width: 3.8rem;
+    gap: 0.12rem;
+    text-align: right;
+}
+
+.atlas-entry-side-meta small {
+    color: #8a9495;
+    font-size: 0.46rem;
+    white-space: nowrap;
+}
+
+.atlas-entry-location,
+.atlas-entry-extra {
+    color: #586668;
+    font-size: 0.42rem;
+    font-weight: 750;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.atlas-entry-location {
+    max-width: 5rem;
+    font-size: 0.4rem;
+}
+
+.atlas-entry-extra {
+    display: block;
+    margin-top: 0.12rem;
+}
+
+.atlas-role ul {
+    margin: 0.4rem 0 0;
+    padding-left: 0.8rem;
+    color: #566366;
+    font-size: 0.42rem;
+    line-height: 1.5;
+}
+
+.atlas-case {
+    display: grid;
+    grid-template-columns: 1.6rem 1fr;
+    margin-top: 0.65rem;
+    padding: 0.75rem;
+    background: #e8f4f0;
+    gap: 0.65rem;
+}
+
+.atlas-case > span {
+    color: #176b62;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 0.8rem;
+    font-style: italic;
+}
+
+.atlas-case p,
+.atlas-case .cv-description-list,
+.atlas-main-custom-section .cv-custom-item p,
+.atlas-main-custom-section .cv-custom-item .cv-description-list {
+    margin-top: 0.22rem;
+    color: #566366;
+    font-size: 0.42rem;
+    line-height: 1.45;
+}
+
+.atlas-main-custom-section .cv-custom-item .cv-description-list li {
+    color: #566366;
+    font-size: 0.42rem;
+    line-height: 1.45;
+}
+
+.atlas-case .cv-description-list li {
+    color: #566366;
+    font-size: 0.38rem;
+    line-height: 1.45;
+}
+
+.atlas-case p,
+.atlas-case .cv-description-list,
+.atlas-case .cv-description-list li {
+    font-size: 0.44rem;
+}
+
+.atlas-case .cv-description-list,
+.atlas-main-custom-section .cv-custom-item .cv-description-list {
+    padding-left: 0.75rem;
+}
+
+.atlas-sidebar {
+    padding-left: 1rem;
+    border-left: 0.0625rem solid #d3d9d5;
+}
+
+.atlas-sidebar section + section {
+    margin-top: 1rem;
+    padding-top: 0.8rem;
+    border-top: 0.0625rem solid #d3d9d5;
+}
+
+.atlas-sidebar ul {
+    display: grid;
+    margin-top: 0.55rem;
+    padding: 0;
+    list-style: none;
+    gap: 0.2rem;
+}
+
+.atlas-sidebar li,
+.atlas-sidebar p {
+    color: #566366;
+    font-size: 0.43rem;
+    line-height: 1.35;
+}
+
+.atlas-sidebar li {
+    min-width: 0;
+}
+
+.atlas-education {
+    display: grid;
+    align-items: start;
+    margin-top: 0.5rem;
+    gap: 0.14rem;
+}
+
+.atlas-education-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+    min-width: 0;
+    gap: 0.45rem;
+}
+
+.atlas-education-row h3,
+.atlas-education-row p,
+.atlas-education-row span {
+    margin: 0;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.atlas-education-row small,
+.atlas-education-row .atlas-entry-location {
+    justify-self: end;
+    margin: 0;
+    text-align: right;
+}
+
+.atlas-sidebar .atlas-education-row h3,
+.atlas-sidebar .atlas-education-row p {
+    margin: 0;
+}
+
+.atlas-sidebar h3 {
+    margin-top: 0.5rem;
+}
+
+.atlas-sidebar p {
+    margin-top: 0.2rem;
+}
+
+.atlas-sidebar a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.atlas-sidebar a:hover {
+    color: #176b62;
+}
+
+.atlas-side-custom-section .cv-custom-item-heading h3 {
+    margin-top: 0.18rem;
+    font-size: 0.46rem;
+    line-height: 1.25;
+}
+
+.atlas-side-custom-section .cv-custom-item-heading > div > span {
+    font-size: 0.38rem;
+    line-height: 1.35;
+}
+
+.template-card-preview .atlas-header {
+    grid-template-columns: minmax(0, 1fr) 6.4rem;
+    padding: 1.35rem 1.65rem 1rem;
+    gap: 1.2rem;
+}
+
+.template-card-preview .atlas-header-label {
+    font-size: 0.34rem;
+}
+
+.template-card-preview .atlas-header h1 {
+    margin-top: 0.24rem;
+    font-size: 1.28rem;
+}
+
+.template-card-preview .atlas-header p {
+    margin-top: 0.32rem;
+    font-size: 0.36rem;
+    line-height: 1.35;
+}
+
+.template-card-preview .atlas-summary {
+    margin-top: 0.32rem;
+}
+
+.template-card-preview .atlas-summary p {
+    font-size: 0.37rem;
+    line-height: 1.35;
+}
+
+.template-card-preview .atlas-contact {
+    padding-left: 0.8rem;
+    gap: 0.18rem;
+}
+
+.template-card-preview .atlas-contact strong {
+    margin-bottom: 0.1rem;
+    font-size: 0.34rem;
+}
+
+.template-card-preview .atlas-contact span {
+    font-size: 0.34rem;
+}
+
+.template-card-preview .atlas-metrics {
+    margin: 0 1.65rem;
+    transform: translateY(-0.55rem);
+}
+
+.template-card-preview .atlas-metrics div {
+    padding: 0.45rem;
+}
+
+.template-card-preview .atlas-metrics strong {
+    font-size: 0.78rem;
+}
+
+.template-card-preview .atlas-metrics span {
+    font-size: 0.3rem;
+}
+
+.template-card-preview .atlas-layout {
+    grid-template-columns: minmax(0, 1fr) 7.2rem;
+    padding: 0.15rem 1.65rem 1.15rem;
+    gap: 0.9rem;
+}
+
+.template-card-preview .atlas-section + .atlas-section {
+    margin-top: 0.65rem;
+}
+
+.template-card-preview .atlas-section h2,
+.template-card-preview .atlas-sidebar h2 {
+    font-size: 0.36rem;
+}
+
+.template-card-preview .atlas-role {
+    grid-template-columns: 0.55rem 1fr;
+    margin-top: 0.42rem;
+    gap: 0.36rem;
+}
+
+.template-card-preview .atlas-role-line::after {
+    top: 0.42rem;
+    bottom: -0.5rem;
+}
+
+.template-card-preview .atlas-role-line span {
+    width: 0.32rem;
+    height: 0.32rem;
+}
+
+.template-card-preview .atlas-role-heading {
+    gap: 0.45rem;
+}
+
+.template-card-preview .atlas-role-heading h3,
+.template-card-preview .atlas-case h3,
+.template-card-preview .atlas-sidebar h3 {
+    font-size: 0.4rem;
+}
+
+.template-card-preview .atlas-role-heading p {
+    margin-top: 0.08rem;
+    font-size: 0.31rem;
+}
+
+.template-card-preview .atlas-role-heading small,
+.template-card-preview .atlas-sidebar small {
+    font-size: 0.33rem;
+}
+
+.template-card-preview .atlas-role ul {
+    margin-top: 0.22rem;
+    padding-left: 0.55rem;
+    font-size: 0.31rem;
+    line-height: 1.32;
+}
+
+.template-card-preview .atlas-case {
+    grid-template-columns: 1.1rem 1fr;
+    margin-top: 0.4rem;
+    padding: 0.5rem;
+    gap: 0.45rem;
+}
+
+.template-card-preview .atlas-case > span {
+    font-size: 0.58rem;
+}
+
+.template-card-preview .atlas-case p {
+    margin-top: 0.14rem;
+    font-size: 0.31rem;
+    line-height: 1.3;
+}
+
+.template-card-preview .atlas-sidebar {
+    padding-left: 0.65rem;
+}
+
+.template-card-preview .atlas-sidebar section + section {
+    margin-top: 0.58rem;
+    padding-top: 0.48rem;
+}
+
+.template-card-preview .atlas-sidebar ul {
+    margin-top: 0.3rem;
+    gap: 0.18rem;
+}
+
+.template-card-preview .atlas-sidebar li,
+.template-card-preview .atlas-sidebar p {
+    font-size: 0.31rem;
+    line-height: 1.3;
+}
+
+.template-card-preview .atlas-language-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    min-width: 0;
+    margin-top: 0.18rem;
+    color: #566366;
+    font-size: 0.31rem;
+    line-height: 1.3;
+    gap: 0.28rem;
+}
+
+.template-card-preview .atlas-language-row > span {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.template-card-preview .atlas-language-row > small {
+    justify-self: end;
+    color: #8a9495;
+    font-size: 0.31rem;
+    line-height: 1.3;
+    text-align: right;
+    white-space: nowrap;
+}
+
+.template-card-preview .atlas-sidebar h3 {
+    margin-top: 0.28rem;
+}
+
+.template-card-preview .atlas-sidebar .atlas-education-row h3,
+.template-card-preview .atlas-sidebar .atlas-education-row p {
+    margin: 0;
+}

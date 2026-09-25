@@ -1,0 +1,375 @@
+.terrace-template {
+    width: 100%;
+    max-width: 34rem;
+    aspect-ratio: 210 / 297;
+    overflow: hidden;
+    padding: 1.6rem 1.8rem;
+    color: #182528;
+    background: #f7f4ee;
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
+    box-shadow: 0 1rem 3rem rgba(34, 45, 45, 0.14);
+}
+
+.terrace-header {
+    display: grid;
+    grid-template-columns: 3rem 1fr 9rem;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.terrace-initials {
+    display: grid;
+    width: 2.6rem;
+    height: 2.6rem;
+    place-items: center;
+    color: #ffffff;
+    background: #d94e42;
+    font-size: 0.55rem;
+    font-weight: 900;
+    clip-path: polygon(0 0, 100% 0, 80% 100%, 0 82%);
+}
+
+.terrace-header small {
+    color: #176b62;
+    font-size: 0.36rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.terrace-header h1 {
+    margin-top: 0.25rem;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.42rem;
+    line-height: 0.95;
+}
+
+.terrace-header p {
+    margin-top: 0.25rem;
+    color: #d94e42;
+    font-size: 0.46rem;
+    font-weight: 850;
+}
+
+.terrace-contact {
+    display: grid;
+    text-align: right;
+    gap: 0.2rem;
+}
+
+.terrace-contact span {
+    color: #6e7a7c;
+    font-size: 0.35rem;
+}
+
+.terrace-step {
+    display: grid;
+    grid-template-columns: 2rem 1fr;
+    min-height: 3.6rem;
+    margin-top: 0.55rem;
+    padding: 0.75rem 0.9rem;
+    gap: 0.65rem;
+}
+
+.terrace-number {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 0.75rem;
+    font-style: italic;
+}
+
+.terrace-step h2 {
+    font-size: 0.4rem;
+    font-weight: 900;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+}
+
+.terrace-step-profile {
+    width: 92%;
+    margin-left: 0;
+    color: #ffffff;
+    background: #182528;
+}
+
+.terrace-step-profile .terrace-number {
+    color: #f1c75b;
+}
+
+.terrace-step-profile h2 {
+    color: #85c7b8;
+}
+
+.terrace-step-profile p {
+    margin-top: 0.3rem;
+    color: #d5dfdd;
+    font-size: 0.4rem;
+    line-height: 1.45;
+}
+
+.terrace-step-experience {
+    width: 96%;
+    margin-left: 4%;
+    background: #ffffff;
+    border: 0.0625rem solid #d9dfdc;
+}
+
+.terrace-step-experience .terrace-number,
+.terrace-step-education .terrace-number {
+    color: #d94e42;
+}
+
+.terrace-job {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    margin-top: 0.45rem;
+    gap: 0.15rem 0.7rem;
+}
+
+.terrace-job + .terrace-job {
+    margin-top: 0.55rem;
+    padding-top: 0.5rem;
+    border-top: 0.0625rem solid #d9dfdc;
+}
+
+.terrace-job h3,
+.terrace-row h3,
+.terrace-step-project h3 {
+    font-size: 0.46rem;
+}
+
+.terrace-job span,
+.terrace-row span {
+    display: block;
+    margin-top: 0.1rem;
+    color: #176b62;
+    font-size: 0.36rem;
+    font-weight: 800;
+}
+
+.terrace-job small,
+.terrace-row small {
+    color: #8c9697;
+    font-size: 0.33rem;
+}
+
+.terrace-job > p {
+    grid-column: 1 / 3;
+    margin-top: 0.2rem;
+    color: #536164;
+    font-size: 0.36rem;
+    line-height: 1.42;
+}
+
+.terrace-job ul {
+    grid-column: 1 / 3;
+    margin: 0.18rem 0 0;
+    padding-left: 0.65rem;
+    color: #536164;
+    font-size: 0.34rem;
+    line-height: 1.42;
+}
+
+.terrace-step-education {
+    width: 88%;
+    margin-left: 12%;
+    background: #f1c75b;
+}
+
+.terrace-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.4rem;
+    gap: 0.7rem;
+}
+
+.terrace-step-skills {
+    width: 82%;
+    margin-left: 4%;
+    color: #ffffff;
+    background: #176b62;
+}
+
+.terrace-step-skills .terrace-number {
+    color: #f1c75b;
+}
+
+.terrace-skills {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 0.4rem;
+    gap: 0.25rem;
+}
+
+.terrace-skills > span {
+    padding: 0.22rem 0.35rem;
+    border: 0.0625rem solid rgba(255,255,255,0.35);
+    border-radius: 999rem;
+    font-size: 0.34rem;
+}
+
+.terrace-step-project {
+    width: 92%;
+    margin-left: 8%;
+    background: #eadde7;
+}
+
+.terrace-step-project .terrace-number {
+    color: #8f4f7d;
+}
+
+.terrace-step-project h3 {
+    margin-top: 0.35rem;
+}
+
+.terrace-step-project p {
+    margin-top: 0.22rem;
+    color: #5f5660;
+    font-size: 0.36rem;
+    line-height: 1.42;
+}
+
+.terrace-meta {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 0.45rem;
+    gap: 0.45rem;
+}
+
+.terrace-meta span {
+    color: #7f6679;
+    font-size: 0.32rem;
+    font-weight: 750;
+}
+
+.template-card-preview .terrace-template {
+    padding: 1rem 1.08rem;
+}
+
+.template-card-preview .terrace-header {
+    grid-template-columns: 2.25rem 1fr 6.7rem;
+    gap: 0.48rem;
+}
+
+.template-card-preview .terrace-initials {
+    width: 1.9rem;
+    height: 1.9rem;
+    font-size: 0.4rem;
+}
+
+.template-card-preview .terrace-header small {
+    font-size: 0.26rem;
+}
+
+.template-card-preview .terrace-header h1 {
+    margin-top: 0.14rem;
+    font-size: 1rem;
+}
+
+.template-card-preview .terrace-header p {
+    margin-top: 0.14rem;
+    font-size: 0.33rem;
+}
+
+.template-card-preview .terrace-contact {
+    gap: 0.11rem;
+}
+
+.template-card-preview .terrace-contact span {
+    font-size: 0.25rem;
+}
+
+.template-card-preview .terrace-step {
+    grid-template-columns: 1.35rem 1fr;
+    min-height: 2.45rem;
+    margin-top: 0.36rem;
+    padding: 0.46rem 0.56rem;
+    gap: 0.38rem;
+}
+
+.template-card-preview .terrace-number {
+    font-size: 0.52rem;
+}
+
+.template-card-preview .terrace-step h2 {
+    font-size: 0.28rem;
+}
+
+.template-card-preview .terrace-step-profile p {
+    margin-top: 0.16rem;
+    font-size: 0.28rem;
+    line-height: 1.22;
+}
+
+.template-card-preview .terrace-job {
+    margin-top: 0.28rem;
+    gap: 0.1rem 0.42rem;
+}
+
+.template-card-preview .terrace-job + .terrace-job {
+    margin-top: 0.32rem;
+    padding-top: 0.28rem;
+}
+
+.template-card-preview .terrace-job h3,
+.template-card-preview .terrace-row h3,
+.template-card-preview .terrace-step-project h3 {
+    font-size: 0.32rem;
+}
+
+.template-card-preview .terrace-job span,
+.template-card-preview .terrace-row span {
+    margin-top: 0.05rem;
+    font-size: 0.25rem;
+}
+
+.template-card-preview .terrace-job small,
+.template-card-preview .terrace-row small {
+    font-size: 0.23rem;
+}
+
+.template-card-preview .terrace-job > p {
+    margin-top: 0.1rem;
+    font-size: 0.25rem;
+    line-height: 1.18;
+}
+
+.template-card-preview .terrace-job ul {
+    margin-top: 0.08rem;
+    padding-left: 0.42rem;
+    font-size: 0.24rem;
+    line-height: 1.16;
+}
+
+.template-card-preview .terrace-row {
+    margin-top: 0.22rem;
+    gap: 0.42rem;
+}
+
+.template-card-preview .terrace-skills {
+    margin-top: 0.22rem;
+    gap: 0.14rem;
+}
+
+.template-card-preview .terrace-skills > span {
+    padding: 0.13rem 0.22rem;
+    font-size: 0.24rem;
+}
+
+.template-card-preview .terrace-step-project h3 {
+    margin-top: 0.2rem;
+}
+
+.template-card-preview .terrace-step-project p {
+    margin-top: 0.12rem;
+    font-size: 0.25rem;
+    line-height: 1.18;
+}
+
+.template-card-preview .terrace-meta {
+    margin-top: 0.24rem;
+    gap: 0.22rem;
+}
+
+.template-card-preview .terrace-meta span {
+    font-size: 0.22rem;
+}

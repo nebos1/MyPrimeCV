@@ -1,0 +1,59 @@
+.main-navbar .upload-cv {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.5rem;
+    padding: 0 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 800;
+    cursor: pointer;
+    gap: 0.5rem;
+    transition:
+        transform 160ms ease,
+        background 160ms ease,
+        border-color 160ms ease;
+}
+
+.main-navbar .upload-cv {
+    border: 0.0625rem solid #c7cbc5;
+    color: #182528;
+    background: #ffffff;
+}
+
+.main-navbar .upload-cv:hover {
+    background: #f4f2ec;
+    transform: translateY(-0.0625rem);
+}
+
+@media (max-width: 48rem) {
+    .main-navbar .upload-cv {
+        flex: 1 1 calc(33.333% - 0.5rem);
+        max-width: none;
+        min-height: 2.3rem;
+        padding: 0.45rem 0.58rem;
+        font-size: 0.76rem;
+        line-height: 1.1;
+        text-align: center;
+        white-space: normal;
+    }
+
+    .main-navbar .upload-cv {
+        gap: 0.32rem;
+    }
+}
+
+@media (max-width: 36rem) {
+    .main-navbar .upload-cv {
+        width: 100%;
+        min-width: 0;
+        flex: none;
+        font-size: 0.7rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .main-navbar .upload-cv {
+        transition: none;
+    }
+}

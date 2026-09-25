@@ -1,0 +1,26 @@
+.logo-icon {
+    display: block;
+    width: 3rem;
+    height: 3rem;
+    background: transparent url("./logo.png") center / contain no-repeat;
+}
+
+.logo-name {
+    font-size: 1rem;
+    font-weight: 850;
+}
+
+.logo-name span {
+    color: #d94e42;
+}
+
+@media (max-width: 48rem) {
+    .logo-icon {
+        width: 2.45rem;
+        height: 2.45rem;
+    }
+
+    .logo-name {
+        font-size: 0.95rem;
+    }
+}

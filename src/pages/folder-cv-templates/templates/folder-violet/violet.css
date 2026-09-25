@@ -1,0 +1,286 @@
+.violet-template {
+    width: 100%;
+    max-width: 34rem;
+    aspect-ratio: 210 / 297;
+    overflow: hidden;
+    padding: 2rem 2.2rem;
+    color: #182528;
+    background: #ffffff;
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
+    box-shadow: 0 1rem 3rem rgba(34, 45, 45, 0.14);
+}
+
+.violet-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.violet-person {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.violet-person > span {
+    display: grid;
+    width: 2.2rem;
+    height: 2.2rem;
+    place-items: center;
+    border-radius: 50%;
+    color: #ffffff;
+    background: #8a62b7;
+    font-size: 0.52rem;
+    font-weight: 900;
+}
+
+.violet-person h1 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.35rem;
+    line-height: 0.95;
+}
+
+.violet-person p {
+    margin-top: 0.3rem;
+    color: #7650a6;
+    font-size: 0.46rem;
+    font-weight: 850;
+}
+
+.violet-header > small {
+    color: #7650a6;
+    font-size: 0.32rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.violet-line {
+    height: 0.12rem;
+    margin: 0.9rem 0 0.8rem;
+    background: #9a75c6;
+}
+
+.violet-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.75fr) minmax(7rem, 0.7fr);
+    align-items: start;
+    gap: 1.05rem;
+}
+
+.violet-main-card,
+.violet-sidebar-card {
+    color: #ffffff;
+    background: #22383b;
+}
+
+.violet-main-card {
+    padding: 1rem 1.05rem;
+}
+
+.violet-sidebar-card {
+    padding: 1rem 0.8rem;
+}
+
+.violet-main-card section + section,
+.violet-sidebar-card section + section {
+    margin-top: 0.8rem;
+    padding-top: 0.65rem;
+    border-top: 0.0625rem solid rgba(255,255,255,0.28);
+}
+
+.violet-main-card h2,
+.violet-sidebar-card h2 {
+    margin-bottom: 0.4rem;
+    color: #bd91ed;
+    font-size: 0.39rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.violet-main-card section > p,
+.violet-sidebar-card p,
+.violet-sidebar-card strong,
+.violet-pair span,
+.violet-pair small {
+    font-size: 0.36rem;
+    line-height: 1.48;
+}
+
+.violet-main-card section > p,
+.violet-sidebar-card p,
+.violet-pair span {
+    color: #d8e1df;
+}
+
+.violet-job + .violet-job {
+    margin-top: 0.55rem;
+}
+
+.violet-job-heading,
+.violet-row,
+.violet-pair {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.7rem;
+}
+
+.violet-job h3,
+.violet-row h3 {
+    font-size: 0.46rem;
+}
+
+.violet-job span,
+.violet-row span {
+    display: block;
+    margin-top: 0.1rem;
+    color: #c7d1cf;
+    font-size: 0.35rem;
+}
+
+.violet-job small,
+.violet-row small,
+.violet-pair small {
+    color: #9eaead;
+    font-size: 0.33rem;
+}
+
+.violet-job ul {
+    margin: 0.24rem 0 0;
+    padding-left: 0.68rem;
+    color: #d8e1df;
+    font-size: 0.35rem;
+    line-height: 1.45;
+}
+
+.violet-sidebar-card strong {
+    display: block;
+    margin-top: 0.28rem;
+    color: #ffffff;
+}
+
+.violet-pair {
+    margin-top: 0.3rem;
+}
+
+.violet-row {
+    margin-top: 0.35rem;
+}
+
+.template-card-preview .violet-template {
+    padding: 1.22rem 1.32rem;
+}
+
+.template-card-preview .violet-header {
+    gap: 0.6rem;
+}
+
+.template-card-preview .violet-person {
+    gap: 0.48rem;
+}
+
+.template-card-preview .violet-person > span {
+    width: 1.55rem;
+    height: 1.55rem;
+    font-size: 0.36rem;
+}
+
+.template-card-preview .violet-person h1 {
+    font-size: 0.98rem;
+}
+
+.template-card-preview .violet-person p {
+    margin-top: 0.16rem;
+    font-size: 0.32rem;
+}
+
+.template-card-preview .violet-header > small {
+    font-size: 0.23rem;
+}
+
+.template-card-preview .violet-line {
+    height: 0.08rem;
+    margin: 0.52rem 0 0.5rem;
+}
+
+.template-card-preview .violet-layout {
+    grid-template-columns: minmax(0, 1.7fr) minmax(5.65rem, 0.72fr);
+    gap: 0.68rem;
+}
+
+.template-card-preview .violet-main-card {
+    padding: 0.62rem 0.68rem;
+}
+
+.template-card-preview .violet-sidebar-card {
+    padding: 0.62rem 0.52rem;
+}
+
+.template-card-preview .violet-main-card section + section,
+.template-card-preview .violet-sidebar-card section + section {
+    margin-top: 0.45rem;
+    padding-top: 0.36rem;
+}
+
+.template-card-preview .violet-main-card h2,
+.template-card-preview .violet-sidebar-card h2 {
+    margin-bottom: 0.22rem;
+    font-size: 0.27rem;
+}
+
+.template-card-preview .violet-main-card section > p,
+.template-card-preview .violet-sidebar-card p,
+.template-card-preview .violet-sidebar-card strong,
+.template-card-preview .violet-pair span,
+.template-card-preview .violet-pair small {
+    font-size: 0.25rem;
+    line-height: 1.22;
+}
+
+.template-card-preview .violet-job + .violet-job {
+    margin-top: 0.32rem;
+}
+
+.template-card-preview .violet-job-heading,
+.template-card-preview .violet-row,
+.template-card-preview .violet-pair {
+    gap: 0.4rem;
+}
+
+.template-card-preview .violet-job h3,
+.template-card-preview .violet-row h3 {
+    font-size: 0.32rem;
+}
+
+.template-card-preview .violet-job span,
+.template-card-preview .violet-row span {
+    margin-top: 0.05rem;
+    font-size: 0.25rem;
+}
+
+.template-card-preview .violet-job small,
+.template-card-preview .violet-row small,
+.template-card-preview .violet-pair small {
+    font-size: 0.23rem;
+}
+
+.template-card-preview .violet-job ul {
+    margin-top: 0.12rem;
+    padding-left: 0.45rem;
+    font-size: 0.25rem;
+    line-height: 1.18;
+}
+
+.template-card-preview .violet-sidebar-card strong {
+    margin-top: 0.16rem;
+}
+
+.template-card-preview .violet-pair {
+    margin-top: 0.16rem;
+}
+
+.template-card-preview .violet-row {
+    margin-top: 0.2rem;
+}

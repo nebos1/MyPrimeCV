@@ -1,0 +1,65 @@
+.paragraphs-editor {
+    display: grid;
+    gap: 0.95rem;
+    padding-left: 1.95rem;
+}
+
+.paragraph-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 2.2rem;
+    align-items: start;
+    gap: 0.8rem;
+}
+
+.delete-paragraph-btn {
+    display: grid;
+    width: 2.2rem;
+    height: 2.2rem;
+    margin-top: 1.95rem;
+    place-items: center;
+    border: 0;
+    border-radius: 0.375rem;
+    color: #6c7d80;
+    background: transparent;
+    cursor: pointer;
+}
+
+.delete-paragraph-btn:enabled:hover {
+    color: #c94036;
+    background: #fff0ed;
+}
+
+.delete-paragraph-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+.delete-paragraph-btn svg {
+    width: 1rem;
+    height: 1rem;
+}
+
+.add-paragraph-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3rem;
+    border: 0.0625rem dashed #9ec9bf;
+    border-radius: 0.5rem;
+    color: #006a62;
+    background: #fbfffd;
+    font-size: 0.86rem;
+    font-weight: 850;
+    cursor: pointer;
+    gap: 0.5rem;
+}
+
+.add-paragraph-btn:hover {
+    border-color: #006a62;
+    background: #f1faf7;
+}
+
+.add-paragraph-btn svg {
+    width: 1.05rem;
+    height: 1.05rem;
+}

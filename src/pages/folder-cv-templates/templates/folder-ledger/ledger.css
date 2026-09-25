@@ -1,0 +1,280 @@
+.ledger-template {
+    width: 100%;
+    max-width: 34rem;
+    aspect-ratio: 210 / 297;
+    padding: 2rem;
+    color: #1a2325;
+    background:
+        linear-gradient(#ecefec 0.0625rem, transparent 0.0625rem) 0 0 / 100% 1.55rem,
+        #ffffff;
+    font-family: "Courier New", Courier, monospace;
+    box-shadow: 0 1rem 3rem rgba(33, 42, 44, 0.13);
+}
+
+.ledger-header {
+    display: grid;
+    grid-template-columns: 4rem 1fr 10rem;
+    align-items: end;
+    min-height: 5rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 0.18rem solid #1a2325;
+    gap: 1rem;
+}
+
+.ledger-header h1 {
+    font-size: 1.45rem;
+    line-height: 0.95;
+    text-transform: uppercase;
+}
+
+.ledger-header p {
+    margin-top: 0.3rem;
+    color: #176b62;
+    font-size: 0.48rem;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.ledger-contact {
+    display: grid;
+    text-align: right;
+    gap: 0.22rem;
+}
+
+.ledger-contact span {
+    color: #687476;
+    font-size: 0.38rem;
+}
+
+.ledger-row {
+    display: grid;
+    grid-template-columns: 2.4rem 5rem 1fr;
+    min-height: 3.1rem;
+    padding: 0.8rem 0;
+    border-bottom: 0.0625rem solid #aeb7b4;
+    gap: 0.65rem;
+}
+
+.ledger-number {
+    color: #d94e42;
+    font-size: 0.46rem;
+    font-weight: 900;
+}
+
+.ledger-row h2 {
+    font-size: 0.46rem;
+    text-transform: uppercase;
+}
+
+.ledger-profile p {
+    color: #4f5d60;
+    font-size: 0.44rem;
+    line-height: 1.5;
+}
+
+.ledger-content {
+    min-width: 0;
+}
+
+.ledger-job {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.18rem 0.8rem;
+}
+
+.ledger-job + .ledger-job {
+    margin-top: 0.65rem;
+    padding-top: 0.65rem;
+    border-top: 0.0625rem dashed #aeb7b4;
+}
+
+.ledger-job h3,
+.ledger-education h3 {
+    font-size: 0.5rem;
+    text-transform: uppercase;
+}
+
+.ledger-job span,
+.ledger-education span {
+    display: block;
+    margin-top: 0.1rem;
+    color: #176b62;
+    font-size: 0.4rem;
+    font-weight: 900;
+}
+
+.ledger-job small,
+.ledger-education small {
+    color: #778285;
+    font-size: 0.37rem;
+}
+
+.ledger-job p {
+    grid-column: 1 / 3;
+    margin-top: 0.22rem;
+    color: #4f5d60;
+    font-size: 0.4rem;
+    line-height: 1.45;
+}
+
+.ledger-job ul {
+    grid-column: 1 / 3;
+    margin: 0.2rem 0 0;
+    padding-left: 0.8rem;
+    color: #4f5d60;
+    font-size: 0.39rem;
+    line-height: 1.45;
+}
+
+.ledger-education {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.ledger-skill-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.35rem 0.6rem;
+}
+
+.ledger-skill-grid > span {
+    color: #3f4d50;
+    font-size: 0.4rem;
+}
+
+.ledger-skill-grid > span::before {
+    color: #d94e42;
+    content: "■ ";
+}
+
+.ledger-language-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.7rem;
+}
+
+.ledger-language-row > span {
+    color: #4f5d60;
+    font-size: 0.38rem;
+}
+
+.ledger-skill-grid > span::before {
+    display: inline-block;
+    width: 0.26rem;
+    height: 0.26rem;
+    margin-right: 0.3rem;
+    background: #d94e42;
+    color: transparent;
+    content: "";
+}
+
+.template-card-preview .ledger-template {
+    overflow: hidden;
+    padding: 1.22rem;
+}
+
+.template-card-preview .ledger-header {
+    grid-template-columns: 3rem 1fr 7.1rem;
+    min-height: 3.45rem;
+    padding-bottom: 0.5rem;
+    gap: 0.65rem;
+}
+
+.template-card-preview .ledger-header h1 {
+    font-size: 1.05rem;
+}
+
+.template-card-preview .ledger-header p {
+    margin-top: 0.18rem;
+    font-size: 0.34rem;
+}
+
+.template-card-preview .ledger-contact {
+    gap: 0.13rem;
+}
+
+.template-card-preview .ledger-contact span {
+    font-size: 0.27rem;
+}
+
+.template-card-preview .ledger-row {
+    grid-template-columns: 1.65rem 3.65rem 1fr;
+    min-height: 2.15rem;
+    padding: 0.46rem 0;
+    gap: 0.42rem;
+}
+
+.template-card-preview .ledger-number {
+    font-size: 0.32rem;
+}
+
+.template-card-preview .ledger-row h2 {
+    font-size: 0.32rem;
+}
+
+.template-card-preview .ledger-profile p {
+    font-size: 0.31rem;
+    line-height: 1.28;
+}
+
+.template-card-preview .ledger-job {
+    gap: 0.12rem 0.45rem;
+}
+
+.template-card-preview .ledger-job + .ledger-job {
+    margin-top: 0.36rem;
+    padding-top: 0.34rem;
+}
+
+.template-card-preview .ledger-job h3,
+.template-card-preview .ledger-education h3 {
+    font-size: 0.36rem;
+}
+
+.template-card-preview .ledger-job span,
+.template-card-preview .ledger-education span {
+    margin-top: 0.06rem;
+    font-size: 0.29rem;
+}
+
+.template-card-preview .ledger-job small,
+.template-card-preview .ledger-education small {
+    font-size: 0.27rem;
+}
+
+.template-card-preview .ledger-job p {
+    margin-top: 0.14rem;
+    font-size: 0.29rem;
+    line-height: 1.24;
+}
+
+.template-card-preview .ledger-job ul {
+    margin-top: 0.12rem;
+    padding-left: 0.52rem;
+    font-size: 0.28rem;
+    line-height: 1.24;
+}
+
+.template-card-preview .ledger-education {
+    gap: 0.55rem;
+}
+
+.template-card-preview .ledger-skill-grid {
+    gap: 0.2rem 0.35rem;
+}
+
+.template-card-preview .ledger-skill-grid > span,
+.template-card-preview .ledger-language-row > span {
+    font-size: 0.28rem;
+}
+
+.template-card-preview .ledger-skill-grid > span::before {
+    width: 0.18rem;
+    height: 0.18rem;
+    margin-right: 0.2rem;
+}
+
+.template-card-preview .ledger-language-row {
+    gap: 0.4rem;
+}

@@ -1,0 +1,337 @@
+.create-cv-list-header,
+.create-cv-list-item-top {
+    display: flex;
+    align-items: center;
+}
+
+.create-cv-list-header button,
+.create-cv-section-add-btn,
+.create-cv-delete-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    cursor: pointer;
+}
+
+.create-cv-section-icon svg,
+.create-cv-photo-import-btn svg,
+.create-cv-list-header svg,
+.create-cv-section-rename-btn svg,
+.create-cv-section-add-btn svg,
+.create-cv-delete-btn svg {
+    width: 1rem;
+    height: 1rem;
+    stroke-width: 2.35;
+}
+
+.create-cv-editor-sidebar {
+    height: calc(100vh - 4.75rem);
+    padding: 1rem;
+    overflow: auto;
+    border-right: 0.0625rem solid #d8ddd6;
+    background: #f8faf7;
+}
+
+.create-cv-editor-section {
+    padding: 1rem 0;
+    border-top: 0.0625rem solid #e1e5df;
+}
+
+.create-cv-editor-section-header {
+    display: grid;
+    grid-template-columns: 2rem minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.65rem;
+    margin-bottom: 0.85rem;
+}
+
+.create-cv-section-heading {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    gap: 0.4rem;
+}
+
+.create-cv-section-rename-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.65rem;
+    height: 1.65rem;
+    flex: 0 0 auto;
+    border: 0.0625rem solid transparent;
+    border-radius: 0.35rem;
+    color: #506466;
+    background: transparent;
+    cursor: pointer;
+}
+
+.create-cv-section-rename-btn:hover,
+.create-cv-section-rename-btn.is-open {
+    border-color: #b9d7d1;
+    color: #006a62;
+    background: #eef8f5;
+}
+
+.create-cv-section-title-editor {
+    display: grid;
+    gap: 0.35rem;
+    margin: -0.15rem 0 0.85rem 2.65rem;
+}
+
+.create-cv-section-title-editor span {
+    color: #506466;
+    font-size: 0.75rem;
+    font-weight: 800;
+}
+
+.create-cv-section-title-editor input {
+    width: 100%;
+    min-width: 0;
+    height: 2.55rem;
+    border: 0.0625rem solid #d6ded5;
+    border-radius: 0.45rem;
+    padding: 0 0.75rem;
+    color: #182528;
+    background: #ffffff;
+    font: inherit;
+    font-size: 0.88rem;
+    outline: none;
+}
+
+.create-cv-section-title-editor input:focus {
+    border-color: #006a62;
+    outline: 0.125rem solid rgba(0, 106, 98, 0.14);
+}
+
+.create-cv-section-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.45rem;
+    color: #006a62;
+    background: #e4f0ed;
+}
+
+.create-cv-editor-section h2,
+.create-cv-list-header h3 {
+    margin: 0;
+    color: #182528;
+    font-size: 0.95rem;
+    font-weight: 900;
+}
+
+.create-cv-field-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: 0.7rem;
+}
+
+.create-cv-photo-import {
+    display: grid;
+    justify-items: start;
+    gap: 0.35rem;
+    margin-bottom: 0.85rem;
+}
+
+.create-cv-photo-import-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    min-height: 2.35rem;
+    padding: 0 0.85rem;
+    border: 0.0625rem solid #cfd7d2;
+    border-radius: 0.45rem;
+    color: #27383b;
+    background: #ffffff;
+    font: inherit;
+    font-size: 0.82rem;
+    font-weight: 850;
+    cursor: pointer;
+}
+
+.create-cv-photo-import-btn:hover {
+    border-color: #b9d7d1;
+    color: #006a62;
+    background: #eef8f5;
+}
+
+.create-cv-photo-import-error {
+    color: #b3342b;
+    font-size: 0.74rem;
+    font-weight: 800;
+}
+
+.create-cv-atlas-metrics-editor {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.65rem;
+    margin-top: 0.75rem;
+}
+
+.create-cv-atlas-metric {
+    min-width: 0;
+    padding: 0.65rem;
+    border: 0.0625rem solid #dfe5dd;
+    border-radius: 0.5rem;
+    background: #ffffff;
+}
+
+.create-cv-atlas-metric .create-cv-field-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.55rem;
+}
+
+.create-cv-field {
+    display: grid;
+    align-content: start;
+    align-self: start;
+    min-width: 0;
+    gap: 0.35rem;
+}
+
+.create-cv-field-wide {
+    grid-column: 1 / -1;
+}
+
+.create-cv-field span,
+.create-cv-field label,
+.create-cv-select-field span {
+    color: #506466;
+    font-size: 0.75rem;
+    font-weight: 800;
+}
+
+.create-cv-field input,
+.create-cv-field textarea,
+.create-cv-field select,
+.create-cv-select-field select {
+    width: 100%;
+    min-width: 0;
+    border: 0.0625rem solid #d6ded5;
+    border-radius: 0.45rem;
+    color: #182528;
+    background: #ffffff;
+    font: inherit;
+    font-size: 0.88rem;
+    outline: none;
+}
+
+.create-cv-field input,
+.create-cv-field select,
+.create-cv-select-field select {
+    height: 2.55rem;
+    padding: 0 0.75rem;
+}
+
+.create-cv-field textarea {
+    min-height: 6.5rem;
+    resize: vertical;
+    padding: 0.7rem 0.75rem;
+    line-height: 1.45;
+}
+
+.field-label-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 0;
+    gap: 0.65rem;
+}
+
+.field-label-row label {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.create-cv-select-field {
+    display: grid;
+    gap: 0.35rem;
+    color: #29484d;
+    font-size: 0.72rem;
+    font-weight: 850;
+}
+
+.create-cv-rating-controls {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.8fr);
+    gap: 0.65rem;
+    margin-top: 0.7rem;
+}
+
+.create-cv-list-header {
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.create-cv-list-header button,
+.create-cv-section-add-btn {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.45rem;
+    color: #ffffff;
+    background: #006a62;
+}
+
+.create-cv-list-item {
+    padding: 0.8rem;
+    border: 0.0625rem solid #dfe5dd;
+    border-radius: 0.5rem;
+    background: #ffffff;
+}
+
+.create-cv-list-item + .create-cv-list-item {
+    margin-top: 0.75rem;
+}
+
+.create-cv-list-item-compact .create-cv-field-grid {
+    grid-template-columns: 1fr 1fr;
+}
+
+.create-cv-list-item-top {
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+    color: #182528;
+    font-size: 0.82rem;
+    font-weight: 850;
+}
+
+.create-cv-delete-btn {
+    width: 1.95rem;
+    height: 1.95rem;
+    border-radius: 0.45rem;
+    color: #b3342b;
+    background: #fae9e7;
+}
+
+.create-cv-delete-btn:disabled {
+    cursor: default;
+    opacity: 0.35;
+}
+
+@media (max-width: 980px) {
+    .create-cv-editor-sidebar {
+        height: auto;
+    }
+
+    .create-cv-editor-sidebar {
+        border-right: 0;
+        border-bottom: 0.0625rem solid #d8ddd6;
+    }
+}
+
+@media (max-width: 680px) {
+    .create-cv-field-grid,
+    .create-cv-list-item-compact .create-cv-field-grid {
+        grid-template-columns: 1fr;
+    }
+}

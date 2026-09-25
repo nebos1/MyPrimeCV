@@ -1,0 +1,152 @@
+.create-motivation-letter-page {
+    display: grid;
+    grid-template-rows: 4rem minmax(0, 1fr);
+    height: 100vh;
+    overflow: hidden;
+    color: #182528;
+    background: #f5f5f2;
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
+}
+
+.motivation-letter-editor {
+    display: grid;
+    grid-template-columns: minmax(22rem, 29rem) minmax(34rem, 1fr);
+    min-height: 0;
+}
+
+.options-sidebar {
+    min-width: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-right: 0.0625rem solid #dedfd9;
+    background: #ffffff;
+}
+
+.editor-form {
+    display: grid;
+    gap: 0;
+    min-height: 24rem;
+    margin-top: 1.25rem;
+    padding: 0 1.5rem 4rem;
+}
+
+.motivation-letter-preview-pane {
+    display: grid;
+    grid-template-rows: 3.5rem minmax(0, 1fr);
+    min-width: 0;
+    overflow: hidden;
+    background: #e7e8e4;
+}
+
+.preview-toolbar {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 3.5rem;
+    padding: 0 1rem;
+    border-bottom: 0.0625rem solid #d0d2cd;
+    background: rgba(247, 247, 244, 0.94);
+    gap: 1rem;
+}
+
+.letter-preview-heading {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+}
+
+.letter-preview-heading span {
+    font-size: 0.78rem;
+    font-weight: 850;
+}
+
+.preview-toolbar small {
+    color: #718083;
+    font-size: 0.65rem;
+}
+
+.zoom-options {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.zoom-options button {
+    display: grid;
+    width: 2rem;
+    height: 2rem;
+    place-items: center;
+    border-radius: 0.375rem;
+    color: #2e464a;
+    background: transparent;
+    cursor: pointer;
+}
+
+.zoom-options button:hover {
+    background: #e6e7e3;
+}
+
+.zoom-options > span {
+    min-width: 2.7rem;
+    color: #2e464a;
+    font-size: 0.7rem;
+    font-weight: 850;
+    text-align: center;
+}
+
+.zoom-icon {
+    width: 1.05rem;
+    height: 1.05rem;
+}
+
+.letter-preview-canvas {
+    min-height: 0;
+    overflow: auto;
+    padding: 1.5rem 1.25rem 5rem;
+}
+
+.letter-preview-sheet {
+    position: relative;
+    width: max-content;
+    margin: 0 auto;
+}
+
+@media (max-width: 58rem) {
+    .create-motivation-letter-page {
+        height: auto;
+        min-height: 100vh;
+        overflow: visible;
+    }
+
+    .motivation-letter-editor {
+        grid-template-columns: 1fr;
+    }
+
+    .options-sidebar {
+        border-right: 0;
+        border-bottom: 0.0625rem solid #dedfd9;
+    }
+
+    .motivation-letter-preview-pane {
+        min-height: 38rem;
+    }
+
+    .preview-toolbar {
+        flex-wrap: wrap;
+        height: auto;
+        padding: 0.75rem 1rem;
+    }
+}
+
+@media (max-width: 36rem) {
+    .letter-preview-heading {
+        display: grid;
+        gap: 0.15rem;
+    }
+
+    .letter-preview-canvas {
+        padding: 1rem;
+    }
+}

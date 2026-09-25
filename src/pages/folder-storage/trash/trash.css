@@ -1,0 +1,14 @@
+.trash-page .sidebar-options .trash {
+    color: #006a62;
+    background: #eaf5f1;
+}
+
+.trash-page .sidebar-options .trash small {
+    color: #006a62;
+}
+
+.trash-page .empty-documents {
+    align-content: center;
+    padding-bottom: 10rem;
+    row-gap: 0.65rem;
+}

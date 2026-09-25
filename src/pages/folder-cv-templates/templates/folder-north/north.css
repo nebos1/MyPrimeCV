@@ -1,0 +1,281 @@
+.north-template {
+    width: 100%;
+    max-width: 34rem;
+    aspect-ratio: 210 / 297;
+    padding: 2.5rem;
+    color: #15262a;
+    background: #ffffff;
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
+    box-shadow: 0 1rem 3rem rgba(30, 45, 47, 0.14);
+}
+
+.north-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 1.25rem;
+    border-bottom: 0.2rem solid #15262a;
+    gap: 2rem;
+}
+
+.north-header h1 {
+    margin-top: 0.35rem;
+    font-size: 1.7rem;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+}
+
+.north-header p {
+    margin-top: 0.4rem;
+    color: #176b62;
+    font-size: 0.62rem;
+    font-weight: 800;
+}
+
+.north-contact {
+    display: grid;
+    padding-top: 0.2rem;
+    text-align: right;
+    gap: 0.28rem;
+}
+
+.north-contact span {
+    color: #6b7779;
+    font-size: 0.45rem;
+}
+
+.north-summary {
+    display: grid;
+    grid-template-columns: 5rem 1fr;
+    padding: 1.2rem 0;
+    border-bottom: 0.0625rem solid #d9ddda;
+    gap: 1rem;
+}
+
+.north-summary h2,
+.north-section h2 {
+    color: #176b62;
+    font-size: 0.5rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.north-summary p {
+    color: #4f5e60;
+    font-size: 0.53rem;
+    line-height: 1.6;
+}
+
+.north-section {
+    margin-top: 1.2rem;
+}
+
+.north-entry {
+    display: grid;
+    grid-template-columns: 5rem 1fr;
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 0.0625rem solid #d9ddda;
+    gap: 1rem;
+}
+
+.north-entry-date {
+    color: #8a9495;
+    font-size: 0.43rem;
+    font-weight: 750;
+    white-space: nowrap;
+}
+
+.north-entry-date span {
+    display: inline;
+    margin: 0;
+    color: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+.north-entry h3,
+.north-small-entry strong {
+    font-size: 0.57rem;
+}
+
+.north-entry-details > span,
+.north-small-entry span {
+    display: block;
+    margin-top: 0.15rem;
+    color: #176b62;
+    font-size: 0.45rem;
+    font-weight: 800;
+}
+
+.north-entry p {
+    margin-top: 0.35rem;
+    color: #536164;
+    font-size: 0.46rem;
+    line-height: 1.5;
+}
+
+.north-entry ul {
+    margin: 0.35rem 0 0;
+    padding-left: 0.8rem;
+    color: #536164;
+    font-size: 0.44rem;
+    line-height: 1.5;
+}
+
+.north-bottom-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 1.3rem;
+    padding-top: 1rem;
+    border-top: 0.2rem solid #15262a;
+    gap: 1.5rem;
+}
+
+.north-bottom-grid .north-section {
+    margin-top: 0;
+}
+
+.north-small-entry {
+    margin-top: 0.65rem;
+}
+
+.north-small-entry small {
+    display: block;
+    margin-bottom: 0.18rem;
+    color: #8a9495;
+    font-size: 0.42rem;
+    white-space: nowrap;
+}
+
+.north-small-entry small span {
+    display: inline;
+    margin: 0;
+    color: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+.north-skills {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 0.6rem;
+    gap: 0.32rem;
+}
+
+.north-skills > span {
+    padding: 0.25rem 0.42rem;
+    border: 0.0625rem solid #ccd4d1;
+    border-radius: 999rem;
+    color: #435255;
+    font-size: 0.4rem;
+    font-weight: 750;
+}
+
+.template-card-preview .north-template {
+    padding: 1.35rem;
+}
+
+.template-card-preview .north-header {
+    padding-bottom: 0.75rem;
+    gap: 1.1rem;
+}
+
+.template-card-preview .north-header h1 {
+    margin-top: 0.22rem;
+    font-size: 1.22rem;
+}
+
+.template-card-preview .north-header p {
+    margin-top: 0.24rem;
+    font-size: 0.44rem;
+}
+
+.template-card-preview .north-contact {
+    gap: 0.16rem;
+}
+
+.template-card-preview .north-contact span {
+    font-size: 0.31rem;
+}
+
+.template-card-preview .north-summary {
+    grid-template-columns: 4rem 1fr;
+    padding: 0.7rem 0;
+    gap: 0.65rem;
+}
+
+.template-card-preview .north-summary h2,
+.template-card-preview .north-section h2 {
+    font-size: 0.35rem;
+}
+
+.template-card-preview .north-summary p {
+    font-size: 0.38rem;
+    line-height: 1.35;
+}
+
+.template-card-preview .north-section {
+    margin-top: 0.65rem;
+}
+
+.template-card-preview .north-entry {
+    grid-template-columns: 4rem 1fr;
+    margin-top: 0.42rem;
+    padding-top: 0.42rem;
+    gap: 0.65rem;
+}
+
+.template-card-preview .north-entry-date {
+    font-size: 0.3rem;
+}
+
+.template-card-preview .north-entry h3,
+.template-card-preview .north-small-entry strong {
+    font-size: 0.4rem;
+}
+
+.template-card-preview .north-entry-details > span,
+.template-card-preview .north-small-entry span {
+    margin-top: 0.08rem;
+    font-size: 0.31rem;
+}
+
+.template-card-preview .north-entry p {
+    margin-top: 0.22rem;
+    font-size: 0.33rem;
+    line-height: 1.3;
+}
+
+.template-card-preview .north-entry ul {
+    margin-top: 0.2rem;
+    padding-left: 0.55rem;
+    font-size: 0.32rem;
+    line-height: 1.28;
+}
+
+.template-card-preview .north-bottom-grid {
+    margin-top: 0.75rem;
+    padding-top: 0.6rem;
+    gap: 0.9rem;
+}
+
+.template-card-preview .north-small-entry {
+    margin-top: 0.38rem;
+}
+
+.template-card-preview .north-small-entry small {
+    margin-bottom: 0.1rem;
+    font-size: 0.3rem;
+}
+
+.template-card-preview .north-skills {
+    margin-top: 0.35rem;
+    gap: 0.18rem;
+}
+
+.template-card-preview .north-skills > span {
+    padding: 0.18rem 0.32rem;
+    font-size: 0.29rem;
+}

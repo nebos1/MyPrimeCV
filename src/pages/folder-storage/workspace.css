@@ -1,0 +1,518 @@
+.workspace-page {
+    display: grid;
+    grid-template-columns: 18rem minmax(0, 1fr);
+    min-height: 100vh;
+    color: #182528;
+    background: linear-gradient(to right, #ffffff 0, #ffffff 18rem, #fbfaf7 18rem, #fbfaf7 100%);
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
+}
+
+.workspace-content {
+    grid-column: 2;
+    width: min(calc(100% - 3rem), 70rem);
+    min-height: 100vh;
+    margin: 0 auto 0 2rem;
+    padding: 4.2rem 0 5.5rem;
+}
+
+.workspace-header {
+    display: grid;
+    grid-template-columns: minmax(18rem, 1fr) minmax(29rem, 40rem);
+    align-items: end;
+    gap: 1.35rem;
+}
+
+.workspace-title h1 {
+    max-width: 28rem;
+    margin-top: 0.75rem;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 2.55rem;
+    font-weight: 700;
+    line-height: 0.98;
+}
+
+.workspace-actions {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(18rem, 1fr) 12.5rem;
+    align-items: center;
+    justify-content: end;
+    margin-bottom: 0.35rem;
+    gap: 0.75rem;
+}
+
+.workspace-search {
+    display: flex;
+    align-items: center;
+    min-height: 3rem;
+    padding: 0 1rem;
+    border: 0.0625rem solid #d7ddd8;
+    border-radius: 0.5rem;
+    background: #ffffff;
+    gap: 0.55rem;
+}
+
+.workspace-search input {
+    width: 100%;
+    min-width: 0;
+    border: 0;
+    outline: 0;
+    color: #182528;
+    background: transparent;
+    font: inherit;
+}
+
+.workspace-search input::placeholder {
+    color: #718083;
+}
+
+.search-icon {
+    width: 1.1rem;
+    height: 1.1rem;
+    flex: 0 0 auto;
+    color: #718083;
+}
+
+.create-resume {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3rem;
+    border-radius: 0.5rem;
+    color: #ffffff;
+    background: #d94e42;
+    font-size: 0.9rem;
+    font-weight: 850;
+    cursor: pointer;
+    gap: 0.45rem;
+}
+
+.create-resume {
+    padding: 0 1rem;
+    white-space: nowrap;
+}
+
+.create-resume:hover {
+    background: #c94036;
+}
+
+.create-doc-icon {
+    width: 1rem;
+    height: 1rem;
+    transition: transform 180ms ease;
+}
+
+.create-doc-icon.active {
+    transform: rotate(180deg);
+}
+
+.document-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 0.65rem);
+    right: 0;
+    z-index: 20;
+    display: grid;
+    width: 22.5rem;
+    padding: 0.45rem;
+    border: 0.0625rem solid #dedfd9;
+    border-radius: 0.45rem;
+    background: #ffffff;
+    box-shadow: 0 1rem 2rem rgba(24, 37, 40, 0.12);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-0.35rem);
+    transition:
+        opacity 180ms ease,
+        transform 180ms ease;
+    gap: 0.15rem;
+}
+
+.document-dropdown-menu.open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.document-dropdown-menu button {
+    display: grid;
+    grid-template-columns: 1.4rem 1fr;
+    align-items: center;
+    min-height: 4.35rem;
+    padding: 0.75rem;
+    border-radius: 0.35rem;
+    color: #182528;
+    background: transparent;
+    text-align: left;
+    cursor: pointer;
+    column-gap: 0.75rem;
+}
+
+.document-dropdown-menu button:hover {
+    background: #f4f2ec;
+}
+
+.new-doc-icon {
+    grid-row: 1 / 3;
+    width: 1.15rem;
+    height: 1.15rem;
+    color: #d94e42;
+}
+
+.new-doc-title {
+    font-size: 0.9rem;
+    font-weight: 850;
+    line-height: 1.15;
+}
+
+.new-doc-description {
+    margin-top: 0.25rem;
+    color: #718083;
+    font-size: 0.82rem;
+    line-height: 1.25;
+}
+
+.recently-edited {
+    margin-top: 3rem;
+}
+
+.recently-edited h2 {
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+.recently-edited span {
+    display: block;
+    margin-top: 0.32rem;
+    color: #718083;
+    font-size: 0.86rem;
+}
+
+.all-documents-icon {
+    display: grid;
+    width: 3.85rem;
+    height: 3.85rem;
+    place-items: center;
+    border-radius: 50%;
+    color: #d94e42;
+    background: #fdece9;
+}
+
+.all-documents-icon .icon {
+    width: 1.45rem;
+    height: 1.45rem;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    grid-column: 1;
+    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    width: 18rem;
+    min-height: 0;
+    padding: 1.1rem 1rem 1.4rem;
+    overflow: hidden;
+    border-right: 0.0625rem solid #e1e3de;
+    background: #ffffff;
+}
+
+.workspace-logo {
+    display: inline-flex;
+    align-items: center;
+    min-height: 3rem;
+    padding: 0 0.85rem;
+    color: #182528;
+    background: transparent;
+    font-size: 1rem;
+    font-weight: 850;
+    cursor: pointer;
+    gap: 0.55rem;
+}
+
+.sidebar-options {
+    display: grid;
+    margin-top: 1.65rem;
+    gap: 0.35rem;
+}
+
+.sidebar-options button {
+    display: flex;
+    align-items: center;
+    min-height: 2.9rem;
+    padding: 0 0.85rem;
+    border-radius: 0.38rem;
+    color: #2e464a;
+    background: transparent;
+    font-size: 0.9rem;
+    font-weight: 850;
+    cursor: pointer;
+    gap: 0.65rem;
+}
+
+.sidebar-options small {
+    margin-left: auto;
+    color: #718083;
+    font-size: 0.85rem;
+    font-weight: 850;
+}
+
+.workspace-icons {
+    width: 1.1rem;
+    height: 1.1rem;
+    flex: 0 0 auto;
+    color: currentColor;
+    stroke-width: 2.1;
+}
+
+.sidebar .workspace-icons {
+    color: #006a62;
+}
+
+.sidebar-footer {
+    display: grid;
+    margin-top: auto;
+    flex: 0 0 auto;
+    padding: 1.2rem 0.85rem 0;
+    border-top: 0.0625rem solid #dedfd9;
+    gap: 0.55rem;
+}
+
+.sidebar-icons {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    color: #182528;
+    font-size: 0.88rem;
+    font-weight: 850;
+}
+
+.sidebar-footer-description {
+    padding-left: 1.75rem;
+    color: #718083;
+    font-size: 0.8rem;
+    line-height: 1.5;
+}
+
+.sidebar-options button:hover {
+    color: #2e464a;
+    background: #f4f2ec;
+}
+
+@media (max-width: 74rem) and (min-width: 58.01rem) {
+    .workspace-header {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .workspace-actions {
+        grid-template-columns: minmax(18rem, 1fr) 12.5rem;
+        justify-content: stretch;
+        width: 100%;
+        margin-bottom: 0;
+    }
+}
+
+@media (max-width: 58rem) {
+    .workspace-page {
+        grid-template-columns: 1fr;
+        background: #fbfaf7;
+    }
+
+    .sidebar {
+        position: static;
+        grid-column: 1;
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        max-height: none;
+        overflow: visible;
+        border-right: 0;
+        border-bottom: 0.0625rem solid #e1e3de;
+    }
+
+    .workspace-content {
+        grid-column: 1;
+        width: min(calc(100% - 1.5rem), 48rem);
+        min-height: auto;
+        margin: 0 auto;
+        padding: 3rem 0 4rem;
+    }
+
+    .workspace-header {
+        grid-template-columns: 1fr;
+        gap: 1.4rem;
+    }
+
+    .workspace-actions {
+        grid-template-columns: 1fr;
+        justify-content: stretch;
+        margin-bottom: 0;
+    }
+
+    .document-dropdown-menu {
+        position: static;
+        width: 100%;
+        max-height: 0;
+        padding: 0 0.45rem;
+        overflow: hidden;
+        border: 0;
+        box-shadow: none;
+        transform: translateY(-0.25rem);
+    }
+
+    .document-dropdown-menu.open {
+        max-height: 16rem;
+        padding: 0.45rem;
+        border: 0.0625rem solid #dedfd9;
+        box-shadow: 0 1rem 2rem rgba(24, 37, 40, 0.12);
+        transform: translateY(0);
+    }
+}
+
+@media (max-height: 52rem) and (min-width: 58.01rem) {
+    .sidebar {
+        padding: 0.75rem 0.95rem 0.9rem;
+    }
+
+    .workspace-logo {
+        min-height: 2.45rem;
+        font-size: 0.92rem;
+        gap: 0.42rem;
+    }
+
+    .sidebar-options {
+        margin-top: 0.85rem;
+        gap: 0.12rem;
+    }
+
+    .sidebar-options button {
+        min-height: 2.25rem;
+        padding: 0 0.55rem;
+        font-size: 0.78rem;
+        gap: 0.45rem;
+    }
+
+    .sidebar-options small {
+        font-size: 0.76rem;
+    }
+
+    .workspace-icons {
+        width: 0.95rem;
+        height: 0.95rem;
+    }
+
+    .sidebar-footer {
+        padding-top: 0.75rem;
+        gap: 0.35rem;
+    }
+
+    .sidebar-icons {
+        gap: 0.45rem;
+        font-size: 0.78rem;
+    }
+
+    .sidebar-footer-description {
+        font-size: 0.68rem;
+        line-height: 1.32;
+    }
+}
+
+@media (max-height: 40rem) and (min-width: 58.01rem) {
+    .sidebar {
+        padding-top: 0.55rem;
+        padding-bottom: 0.65rem;
+    }
+
+    .workspace-logo {
+        min-height: 2.1rem;
+        font-size: 0.82rem;
+    }
+
+    .sidebar-options button {
+        min-height: 1.95rem;
+        font-size: 0.72rem;
+    }
+
+    .sidebar-footer {
+        padding-top: 0.55rem;
+    }
+
+    .sidebar-footer-description {
+        font-size: 0.62rem;
+        line-height: 1.24;
+    }
+}
+
+@media (max-height: 36rem) and (min-width: 58.01rem) {
+    .workspace-page {
+        grid-template-columns: 1fr;
+        background: #fbfaf7;
+    }
+
+    .sidebar {
+        position: static;
+        grid-column: 1;
+        grid-row: 1;
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        max-height: none;
+        overflow: visible;
+        border-right: 0;
+        border-bottom: 0.0625rem solid #e1e3de;
+    }
+
+    .workspace-content {
+        grid-column: 1;
+        width: min(calc(100% - 1.5rem), 48rem);
+        min-height: auto;
+        margin: 0 auto;
+        padding: 3rem 0 4rem;
+    }
+
+    .workspace-header {
+        grid-template-columns: 1fr;
+        gap: 1.4rem;
+    }
+
+    .workspace-actions {
+        grid-template-columns: 1fr;
+        justify-content: stretch;
+        margin-bottom: 0;
+    }
+
+    .document-dropdown-menu {
+        position: static;
+        width: 100%;
+        max-height: 0;
+        padding: 0 0.45rem;
+        overflow: hidden;
+        border: 0;
+        box-shadow: none;
+        transform: translateY(-0.25rem);
+    }
+
+    .document-dropdown-menu.open {
+        max-height: 16rem;
+        padding: 0.45rem;
+        border: 0.0625rem solid #dedfd9;
+        box-shadow: 0 1rem 2rem rgba(24, 37, 40, 0.12);
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 36rem) {
+    .workspace-title h1 {
+        font-size: 2.55rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .create-doc-icon,
+    .document-dropdown-menu {
+        transition: none;
+    }
+}

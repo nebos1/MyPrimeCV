@@ -1,0 +1,139 @@
+.create-cv-nav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 4.75rem;
+    padding: 0.85rem 1.15rem;
+    border-bottom: 0.0625rem solid #d8ddd6;
+    background: rgba(248, 250, 247, 0.96);
+    backdrop-filter: blur(1rem);
+}
+
+.create-cv-nav-left,
+.create-cv-title-wrap,
+.create-cv-title-wrap > span,
+.create-cv-nav-actions,
+.create-cv-import-btn,
+.create-cv-download-btn {
+    display: flex;
+    align-items: center;
+}
+
+.create-cv-nav-left {
+    min-width: 0;
+    gap: 0.9rem;
+}
+
+.create-cv-back-button,
+.create-cv-import-btn,
+.create-cv-download-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    cursor: pointer;
+}
+
+.create-cv-back-button {
+    width: 2.55rem;
+    height: 2.55rem;
+    border-radius: 50%;
+    color: #182528;
+    background: #ffffff;
+}
+
+.create-cv-nav-icon {
+    width: 1rem;
+    height: 1rem;
+    stroke-width: 2.35;
+}
+
+.create-cv-title-wrap {
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+}
+
+.create-cv-title-wrap .document-title-editor {
+    max-width: min(28rem, 58vw);
+    min-width: 0;
+    border: 0;
+    color: #182528;
+    background: transparent;
+    font-size: 1.05rem;
+    font-weight: 850;
+    outline: none;
+}
+
+.create-cv-title-wrap > span {
+    gap: 0.4rem;
+    color: #587072;
+    font-size: 0.78rem;
+    font-weight: 750;
+}
+
+.create-cv-title-wrap i {
+    width: 0.48rem;
+    height: 0.48rem;
+    border-radius: 50%;
+    background: #20a36b;
+}
+
+.create-cv-nav-actions {
+    gap: 0.65rem;
+}
+
+.create-cv-import-btn,
+.create-cv-download-btn {
+    gap: 0.45rem;
+    min-height: 2.55rem;
+    padding: 0 1rem;
+    border-radius: 999rem;
+    font-size: 0.88rem;
+    font-weight: 850;
+}
+
+.create-cv-import-btn {
+    border: 0.0625rem solid #cfd7d2;
+    color: #27383b;
+    background: #ffffff;
+}
+
+.create-cv-import-btn:hover {
+    background: #eef2ef;
+}
+
+.create-cv-download-btn {
+    color: #ffffff;
+    background: #d94e42;
+}
+
+.create-cv-download-btn:hover {
+    background: #27383b;
+}
+
+@media (max-width: 680px) {
+    .create-cv-nav {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .create-cv-title-wrap .document-title-editor {
+        width: 100%;
+    }
+
+    .create-cv-nav-actions {
+        width: 100%;
+    }
+
+    .create-cv-import-btn,
+    .create-cv-download-btn {
+        flex: 1 1 0;
+        width: 100%;
+    }
+}

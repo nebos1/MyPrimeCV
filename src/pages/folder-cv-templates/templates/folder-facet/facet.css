@@ -1,0 +1,290 @@
+.facet-template {
+    position: relative;
+    display: grid;
+    grid-template-columns: 8rem 1fr;
+    width: 100%;
+    max-width: 34rem;
+    aspect-ratio: 210 / 297;
+    overflow: hidden;
+    color: #182528;
+    background: #ffffff;
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
+    box-shadow: 0 1rem 3rem rgba(34, 45, 45, 0.14);
+}
+
+.facet-sidebar {
+    position: relative;
+    z-index: 1;
+    min-width: 0;
+    padding: 1.6rem 1.1rem;
+    color: #ffffff;
+    background: #22383b;
+}
+
+.facet-sidebar::after {
+    position: absolute;
+    top: 0;
+    right: -1.6rem;
+    width: 3.2rem;
+    height: 100%;
+    background: #22383b;
+    clip-path: polygon(0 0, 55% 0, 0 100%);
+    content: "";
+}
+
+.facet-photo {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    width: 2.8rem;
+    height: 3.4rem;
+    margin: 0.2rem auto 1.2rem;
+    place-items: center;
+    color: #ffffff;
+    background: #b83d70;
+    font-size: 0.58rem;
+    font-weight: 900;
+    transform: rotate(-3deg);
+}
+
+.facet-sidebar section {
+    position: relative;
+    z-index: 2;
+}
+
+.facet-sidebar section + section {
+    margin-top: 0.9rem;
+    padding-top: 0.7rem;
+    border-top: 0.0625rem solid rgba(255,255,255,0.35);
+}
+
+.facet-sidebar h2,
+.facet-section h2 {
+    font-size: 0.4rem;
+    font-weight: 900;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+}
+
+.facet-sidebar h2 {
+    margin-bottom: 0.4rem;
+    color: #ff6a98;
+}
+
+.facet-sidebar p,
+.facet-sidebar strong {
+    display: block;
+    font-size: 0.36rem;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.facet-sidebar strong {
+    margin-top: 0.3rem;
+}
+
+.facet-main {
+    min-width: 0;
+    padding: 1.8rem 1.4rem 1.2rem 2.2rem;
+}
+
+.facet-header {
+    display: flex;
+    justify-content: space-between;
+    min-height: 5rem;
+    gap: 1rem;
+}
+
+.facet-header h1 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.7rem;
+    line-height: 0.78;
+}
+
+.facet-header p {
+    margin-top: 0.45rem;
+    color: #b83d70;
+    font-size: 0.48rem;
+    font-weight: 850;
+}
+
+.facet-header small {
+    color: #b83d70;
+    font-size: 0.32rem;
+    font-weight: 900;
+    line-height: 1.2;
+    text-align: right;
+    text-transform: uppercase;
+}
+
+.facet-section {
+    margin-top: 0.85rem;
+}
+
+.facet-section h2 {
+    padding-bottom: 0.3rem;
+    border-bottom: 0.0625rem solid #d9dfdc;
+    color: #b83d70;
+}
+
+.facet-section > p {
+    margin-top: 0.38rem;
+    color: #536164;
+    font-size: 0.4rem;
+    line-height: 1.5;
+}
+
+.facet-job {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    margin-top: 0.5rem;
+    gap: 0.2rem 0.8rem;
+}
+
+.facet-job h3,
+.facet-simple h3 {
+    font-size: 0.48rem;
+}
+
+.facet-job span,
+.facet-simple span {
+    display: block;
+    margin-top: 0.1rem;
+    color: #6b7779;
+    font-size: 0.37rem;
+}
+
+.facet-job small,
+.facet-simple small {
+    color: #9aa3a4;
+    font-size: 0.34rem;
+}
+
+.facet-job ul {
+    grid-column: 1 / 3;
+    margin: 0.22rem 0 0;
+    padding-left: 0.7rem;
+    color: #536164;
+    font-size: 0.37rem;
+    line-height: 1.45;
+}
+
+.facet-simple {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.48rem;
+    gap: 0.8rem;
+}
+
+.template-card-preview .facet-template {
+    grid-template-columns: 6.1rem 1fr;
+}
+
+.template-card-preview .facet-sidebar {
+    padding: 1.1rem 0.78rem;
+}
+
+.template-card-preview .facet-sidebar::after {
+    right: -1rem;
+    width: 2rem;
+}
+
+.template-card-preview .facet-photo {
+    width: 2rem;
+    height: 2.45rem;
+    margin: 0.1rem auto 0.72rem;
+    font-size: 0.4rem;
+}
+
+.template-card-preview .facet-sidebar section + section {
+    margin-top: 0.55rem;
+    padding-top: 0.45rem;
+}
+
+.template-card-preview .facet-sidebar h2,
+.template-card-preview .facet-section h2 {
+    font-size: 0.28rem;
+}
+
+.template-card-preview .facet-sidebar h2 {
+    margin-bottom: 0.24rem;
+}
+
+.template-card-preview .facet-sidebar p,
+.template-card-preview .facet-sidebar strong {
+    font-size: 0.26rem;
+    line-height: 1.26;
+}
+
+.template-card-preview .facet-sidebar strong {
+    margin-top: 0.17rem;
+}
+
+.template-card-preview .facet-main {
+    padding: 1.15rem 0.85rem 0.75rem 1.45rem;
+}
+
+.template-card-preview .facet-header {
+    min-height: 3.25rem;
+    gap: 0.55rem;
+}
+
+.template-card-preview .facet-header h1 {
+    font-size: 1.12rem;
+}
+
+.template-card-preview .facet-header p {
+    margin-top: 0.25rem;
+    font-size: 0.34rem;
+}
+
+.template-card-preview .facet-header small {
+    font-size: 0.23rem;
+}
+
+.template-card-preview .facet-section {
+    margin-top: 0.5rem;
+}
+
+.template-card-preview .facet-section h2 {
+    padding-bottom: 0.18rem;
+}
+
+.template-card-preview .facet-section > p {
+    margin-top: 0.2rem;
+    font-size: 0.28rem;
+    line-height: 1.24;
+}
+
+.template-card-preview .facet-job {
+    margin-top: 0.3rem;
+    gap: 0.12rem 0.45rem;
+}
+
+.template-card-preview .facet-job h3,
+.template-card-preview .facet-simple h3 {
+    font-size: 0.33rem;
+}
+
+.template-card-preview .facet-job span,
+.template-card-preview .facet-simple span {
+    margin-top: 0.06rem;
+    font-size: 0.26rem;
+}
+
+.template-card-preview .facet-job small,
+.template-card-preview .facet-simple small {
+    font-size: 0.24rem;
+}
+
+.template-card-preview .facet-job ul {
+    margin-top: 0.12rem;
+    padding-left: 0.45rem;
+    font-size: 0.26rem;
+    line-height: 1.2;
+}
+
+.template-card-preview .facet-simple {
+    margin-top: 0.28rem;
+    gap: 0.45rem;
+}

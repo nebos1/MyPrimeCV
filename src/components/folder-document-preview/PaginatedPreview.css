@@ -1,0 +1,61 @@
+.document-preview-pages,
+.document-preview-measurement {
+    width: 544px;
+}
+
+.document-preview-pages-frame {
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.document-preview-pages {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: grid;
+    gap: 24px;
+    transform-origin: top left;
+}
+
+.document-preview-page {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 210 / 297;
+    overflow: hidden;
+    box-shadow: 0 1.25rem 3.5rem rgba(24, 37, 40, 0.16);
+}
+
+.document-preview-page-clip {
+    position: absolute;
+    right: 0;
+    left: 0;
+    overflow: hidden;
+}
+
+.document-preview-page-content {
+    position: absolute;
+    inset: 0 auto auto 0;
+    width: 544px;
+    transform-origin: top left;
+}
+
+.document-preview-measurement {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    visibility: hidden;
+    pointer-events: none;
+    transform-origin: top left;
+}
+
+.document-preview-page-content > article,
+.document-preview-measurement > article {
+    width: 544px;
+    max-width: none;
+    margin: 0;
+    overflow: visible;
+    overflow-wrap: anywhere;
+    box-shadow: none;
+    transform-origin: top left;
+}

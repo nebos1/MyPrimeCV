@@ -1,0 +1,20 @@
+.date-format-select {
+    display: grid;
+    min-width: 0;
+    gap: 0.45rem;
+    color: #213f44;
+    font-size: 0.78rem;
+    font-weight: 850;
+}
+
+.date-format-select select {
+    width: 100%;
+    min-height: 2.35rem;
+    border: 0.0625rem solid #d5d7d1;
+    border-radius: 0.375rem;
+    padding: 0 0.65rem;
+    color: #182528;
+    background: #ffffff;
+    font-size: 0.78rem;
+    font-weight: 700;
+}

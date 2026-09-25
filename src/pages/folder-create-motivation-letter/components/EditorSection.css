@@ -1,0 +1,88 @@
+.editor-section {
+    display: grid;
+    gap: 1.4rem;
+    padding: 1.35rem 0 2rem;
+    border-top: 0.0625rem solid #d8ddd8;
+}
+
+.editor-section-last {
+    border-bottom: 0.0625rem solid #d8ddd8;
+}
+
+.editor-section.is-collapsed {
+    padding-bottom: 1.35rem;
+}
+
+.editor-section-header {
+    display: grid;
+    grid-template-columns: 2.65rem minmax(0, 1fr) 2rem;
+    align-items: center;
+    gap: 0.7rem;
+}
+
+.section-icon {
+    display: grid;
+    width: 2.65rem;
+    height: 2.65rem;
+    place-items: center;
+    border-radius: 0.55rem;
+    color: #006a62;
+    background: #e4f0ed;
+}
+
+.section-icon svg {
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+.section-heading {
+    display: grid;
+    min-width: 0;
+    gap: 0.25rem;
+}
+
+.section-heading h2 {
+    color: #182528;
+    font-size: 0.94rem;
+    font-weight: 850;
+    line-height: 1.15;
+}
+
+.section-heading small {
+    overflow: hidden;
+    color: #64787b;
+    font-size: 0.74rem;
+    line-height: 1.2;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.section-toggle {
+    display: grid;
+    width: 2rem;
+    height: 2rem;
+    place-items: center;
+    border: 0;
+    border-radius: 0.375rem;
+    color: #6b7d80;
+    background: transparent;
+    cursor: pointer;
+}
+
+.section-toggle:hover {
+    color: #27383b;
+    background: #eef1ed;
+}
+
+.section-toggle svg {
+    width: 1rem;
+    height: 1rem;
+}
+
+.editor-section-fields {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: 1.05rem 1rem;
+    padding-left: 1.95rem;
+}

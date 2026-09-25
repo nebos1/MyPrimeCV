@@ -1,0 +1,36 @@
+.site-layout {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(32rem, 1.1fr);
+    align-content: start;
+    align-items: start;
+    width: min(calc(100% - 3rem), 76rem);
+    margin: 0 auto;
+    column-gap: 5rem;
+    row-gap: 1.75rem;
+}
+
+@media (max-width: 76rem) {
+    .site-layout {
+        grid-template-columns: minmax(0, 0.92fr) minmax(24rem, 1.08fr);
+        column-gap: 2.5rem;
+    }
+}
+
+@media (max-width: 62rem) {
+    .site-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 48rem) {
+    .site-layout {
+        width: min(calc(100% - 1.5rem), 76rem);
+    }
+}
+
+@media (max-width: 36rem) {
+    .site-layout {
+        width: min(calc(100% - 1rem), 23.5rem);
+    }
+}

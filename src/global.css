@@ -1,0 +1,68 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    letter-spacing: 0;
+}
+
+html {
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+body {
+    min-width: 20rem;
+    overflow-x: hidden;
+    color: #182528;
+    background: #fbfaf7;
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
+}
+
+button {
+    border: 0;
+    color: inherit;
+    font: inherit;
+}
+
+button:focus-visible {
+    outline: 0.1875rem solid rgba(23, 107, 98, 0.28);
+    outline-offset: 0.125rem;
+}
+
+.eyebrow-icon {
+    width: 1.05rem;
+    height: 1.05rem;
+}
+
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    color: #006a62;
+    background: transparent;
+    font-size: 0.78rem;
+    font-weight: 850;
+    text-transform: uppercase;
+}
+
+.eyebrow-icon {
+    width: 1rem;
+    height: 1rem;
+    color: #006a62;
+    stroke-width: 2.4;
+}
+
+@media (max-width: 36rem) {
+    .eyebrow {
+        font-size: 0.68rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}

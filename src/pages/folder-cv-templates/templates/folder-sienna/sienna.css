@@ -1,0 +1,365 @@
+.sienna-template {
+    position: relative;
+    width: 100%;
+    max-width: 34rem;
+    aspect-ratio: 210 / 297;
+    overflow: hidden;
+    padding: 0 2.2rem 1.6rem;
+    color: #463f38;
+    background: #fffaf4;
+    font-family: Georgia, "Times New Roman", serif;
+    box-shadow: 0 1rem 3rem rgba(70, 63, 56, 0.13);
+}
+
+.sienna-top {
+    height: 4.6rem;
+    margin: 0 -2.2rem;
+    background: #9e684f;
+}
+
+.sienna-header {
+    position: relative;
+    display: grid;
+    grid-template-columns: 5.5rem 1fr 9rem;
+    align-items: center;
+    min-height: 5.3rem;
+    margin-top: -2.7rem;
+    padding: 0 0.4rem;
+    gap: 0.9rem;
+}
+
+.sienna-photo {
+    width: 5.1rem;
+    height: 5.1rem;
+    overflow: hidden;
+    border: 0.28rem solid #fffaf4;
+    border-radius: 50%;
+    background: #d2a47e;
+    box-shadow: 0 0.45rem 1rem rgba(70,63,56,0.14);
+}
+
+.sienna-photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.sienna-name {
+    padding-top: 1.8rem;
+}
+
+.sienna-name small {
+    color: #9e684f;
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
+    font-size: 0.34rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.sienna-name h1 {
+    margin-top: 0.28rem;
+    font-size: 1.55rem;
+    font-weight: 500;
+    line-height: 0.95;
+}
+
+.sienna-name p {
+    margin-top: 0.3rem;
+    color: #9e684f;
+    font-size: 0.5rem;
+    font-style: italic;
+}
+
+.sienna-contact {
+    display: grid;
+    align-self: end;
+    padding-bottom: 0.3rem;
+    text-align: right;
+    gap: 0.2rem;
+}
+
+.sienna-contact span {
+    color: #756b62;
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
+    font-size: 0.34rem;
+}
+
+.sienna-profile {
+    display: grid;
+    grid-template-columns: 5.2rem 1fr;
+    margin-top: 0.7rem;
+    padding: 0.75rem 0;
+    border-top: 0.0625rem solid #cdbca9;
+    border-bottom: 0.0625rem solid #cdbca9;
+    gap: 0.8rem;
+}
+
+.sienna-profile h2,
+.sienna-section h2,
+.sienna-sidebar h2 {
+    color: #9e684f;
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
+    font-size: 0.39rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.sienna-profile p {
+    color: #645a52;
+    font-size: 0.46rem;
+    font-style: italic;
+    line-height: 1.55;
+}
+
+.sienna-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.65fr) minmax(7.7rem, 0.72fr);
+    margin-top: 1rem;
+    gap: 1.2rem;
+}
+
+.sienna-section + .sienna-section {
+    margin-top: 0.9rem;
+}
+
+.sienna-job {
+    margin-top: 0.55rem;
+    padding-top: 0.55rem;
+    border-top: 0.0625rem solid #d8cbbb;
+}
+
+.sienna-job-heading,
+.sienna-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.8rem;
+}
+
+.sienna-job h3,
+.sienna-row h3,
+.sienna-sidebar h3 {
+    font-size: 0.48rem;
+    font-weight: 600;
+}
+
+.sienna-job span,
+.sienna-row span {
+    display: block;
+    margin-top: 0.1rem;
+    color: #9e684f;
+    font-size: 0.36rem;
+    font-style: italic;
+}
+
+.sienna-job small,
+.sienna-row small,
+.sienna-language small {
+    color: #8b8178;
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
+    font-size: 0.33rem;
+}
+
+.sienna-job > p {
+    margin-top: 0.24rem;
+    color: #645a52;
+    font-size: 0.37rem;
+    line-height: 1.45;
+}
+
+.sienna-job ul {
+    margin: 0.22rem 0 0;
+    padding-left: 0.68rem;
+    color: #645a52;
+    font-size: 0.35rem;
+    line-height: 1.45;
+}
+
+.sienna-row {
+    margin-top: 0.45rem;
+}
+
+.sienna-sidebar {
+    padding-left: 0.9rem;
+    border-left: 0.0625rem solid #cdbca9;
+}
+
+.sienna-sidebar section + section {
+    margin-top: 0.85rem;
+    padding-top: 0.65rem;
+    border-top: 0.0625rem solid #d8cbbb;
+}
+
+.sienna-sidebar p,
+.sienna-language span,
+.sienna-language small {
+    font-size: 0.35rem;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.sienna-sidebar p,
+.sienna-language span {
+    color: #645a52;
+}
+
+.sienna-sidebar h3 {
+    margin-top: 0.4rem;
+}
+
+.sienna-language {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.28rem;
+    gap: 0.5rem;
+}
+
+.template-card-preview .sienna-template {
+    padding: 0 1.22rem 0.9rem;
+}
+
+.template-card-preview .sienna-top {
+    height: 3.1rem;
+    margin: 0 -1.22rem;
+}
+
+.template-card-preview .sienna-header {
+    grid-template-columns: 3.55rem 1fr 6.55rem;
+    min-height: 3.7rem;
+    margin-top: -1.95rem;
+    padding: 0 0.25rem;
+    gap: 0.52rem;
+}
+
+.template-card-preview .sienna-photo {
+    width: 3.35rem;
+    height: 3.35rem;
+    border-width: 0.18rem;
+}
+
+.template-card-preview .sienna-name {
+    padding-top: 1.2rem;
+}
+
+.template-card-preview .sienna-name small {
+    font-size: 0.24rem;
+}
+
+.template-card-preview .sienna-name h1 {
+    margin-top: 0.16rem;
+    font-size: 1.05rem;
+}
+
+.template-card-preview .sienna-name p {
+    margin-top: 0.16rem;
+    font-size: 0.34rem;
+}
+
+.template-card-preview .sienna-contact {
+    padding-bottom: 0.16rem;
+    gap: 0.11rem;
+}
+
+.template-card-preview .sienna-contact span {
+    font-size: 0.24rem;
+}
+
+.template-card-preview .sienna-profile {
+    grid-template-columns: 3.45rem 1fr;
+    margin-top: 0.38rem;
+    padding: 0.44rem 0;
+    gap: 0.48rem;
+}
+
+.template-card-preview .sienna-profile h2,
+.template-card-preview .sienna-section h2,
+.template-card-preview .sienna-sidebar h2 {
+    font-size: 0.27rem;
+}
+
+.template-card-preview .sienna-profile p {
+    font-size: 0.3rem;
+    line-height: 1.24;
+}
+
+.template-card-preview .sienna-layout {
+    grid-template-columns: minmax(0, 1.6fr) minmax(5.8rem, 0.75fr);
+    margin-top: 0.58rem;
+    gap: 0.68rem;
+}
+
+.template-card-preview .sienna-section + .sienna-section {
+    margin-top: 0.48rem;
+}
+
+.template-card-preview .sienna-job {
+    margin-top: 0.32rem;
+    padding-top: 0.32rem;
+}
+
+.template-card-preview .sienna-job-heading,
+.template-card-preview .sienna-row {
+    gap: 0.42rem;
+}
+
+.template-card-preview .sienna-job h3,
+.template-card-preview .sienna-row h3,
+.template-card-preview .sienna-sidebar h3 {
+    font-size: 0.32rem;
+}
+
+.template-card-preview .sienna-job span,
+.template-card-preview .sienna-row span {
+    margin-top: 0.05rem;
+    font-size: 0.25rem;
+}
+
+.template-card-preview .sienna-job small,
+.template-card-preview .sienna-row small,
+.template-card-preview .sienna-language small {
+    font-size: 0.23rem;
+}
+
+.template-card-preview .sienna-job > p {
+    margin-top: 0.1rem;
+    font-size: 0.25rem;
+    line-height: 1.16;
+}
+
+.template-card-preview .sienna-job ul {
+    margin-top: 0.1rem;
+    padding-left: 0.42rem;
+    font-size: 0.24rem;
+    line-height: 1.16;
+}
+
+.template-card-preview .sienna-row {
+    margin-top: 0.26rem;
+}
+
+.template-card-preview .sienna-sidebar {
+    padding-left: 0.52rem;
+}
+
+.template-card-preview .sienna-sidebar section + section {
+    margin-top: 0.46rem;
+    padding-top: 0.34rem;
+}
+
+.template-card-preview .sienna-sidebar p,
+.template-card-preview .sienna-language span,
+.template-card-preview .sienna-language small {
+    font-size: 0.25rem;
+    line-height: 1.22;
+}
+
+.template-card-preview .sienna-sidebar h3 {
+    margin-top: 0.2rem;
+}
+
+.template-card-preview .sienna-language {
+    margin-top: 0.14rem;
+    gap: 0.28rem;
+}

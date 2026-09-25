@@ -1,0 +1,184 @@
+.main-navbar {
+    position: sticky;
+    z-index: 50;
+    top: 0;
+    grid-column: 1 / 3;
+    width: 100vw;
+    margin-right: calc(50% - 50vw);
+    margin-left: calc(50% - 50vw);
+    border-bottom: 0.0625rem solid rgba(222, 223, 217, 0.82);
+    background: rgba(251, 250, 247, 0.94);
+    backdrop-filter: blur(0.75rem);
+}
+
+.main-navbar ul {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    width: min(calc(100% - 3rem), 76rem);
+    min-height: 4.75rem;
+    margin: 0 auto;
+    padding: 0.55rem 0;
+    list-style: none;
+    gap: 0.5rem;
+}
+
+.logo {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.9rem;
+    margin-right: 1.45rem;
+    color: #182528;
+    background: transparent;
+    cursor: pointer;
+    gap: 0.55rem;
+}
+
+.main-navbar .cv-templates,
+.main-navbar .motivation-letters,
+.main-navbar .why-free,
+.main-navbar .my-workspace {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.65rem 0.8rem;
+    border-radius: 0.375rem;
+    color: #46575a;
+    background: transparent;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.main-navbar .cv-templates:hover,
+.main-navbar .motivation-letters:hover,
+.main-navbar .why-free:hover,
+.main-navbar .my-workspace:hover {
+    color: #182528;
+    background: #f4f2ec;
+}
+
+.main-navbar .my-workspace {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.75rem;
+    margin-left: auto;
+    gap: 0.5rem;
+    font-weight: 800;
+}
+
+.main-navbar .create-cv {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.5rem;
+    padding: 0 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 800;
+    cursor: pointer;
+    gap: 0.5rem;
+    transition:
+        transform 160ms ease,
+        background 160ms ease,
+        border-color 160ms ease;
+}
+
+.main-navbar .create-cv {
+    color: #ffffff;
+    background: #d94e42;
+}
+
+.main-navbar .create-cv:hover {
+    background: #27383b;
+    transform: translateY(-0.0625rem);
+}
+
+@media (max-width: 62rem) {
+    .main-navbar {
+        position: static;
+        grid-column: 1 / -1;
+        width: 100%;
+        margin-right: 0;
+        margin-left: 0;
+    }
+
+    .main-navbar ul {
+        width: 100%;
+    }
+}
+
+@media (max-width: 48rem) {
+    .main-navbar ul {
+        width: min(calc(100% - 1.5rem), 76rem);
+    }
+
+    .main-navbar ul {
+        justify-content: center;
+        padding: 0.7rem 0;
+        gap: 0.35rem;
+    }
+
+    .logo {
+        width: 100%;
+        justify-content: center;
+        margin-right: 0;
+        gap: 0.45rem;
+    }
+
+    .main-navbar .cv-templates,
+    .main-navbar .motivation-letters,
+    .main-navbar .why-free,
+    .main-navbar .my-workspace,
+    .main-navbar .create-cv {
+        flex: 1 1 calc(33.333% - 0.5rem);
+        max-width: none;
+        min-height: 2.3rem;
+        padding: 0.45rem 0.58rem;
+        font-size: 0.76rem;
+        line-height: 1.1;
+        text-align: center;
+        white-space: normal;
+    }
+
+    .main-navbar .my-workspace,
+    .main-navbar .create-cv {
+        gap: 0.32rem;
+    }
+}
+
+@media (max-width: 36rem) {
+    .main-navbar ul {
+        width: min(calc(100% - 1rem), 23.5rem);
+    }
+
+    .main-navbar ul {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .logo {
+        grid-column: 1 / 3;
+        width: auto;
+        justify-self: center;
+    }
+
+    .main-navbar .cv-templates,
+    .main-navbar .motivation-letters,
+    .main-navbar .why-free,
+    .main-navbar .my-workspace,
+    .main-navbar .create-cv {
+        width: 100%;
+        min-width: 0;
+        flex: none;
+        font-size: 0.7rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .main-navbar .create-cv {
+        transition: none;
+    }
+}

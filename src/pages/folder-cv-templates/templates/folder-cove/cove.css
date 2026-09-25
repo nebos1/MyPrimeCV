@@ -1,0 +1,308 @@
+.cove-template {
+    display: grid;
+    grid-template-columns: 8.2rem 1fr;
+    width: 100%;
+    max-width: 34rem;
+    aspect-ratio: 210 / 297;
+    overflow: hidden;
+    padding: 1.1rem 1.4rem 1.1rem 1.1rem;
+    color: #182528;
+    background: #ffffff;
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
+    box-shadow: 0 1rem 3rem rgba(34, 45, 45, 0.14);
+}
+
+.cove-sidebar {
+    min-width: 0;
+    padding: 2.3rem 1.15rem 1.4rem;
+    color: #ffffff;
+    background: #22383b;
+    border-radius: 0 0 2.2rem 0;
+}
+
+.cove-avatar {
+    display: grid;
+    width: 3.1rem;
+    height: 3.1rem;
+    margin: 0 auto 1.25rem;
+    place-items: center;
+    border: 0.16rem solid #ffffff;
+    border-radius: 50%;
+    background: #df5b76;
+    font-size: 0.62rem;
+    font-weight: 900;
+}
+
+.cove-sidebar section + section {
+    margin-top: 1rem;
+    padding-top: 0.8rem;
+    border-top: 0.0625rem solid rgba(255,255,255,0.35);
+}
+
+.cove-sidebar h2,
+.cove-section h2 {
+    font-size: 0.42rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.cove-sidebar h2 {
+    margin-bottom: 0.48rem;
+    color: #ff6e8b;
+}
+
+.cove-sidebar p,
+.cove-sidebar strong,
+.cove-pair span,
+.cove-pair small {
+    display: block;
+    font-size: 0.38rem;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.cove-sidebar strong {
+    margin-top: 0.34rem;
+}
+
+.cove-pair {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.35rem;
+    gap: 0.5rem;
+}
+
+.cove-pair small {
+    color: #b8c5c4;
+}
+
+.cove-main {
+    min-width: 0;
+    padding: 1.9rem 1.2rem 1.2rem 1.7rem;
+}
+
+.cove-header {
+    min-height: 4.2rem;
+}
+
+.cove-header small {
+    float: right;
+    color: #df5b76;
+    font-size: 0.35rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.cove-header h1 {
+    padding-top: 0.35rem;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.55rem;
+    line-height: 0.95;
+}
+
+.cove-header p {
+    margin-top: 0.35rem;
+    color: #df5b76;
+    font-size: 0.52rem;
+    font-weight: 850;
+}
+
+.cove-section {
+    margin-top: 0.9rem;
+}
+
+.cove-section h2 {
+    display: flex;
+    align-items: center;
+    color: #df5b76;
+    gap: 0.45rem;
+}
+
+.cove-section h2::after {
+    flex: 1;
+    height: 0.0625rem;
+    background: #dce1df;
+    content: "";
+}
+
+.cove-section > p {
+    margin-top: 0.42rem;
+    color: #536164;
+    font-size: 0.42rem;
+    line-height: 1.5;
+}
+
+.cove-job {
+    margin-top: 0.55rem;
+}
+
+.cove-job-heading,
+.cove-row,
+.cove-project {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.8rem;
+}
+
+.cove-job h3,
+.cove-row h3,
+.cove-project h3 {
+    font-size: 0.5rem;
+}
+
+.cove-job span,
+.cove-row span,
+.cove-project span {
+    display: block;
+    margin-top: 0.12rem;
+    color: #6b7779;
+    font-size: 0.39rem;
+}
+
+.cove-job small,
+.cove-row small,
+.cove-project small {
+    color: #9aa3a4;
+    font-size: 0.36rem;
+}
+
+.cove-job ul {
+    margin: 0.3rem 0 0;
+    padding-left: 0.75rem;
+    color: #536164;
+    font-size: 0.39rem;
+    line-height: 1.45;
+}
+
+.cove-row,
+.cove-project {
+    margin-top: 0.5rem;
+}
+
+.template-card-preview .cove-template {
+    grid-template-columns: 6.25rem 1fr;
+    padding: 0.78rem 0.95rem 0.78rem 0.78rem;
+}
+
+.template-card-preview .cove-sidebar {
+    padding: 1.35rem 0.72rem 0.82rem;
+    border-radius: 0 0 1.45rem 0;
+}
+
+.template-card-preview .cove-avatar {
+    width: 2.05rem;
+    height: 2.05rem;
+    margin-bottom: 0.72rem;
+    border-width: 0.1rem;
+    font-size: 0.42rem;
+}
+
+.template-card-preview .cove-sidebar section + section {
+    margin-top: 0.58rem;
+    padding-top: 0.48rem;
+}
+
+.template-card-preview .cove-sidebar h2,
+.template-card-preview .cove-section h2 {
+    font-size: 0.29rem;
+}
+
+.template-card-preview .cove-sidebar h2 {
+    margin-bottom: 0.26rem;
+}
+
+.template-card-preview .cove-sidebar p,
+.template-card-preview .cove-sidebar strong,
+.template-card-preview .cove-pair span,
+.template-card-preview .cove-pair small {
+    font-size: 0.27rem;
+    line-height: 1.28;
+}
+
+.template-card-preview .cove-sidebar strong {
+    margin-top: 0.18rem;
+}
+
+.template-card-preview .cove-pair {
+    margin-top: 0.18rem;
+    gap: 0.3rem;
+}
+
+.template-card-preview .cove-main {
+    padding: 1.18rem 0.75rem 0.75rem 1.05rem;
+}
+
+.template-card-preview .cove-header {
+    min-height: 2.9rem;
+}
+
+.template-card-preview .cove-header small {
+    font-size: 0.25rem;
+}
+
+.template-card-preview .cove-header h1 {
+    padding-top: 0.22rem;
+    font-size: 1.08rem;
+}
+
+.template-card-preview .cove-header p {
+    margin-top: 0.2rem;
+    font-size: 0.36rem;
+}
+
+.template-card-preview .cove-section {
+    margin-top: 0.52rem;
+}
+
+.template-card-preview .cove-section h2 {
+    gap: 0.28rem;
+}
+
+.template-card-preview .cove-section > p {
+    margin-top: 0.22rem;
+    font-size: 0.29rem;
+    line-height: 1.25;
+}
+
+.template-card-preview .cove-job {
+    margin-top: 0.34rem;
+}
+
+.template-card-preview .cove-job-heading,
+.template-card-preview .cove-row,
+.template-card-preview .cove-project {
+    gap: 0.45rem;
+}
+
+.template-card-preview .cove-job h3,
+.template-card-preview .cove-row h3,
+.template-card-preview .cove-project h3 {
+    font-size: 0.35rem;
+}
+
+.template-card-preview .cove-job span,
+.template-card-preview .cove-row span,
+.template-card-preview .cove-project span {
+    margin-top: 0.06rem;
+    font-size: 0.27rem;
+}
+
+.template-card-preview .cove-job small,
+.template-card-preview .cove-row small,
+.template-card-preview .cove-project small {
+    font-size: 0.25rem;
+}
+
+.template-card-preview .cove-job ul {
+    margin-top: 0.16rem;
+    padding-left: 0.48rem;
+    font-size: 0.27rem;
+    line-height: 1.22;
+}
+
+.template-card-preview .cove-row,
+.template-card-preview .cove-project {
+    margin-top: 0.28rem;
+}

@@ -1,0 +1,150 @@
+.create-cv-page {
+    min-height: 100vh;
+    color: #182528;
+    background: #eef2ef;
+}
+
+.create-cv-unavailable-page {
+    display: grid;
+    min-height: 100vh;
+    place-items: center;
+    padding: 2rem;
+    color: #182528;
+    background: #ffffff;
+    text-align: center;
+}
+
+.create-cv-unavailable-page p,
+.create-cv-unavailable-template p {
+    max-width: 26rem;
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 850;
+    line-height: 1.5;
+}
+
+.create-cv-unavailable-template {
+    display: grid;
+    width: min(100%, 34rem);
+    aspect-ratio: 210 / 297;
+    place-items: center;
+    padding: 2rem;
+    color: #182528;
+    background: #ffffff;
+    text-align: center;
+    box-shadow: 0 1.25rem 3.5rem rgba(24, 37, 40, 0.16);
+}
+
+.create-cv-zoom-options,
+.create-cv-preview-toolbar {
+    display: flex;
+    align-items: center;
+}
+
+.create-cv-zoom-options button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    cursor: pointer;
+}
+
+.create-cv-toolbar-icon {
+    width: 1rem;
+    height: 1rem;
+    stroke-width: 2.35;
+}
+
+.create-cv-layout {
+    display: grid;
+    grid-template-columns: minmax(22rem, 0.78fr) minmax(28rem, 1.22fr);
+    min-height: calc(100vh - 4.75rem);
+}
+
+.create-cv-preview-pane {
+    min-width: 0;
+    height: calc(100vh - 4.75rem);
+    overflow: hidden;
+    background: #e7ece7;
+}
+
+.create-cv-preview-toolbar {
+    justify-content: space-between;
+    gap: 1rem;
+    height: 4rem;
+    padding: 0 1.15rem;
+    border-bottom: 0.0625rem solid #d8ddd6;
+    background: #f8faf7;
+}
+
+.create-cv-preview-heading {
+    display: grid;
+    gap: 0.1rem;
+}
+
+.create-cv-preview-toolbar span {
+    color: #182528;
+    font-size: 0.9rem;
+    font-weight: 900;
+}
+
+.create-cv-preview-toolbar small {
+    color: #637678;
+    font-size: 0.75rem;
+    font-weight: 750;
+}
+
+.create-cv-zoom-options {
+    gap: 0.45rem;
+}
+
+.create-cv-zoom-options button {
+    width: 2.1rem;
+    height: 2.1rem;
+    border-radius: 50%;
+    color: #182528;
+    background: #e8ede7;
+}
+
+.create-cv-zoom-options > span {
+    min-width: 3.25rem;
+    text-align: center;
+    color: #506466;
+    font-size: 0.8rem;
+}
+
+.create-cv-preview-canvas {
+    height: calc(100% - 4rem);
+    overflow: auto;
+    padding: 1.5rem 1.25rem 5rem;
+}
+
+.create-cv-preview-sheet {
+    position: relative;
+    display: grid;
+    align-content: start;
+    justify-items: center;
+    width: max-content;
+    margin: 0 auto;
+}
+
+.create-cv-blank-template {
+    width: min(100%, 34rem);
+    aspect-ratio: 210 / 297;
+    background: #ffffff;
+    box-shadow: 0 1.25rem 3.5rem rgba(24, 37, 40, 0.16);
+}
+
+@media (max-width: 980px) {
+    .create-cv-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .create-cv-preview-pane {
+        height: auto;
+    }
+
+    .create-cv-preview-pane {
+        min-height: 42rem;
+    }
+}

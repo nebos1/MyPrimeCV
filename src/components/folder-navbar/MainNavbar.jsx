@@ -3,14 +3,6 @@ import "./MainNavbar.css";
 import * as Icons from "../../folder-lucide-icons/lucide-icons";
 import UploadCvButton from "../folder-upload-cv/UploadCvButton";
 
-function GoToCVTemplates() {
-    window.location.href = "/cv-templates";
-}
-
-function GoToHome() {
-    window.location.href = "/";
-}
-
 function GoToWorkspace() {
     window.location.href = "/workspace";
 }
@@ -35,15 +27,15 @@ function MainNavbar() {
     return (
         <nav className="main-navbar">
             <ul>
-                <button type="button" className="logo" aria-label="MyPrimeCV" onClick={GoToHome}>
+                <a href="/" className="logo" aria-label="MyPrimeCV">
                     <span className="logo-icon"></span>
                     <span className="logo-name">
                         MyPrime<span>CV</span>
                     </span>
-                </button>
-                <button type="button" className="cv-templates" onClick={GoToCVTemplates}>
+                </a>
+                <a href="/cv-templates" className="cv-templates">
                     CV templates
-                </button>
+                </a>
                 <button type="button" className="motivation-letters" onClick={GoToCreateMotivationLetter}>
                     Motivation letters
                 </button>
@@ -54,9 +46,9 @@ function MainNavbar() {
                     <Icons.FolderOpenLucideIcon className="icon" /> My workspace
                 </button>
                 <UploadCvButton />
-                <button type="button" className="create-cv" onClick={GoToCVTemplates}>
+                <a href="/cv-templates" className="create-cv">
                     Create CV <Icons.ArrowRightLucideIcon className="icon" />
-                </button>
+                </a>
             </ul>
         </nav>
     );

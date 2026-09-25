@@ -78,19 +78,19 @@
     padding: 0 1rem;
     border-radius: 0.5rem;
     color: #ffffff;
-    background: #27383b;
+    background: #d94e42;
     font-size: 0.82rem;
     font-weight: 850;
     cursor: pointer;
     gap: 0.5rem;
-}
-
-.download-btn:hover {
-    background: #c94036;
     transition:
         transform 160ms ease,
         background 160ms ease,
         border-color 160ms ease;
+}
+
+.download-btn:hover {
+    background: #27383b;
 }
 
 .download-icon {
@@ -119,7 +119,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .download-btn:hover {
+    .download-btn {
         transition: none;
     }
 }

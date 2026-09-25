@@ -96,6 +96,10 @@
     border-radius: 999rem;
     font-size: 0.88rem;
     font-weight: 850;
+    transition:
+        background 160ms ease,
+        color 160ms ease,
+        border-color 160ms ease;
 }
 
 .create-cv-import-btn {
@@ -105,7 +109,9 @@
 }
 
 .create-cv-import-btn:hover {
-    background: #eef2ef;
+    color: #ffffff;
+    background: #27383b;
+    border-color: #27383b;
 }
 
 .create-cv-download-btn {
@@ -115,6 +121,13 @@
 
 .create-cv-download-btn:hover {
     background: #27383b;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .create-cv-import-btn,
+    .create-cv-download-btn {
+        transition: none;
+    }
 }
 
 @media (max-width: 680px) {

@@ -1,6 +1,6 @@
-<h1><img src="./src/folder-logo-readme/logo-readme.png" alt="" width="40" style="vertical-align: middle;" /> MyPrimeCV</h1>
+<h1><img src="./src/folder-logo/logo.png" alt="" width="40" style="vertical-align: middle;" /> MyPrimeCV</h1>
 
-<img width="1280" height="720" alt="{60DFBC96-F9AF-450D-A900-7CCE96561D79}" src="https://github.com/user-attachments/assets/8c68dce7-c38d-42f2-bcd9-605ef9e90942" />
+<img alt="MyPrimeCV homepage" src="./src/folder-img-readme/homepage-vizualization.png" />
 
 MyPrimeCV is a free, browser-based tool for creating and organizing job application documents. Build a CV and a tailored motivation letter, preview your work as you edit, and export a polished PDF.
 

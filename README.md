@@ -1,45 +1,20 @@
-# MyPrimeCV
+<h1><img src="./src/folder-logo-readme/logo-readme.png" alt="" width="40" style="vertical-align: middle;" /> MyPrimeCV</h1>
 
-A React app for creating CVs and motivation letters. Documents are saved in the browser. You can download a PDF or save a JSON backup.
+<img width="1280" height="720" alt="{60DFBC96-F9AF-450D-A900-7CCE96561D79}" src="https://github.com/user-attachments/assets/8c68dce7-c38d-42f2-bcd9-605ef9e90942" />
 
-## Run locally
+MyPrimeCV is a free, browser-based tool for creating and organizing job application documents. Build a CV and a tailored motivation letter, preview your work as you edit, and export a polished PDF.
 
-Install Node.js, open this folder in a terminal, and run:
 
-```sh
-npm install
-npm run dev
-```
+## CV builder
 
-Open the address shown in the terminal.
+Add your contact details and professional profile, then fill in experience, education, skills, languages, projects, links, and custom sections. Choose from six editable designs: Meadow, Atlas, North, Linen, Studio, and Ribbon. The page preview shows how your CV is laid out, and you can export it as a PDF.
 
-To check the production build:
+## Motivation letters
 
-```sh
-npm run build
-npm run preview
-```
+Create a letter with sender and recipient details, a subject and greeting, editable body paragraphs, and a professional closing. The preview updates as you work so you can review the finished letter.
 
-## Where to edit
+## Your workspace
 
-- `src/App.jsx` selects the page from the URL.
-- `src/pages/folder-cv-templates/templates` contains each CV design and its CSS.
-- `src/pages/folder-create-cv` contains the CV forms, data and save actions.
-- `src/pages/folder-create-motivation-letter` contains the letter form and preview.
-- `src/pages/folder-storage` contains the workspace, favorites and trash pages.
-- `src/pages/folder-local-storage` reads, saves and checks document backups.
-- `src/components/folder-document-preview` handles A4 pages and PDF export.
+CVs and letters are saved in your browser, where you can browse your documents, mark favorites, and manage items in the trash. Export a JSON backup to keep a copy of your workspace, or restore one later.
 
-Meadow, Atlas, North, Linen, Studio and Ribbon have working editors. The other gallery designs are previews.
-
-## Code style
-
-Use direct JSX, short functions and clear names. Write fields and buttons directly in their form. Repeated markup is fine. Keep component inputs at the page, editor and preview boundaries.
-
-Use classes that name the part they style, such as `letter-editor-sidebar` or `create-cv-field-grid`. Keep CSS rules flat, with ordinary values and explicit spacing classes. Avoid CSS comments, CSS variables and positional or sibling selectors.
-
-## Try a backup
-
-Use **Restore backup** in the workspace to load a workspace JSON file. Use **Import** in a CV editor to load CV data into the selected template.
-
-Restore replaces the documents in that browser. Use a separate browser profile when testing with sample data.
+Documents are stored locally in the browser rather than in a MyPrimeCV account. Clearing browser data can remove locally saved documents, so keep a backup if you need one.

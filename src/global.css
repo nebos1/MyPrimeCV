@@ -29,12 +29,12 @@ button:focus-visible {
     outline-offset: 0.125rem;
 }
 
-.eyebrow-icon {
+.site-intro-icon {
     width: 1.05rem;
     height: 1.05rem;
 }
 
-.eyebrow {
+.site-intro-label {
     display: inline-flex;
     align-items: center;
     gap: 0.45rem;
@@ -48,7 +48,7 @@ button:focus-visible {
     text-transform: uppercase;
 }
 
-.eyebrow-icon {
+.site-intro-icon {
     width: 1rem;
     height: 1rem;
     color: #006a62;
@@ -56,7 +56,7 @@ button:focus-visible {
 }
 
 @media (max-width: 36rem) {
-    .eyebrow {
+    .site-intro-label {
         font-size: 0.68rem;
     }
 }

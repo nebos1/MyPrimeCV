@@ -1,19 +1,16 @@
 import * as Icons from "../../folder-lucide-icons/lucide-icons";
 import { useState } from "react";
-
 import CreateCvNav from "./components/CreateCvNav";
 import PaginatedPreview from "../../components/folder-document-preview/PaginatedPreview";
 import { useCreateCvDocument } from "./hooks/useCreateCvDocument";
-
 import "./create-cv.css";
-
 function CreateCV() {
     const [zoom, setZoom] = useState(84);
     const [pageCount, setPageCount] = useState(1);
-    const { document, template, saveStatus, RetrySave, UpdateDocument, ImportWorkspaceBackup, actions } = useCreateCvDocument();
+    const { document, template, saveStatus, RetrySave, UpdateDocument, ImportWorkspaceBackup, actions } =
+        useCreateCvDocument();
     const TemplateComponent = template.Component;
     const EditorComponent = template.EditorComponent;
-
     if (!template.isImplemented) {
         return (
             <main className="create-cv-unavailable-page">
@@ -21,20 +18,23 @@ function CreateCV() {
             </main>
         );
     }
-
     let pageLabel;
     if (pageCount === 1) {
         pageLabel = "page";
     } else {
         pageLabel = "pages";
     }
-
     return (
         <div className="create-cv-page">
             <CreateCvNav
+                cvDocument={document}
                 title={document.title}
                 templateName={template.name}
-                onTitleChange={(title) => UpdateDocument({ title })}
+                onTitleChange={(title) =>
+                    UpdateDocument({
+                        title,
+                    })
+                }
                 onImport={ImportWorkspaceBackup}
                 saveStatus={saveStatus}
                 onRetrySave={RetrySave}
@@ -85,5 +85,4 @@ function CreateCV() {
         </div>
     );
 }
-
 export default CreateCV;

@@ -24,7 +24,7 @@
     width: 4.7rem;
     height: 5.5rem;
     overflow: hidden;
-    border: 0.15rem solid rgba(255,255,255,0.75);
+    border: 0.15rem solid rgba(255, 255, 255, 0.75);
     border-radius: 0.35rem;
     background: #d94e42;
 }
@@ -61,7 +61,7 @@
 .summit-contact {
     display: grid;
     padding-left: 0.9rem;
-    border-left: 0.0625rem solid rgba(255,255,255,0.25);
+    border-left: 0.0625rem solid rgba(255, 255, 255, 0.25);
     gap: 0.24rem;
 }
 
@@ -106,7 +106,7 @@
     gap: 1.2rem;
 }
 
-.summit-section + .summit-section {
+.summit-section.summit-section-spaced {
     margin-top: 0.9rem;
 }
 
@@ -182,7 +182,7 @@
     border-left: 0.0625rem solid #d9dfdc;
 }
 
-.summit-sidebar section + section {
+.summit-sidebar .summit-sidebar-section-spaced {
     margin-top: 0.9rem;
     padding-top: 0.7rem;
     border-top: 0.0625rem solid #d9dfdc;
@@ -278,7 +278,7 @@
     gap: 0.68rem;
 }
 
-.template-card-preview .summit-section + .summit-section {
+.template-card-preview .summit-section.summit-section-spaced {
     margin-top: 0.5rem;
 }
 
@@ -336,7 +336,7 @@
     padding-left: 0.52rem;
 }
 
-.template-card-preview .summit-sidebar section + section {
+.template-card-preview .summit-sidebar .summit-sidebar-section-spaced {
     margin-top: 0.5rem;
     padding-top: 0.38rem;
 }

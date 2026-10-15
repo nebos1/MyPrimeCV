@@ -1,14 +1,11 @@
 import { CreateEmptyCvData, CvSchemaVersion } from "../folder-create-cv/create-cv-data";
 import { CvTemplateMetadata } from "../folder-cv-templates/cv-template-metadata";
 import { CreateDefaultStyle } from "../folder-create-motivation-letter/motivation-letter-style";
-
 export const WorkspaceBackupFormat = "MyPrimeCV::workspace-backup::v1";
 export const BackupSchemaVersion = 1;
-
 function IsObject(value) {
     return value !== null && typeof value === "object" && !Array.isArray(value);
 }
-
 function HasExpectedFields(value, example) {
     if (Array.isArray(example)) {
         return Array.isArray(value) && value.every((item) => HasExpectedFields(item, example[0]));
@@ -18,7 +15,6 @@ function HasExpectedFields(value, example) {
     }
     return typeof value === typeof example && (typeof value !== "number" || Number.isFinite(value));
 }
-
 function IsValidLetterData(data) {
     const sections = {
         SenderBlock: ["first_name", "last_name", "professional_title", "email", "phone", "city", "country"],
@@ -35,20 +31,69 @@ function IsValidLetterData(data) {
     if (typeof data.sectionValues?.RecipientBlock?.date_format !== "string") return false;
     const paragraphs = data.sectionValues?.BodyParagraphBlock?.paragraphs;
     const styles = data.fieldStyles?.BodyParagraphBlock?.paragraphs;
-    return HasExpectedFields(paragraphs, [""]) &&
-        HasExpectedFields(styles, [CreateDefaultStyle()]) && paragraphs.length === styles.length;
+    return (
+        HasExpectedFields(paragraphs, [""]) &&
+        HasExpectedFields(styles, [CreateDefaultStyle()]) &&
+        paragraphs.length === styles.length
+    );
 }
-
+function IsValidCvData(data) {
+    // Backups made before Linen, Studio and Ribbon have no optional design fields.
+    const next = Object.assign(
+        {
+            tools: "",
+            footerNote: "",
+            studioImpact: {
+                label: "",
+                value: "",
+                description: "",
+            },
+        },
+        data,
+    );
+    if (IsObject(next.sectionTitles)) {
+        next.sectionTitles = Object.assign(
+            {
+                linenExpertise: "Expertise",
+                linenTools: "Tools",
+            },
+            next.sectionTitles,
+        );
+    }
+    if (Array.isArray(next.employment)) {
+        next.employment = next.employment.map((employmentEntry) =>
+            IsObject(employmentEntry)
+                ? Object.assign(
+                      {
+                          summary: "",
+                      },
+                      employmentEntry,
+                  )
+                : employmentEntry,
+        );
+    }
+    return HasExpectedFields(next, CreateEmptyCvData());
+}
 export function ValidateWorkspaceBackup(backup) {
-    if (!IsObject(backup) || backup.format !== WorkspaceBackupFormat || backup.product !== "MyPrimeCV" ||
-        backup.backupSchemaVersion !== BackupSchemaVersion || !Array.isArray(backup.documents)) {
+    if (
+        !IsObject(backup) ||
+        backup.format !== WorkspaceBackupFormat ||
+        backup.product !== "MyPrimeCV" ||
+        backup.backupSchemaVersion !== BackupSchemaVersion ||
+        !Array.isArray(backup.documents)
+    ) {
         throw new Error("This file is not a supported MyPrimeCV backup. Export a new backup from MyPrimeCV.");
     }
-
     const ids = new Set();
     for (const document of backup.documents) {
-        if (!IsObject(document) || typeof document.id !== "string" || !document.id.trim() ||
-            ids.has(document.id) || typeof document.title !== "string" || !IsObject(document.data)) {
+        if (
+            !IsObject(document) ||
+            typeof document.id !== "string" ||
+            !document.id.trim() ||
+            ids.has(document.id) ||
+            typeof document.title !== "string" ||
+            !IsObject(document.data)
+        ) {
             throw new Error("This backup contains an invalid document or duplicate document IDs.");
         }
         ids.add(document.id);
@@ -61,8 +106,10 @@ export function ValidateWorkspaceBackup(backup) {
             }
         }
         if (document.type === "resume") {
-            if (!CvTemplateMetadata.some((template) => template.id === document.templateId) ||
-                !HasExpectedFields(document.data, CreateEmptyCvData())) {
+            if (
+                !CvTemplateMetadata.some((template) => template.id === document.templateId) ||
+                !IsValidCvData(document.data)
+            ) {
                 throw new Error("This backup contains an invalid CV or an unknown CV template.");
             }
         } else if (document.type === "motivation-letter") {

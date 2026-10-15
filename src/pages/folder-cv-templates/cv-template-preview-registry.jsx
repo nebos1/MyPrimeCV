@@ -16,7 +16,6 @@ import SummitTemplate from "./templates/folder-summit/summit";
 import TerraceTemplate from "./templates/folder-terrace/terrace";
 import VioletTemplate from "./templates/folder-violet/violet";
 import { CvTemplateMetadata } from "./cv-template-metadata";
-
 const PreviewComponents = {
     meadow: MeadowTemplate,
     atlas: AtlasTemplate,
@@ -36,7 +35,8 @@ const PreviewComponents = {
     sienna: SiennaTemplate,
     summit: SummitTemplate,
 };
-
 export const CvTemplatePreviewRegistry = CvTemplateMetadata.map((template) =>
-    Object.assign({}, template, { PreviewComponent: PreviewComponents[template.id] }),
+    Object.assign({}, template, {
+        PreviewComponent: PreviewComponents[template.id],
+    }),
 );

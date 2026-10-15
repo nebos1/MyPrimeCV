@@ -1,4 +1,4 @@
-.backup-actions button {
+.workspace-backup-actions button {
     display: flex;
     align-items: center;
     min-height: 2.9rem;
@@ -12,7 +12,7 @@
     gap: 0.65rem;
 }
 
-.backup-actions {
+.workspace-backup-actions {
     display: grid;
     flex: 0 0 auto;
     margin-top: 1.2rem;
@@ -21,7 +21,7 @@
     gap: 0.25rem;
 }
 
-.backup-actions button {
+.workspace-backup-actions button {
     justify-content: flex-start;
     width: 100%;
     padding: 0;
@@ -30,20 +30,61 @@
     cursor: pointer;
 }
 
-.backup-actions button:hover {
+.workspace-backup-actions button:hover {
     color: #2e464a;
     background: #f4f2ec;
 }
 
+.workspace-restore-dialog {
+    width: min(34rem, calc(100vw - 2rem));
+    margin: auto;
+    padding: 1.5rem;
+    border: 1px solid #dedfd9;
+    border-radius: 0.75rem;
+    color: #182528;
+    background: #ffffff;
+}
+
+.workspace-restore-dialog::backdrop {
+    background: rgba(24, 37, 40, 0.5);
+}
+
+.workspace-restore-dialog p {
+    margin-top: 1rem;
+    line-height: 1.5;
+}
+
+.workspace-restore-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+.workspace-restore-buttons button {
+    padding: 0.75rem 1rem;
+    border: 1px solid #cfd7d2;
+    border-radius: 0.4rem;
+    color: #182528;
+    background: #f4f2ec;
+    cursor: pointer;
+}
+
+.workspace-restore-buttons .workspace-restore-confirm {
+    color: #ffffff;
+    background: #c94036;
+    border-color: #c94036;
+}
+
 @media (max-height: 52rem) and (min-width: 58.01rem) {
-    .backup-actions button {
+    .workspace-backup-actions button {
         min-height: 2.25rem;
         padding: 0 0.55rem;
         font-size: 0.78rem;
         gap: 0.45rem;
     }
 
-    .backup-actions {
+    .workspace-backup-actions {
         margin-top: 0.75rem;
         padding-top: 0.7rem;
         gap: 0.12rem;
@@ -51,12 +92,12 @@
 }
 
 @media (max-height: 40rem) and (min-width: 58.01rem) {
-    .backup-actions button {
+    .workspace-backup-actions button {
         min-height: 1.95rem;
         font-size: 0.72rem;
     }
 
-    .backup-actions {
+    .workspace-backup-actions {
         margin-top: 0.55rem;
         padding-top: 0.55rem;
     }

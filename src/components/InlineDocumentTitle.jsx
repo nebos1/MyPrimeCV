@@ -2,13 +2,11 @@ import { useRef, useState } from "react";
 import { PencilLucideIcon } from "../folder-lucide-icons/lucide-icons";
 import { GetStorageErrorMessage } from "../pages/folder-local-storage/saving-data";
 import "./InlineDocumentTitle.css";
-
 export default function InlineDocumentTitle({ title, onRename, onOpen, label = "Document title" }) {
     const [isEditing, setIsEditing] = useState(false);
     const [draft, setDraft] = useState(title);
     const [error, setError] = useState("");
     const cancelled = useRef(false);
-
     function SaveTitle() {
         if (cancelled.current) return;
         try {
@@ -20,7 +18,6 @@ export default function InlineDocumentTitle({ title, onRename, onOpen, label = "
             setError(GetStorageErrorMessage(error));
         }
     }
-
     return (
         <div className="document-title-editor">
             <div className="document-title-row">
@@ -48,7 +45,9 @@ export default function InlineDocumentTitle({ title, onRename, onOpen, label = "
                             <button type="button" className="workspace-document-open" onClick={onOpen}>
                                 <strong>{title}</strong>
                             </button>
-                        ) : <strong>{title}</strong>}
+                        ) : (
+                            <strong>{title}</strong>
+                        )}
                         <button
                             type="button"
                             className="document-title-rename"

@@ -1,13 +1,13 @@
-.trash-page .sidebar-options .trash {
+.workspace-trash-page .workspace-sidebar-options .workspace-trash {
     color: #006a62;
     background: #eaf5f1;
 }
 
-.trash-page .sidebar-options .trash small {
+.workspace-trash-page .workspace-sidebar-options .workspace-trash small {
     color: #006a62;
 }
 
-.trash-page .empty-documents {
+.workspace-trash-page .workspace-empty-documents {
     align-content: center;
     padding-bottom: 10rem;
     row-gap: 0.65rem;

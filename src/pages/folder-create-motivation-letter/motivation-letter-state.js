@@ -1,5 +1,4 @@
 import { CreateDefaultStyle } from "./motivation-letter-style";
-
 export function CreateInitialValues(config) {
     const values = {};
     for (const section of config) {
@@ -15,7 +14,6 @@ export function CreateInitialValues(config) {
     }
     return values;
 }
-
 export function CreateInitialStyles(config) {
     const styles = {};
     for (const section of config) {
@@ -28,30 +26,26 @@ export function CreateInitialStyles(config) {
     }
     return styles;
 }
-
 function NormalizeStyle(style) {
     const defaults = CreateDefaultStyle();
     const result = Object.assign({}, defaults, style);
     result.color = Object.assign({}, defaults.color, style?.color);
     return result;
 }
-
 export function NormalizeMotivationLetterData(data, config) {
     const sectionValues = CreateInitialValues(config);
     const fieldStyles = CreateInitialStyles(config);
-
     for (const section of config) {
         const values = data?.sectionValues?.[section.key];
         const styles = data?.fieldStyles?.[section.key];
-
         if (section.type === "paragraphs") {
             if (Array.isArray(values?.paragraphs) && values.paragraphs.length > 0) {
                 sectionValues[section.key].paragraphs = values.paragraphs.map((text) =>
                     typeof text === "string" ? text : "",
                 );
             }
-            fieldStyles[section.key].paragraphs = sectionValues[section.key].paragraphs.map((text, index) =>
-                NormalizeStyle(styles?.paragraphs?.[index]),
+            fieldStyles[section.key].paragraphs = sectionValues[section.key].paragraphs.map((text, paragraphIndex) =>
+                NormalizeStyle(styles?.paragraphs?.[paragraphIndex]),
             );
         } else {
             for (const key of Object.keys(sectionValues[section.key])) {
@@ -64,6 +58,8 @@ export function NormalizeMotivationLetterData(data, config) {
             }
         }
     }
-
-    return { sectionValues, fieldStyles };
+    return {
+        sectionValues,
+        fieldStyles,
+    };
 }

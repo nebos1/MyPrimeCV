@@ -5,7 +5,7 @@
     min-height: 0;
     min-width: 0;
     color: #182528;
-    font-family: Arial, sans-serif;
+    font-family: "MyPrimeCV Sans", sans-serif;
     font-size: 12.3px;
     line-height: 1.35;
     overflow-wrap: anywhere;
@@ -28,7 +28,7 @@
     line-height: 1.55;
 }
 
-.letter-preview-list li + li {
+.letter-preview-list .letter-preview-list-li-spaced {
     margin-top: 0.35rem;
 }
 

@@ -3,47 +3,38 @@ import * as Icons from "../../../folder-lucide-icons/lucide-icons";
 import { useRef, useState } from "react";
 import InlineDocumentTitle from "../../../components/InlineDocumentTitle";
 import { ExportPreviewPdf } from "../../../components/folder-document-preview/export-pdf";
-
-function CreateCvNav({ title, templateName, onTitleChange, onImport, saveStatus, onRetrySave }) {
+function CreateCvNav({ cvDocument, title, templateName, onTitleChange, onImport, saveStatus, onRetrySave }) {
     const importInputRef = useRef(null);
     const [exporting, setExporting] = useState(false);
-
     async function DownloadPdf() {
         setExporting(true);
         try {
-            await ExportPreviewPdf(title);
+            await ExportPreviewPdf(title, cvDocument);
         } catch (error) {
             window.alert(error.message || "The PDF could not be prepared. Please try again.");
         } finally {
             setExporting(false);
         }
     }
-
     let downloadText = "Download PDF";
     if (exporting) {
         downloadText = "Preparing PDF...";
     }
-
     function GoBack() {
         window.history.back();
     }
-
     function ImportFromFile(event) {
         const input = event.currentTarget;
         const file = input.files?.[0];
-
         if (!file) {
             return;
         }
-
         if (!file.name.toLowerCase().endsWith(".json")) {
             window.alert("Only MyPrimeCV JSON backups can be imported.");
             input.value = "";
             return;
         }
-
         const reader = new FileReader();
-
         reader.onload = () => {
             try {
                 onImport(JSON.parse(reader.result));
@@ -60,7 +51,6 @@ function CreateCvNav({ title, templateName, onTitleChange, onImport, saveStatus,
         };
         reader.readAsText(file);
     }
-
     return (
         <div className="create-cv-nav">
             <div className="create-cv-nav-left">
@@ -71,14 +61,18 @@ function CreateCvNav({ title, templateName, onTitleChange, onImport, saveStatus,
                     <InlineDocumentTitle title={title} onRename={onTitleChange} label="CV title" />
                     <span>
                         <i></i>
-                        <span role="status">{templateName} template / {saveStatus}</span>
+                        <span role="status">
+                            {templateName} template / {saveStatus}
+                        </span>
                     </span>
                 </div>
             </div>
 
             <div className="create-cv-nav-actions">
                 {saveStatus.startsWith("Not saved:") && (
-                    <button type="button" className="create-cv-import-btn" onClick={onRetrySave}>Retry saving</button>
+                    <button type="button" className="create-cv-import-btn" onClick={onRetrySave}>
+                        Retry saving
+                    </button>
                 )}
                 <button type="button" className="create-cv-import-btn" onClick={() => importInputRef.current?.click()}>
                     <Icons.UploadLucideIcon className="create-cv-nav-icon" />
@@ -91,8 +85,13 @@ function CreateCvNav({ title, templateName, onTitleChange, onImport, saveStatus,
                     onChange={ImportFromFile}
                     hidden
                 />
-                <button type="button" className="create-cv-download-btn" onClick={DownloadPdf} disabled={exporting}
-                    title="Download your document as an A4 PDF">
+                <button
+                    type="button"
+                    className="create-cv-download-btn"
+                    onClick={DownloadPdf}
+                    disabled={exporting}
+                    title="Download your document as an A4 PDF"
+                >
                     <Icons.DownloadLucideIcon className="create-cv-nav-icon" />
                     {downloadText}
                 </button>
@@ -100,5 +99,4 @@ function CreateCvNav({ title, templateName, onTitleChange, onImport, saveStatus,
         </div>
     );
 }
-
 export default CreateCvNav;

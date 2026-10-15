@@ -1,6 +1,5 @@
 import React from "react";
 import "./ledger.css";
-
 function LedgerTemplate() {
     return (
         <article className="ledger-template">
@@ -20,7 +19,10 @@ function LedgerTemplate() {
             <section className="ledger-row ledger-profile">
                 <div className="ledger-number">00</div>
                 <h2>Profile</h2>
-                <p>Product designer focused on clear, useful and human-centered digital experiences. I combine research, visual design and close collaboration with development teams.</p>
+                <p>
+                    Product designer focused on clear, useful and human-centered digital experiences. I combine
+                    research, visual design and close collaboration with development teams.
+                </p>
             </section>
 
             <section className="ledger-row">
@@ -36,7 +38,10 @@ function LedgerTemplate() {
 
                         <small>2023 — Present</small>
 
-                        <p>Led product discovery, interaction design and design-system work across multiple SaaS products.</p>
+                        <p>
+                            Led product discovery, interaction design and design-system work across multiple SaaS
+                            products.
+                        </p>
 
                         <ul>
                             <li>Improved onboarding completion by 28%.</li>
@@ -45,7 +50,7 @@ function LedgerTemplate() {
                         </ul>
                     </article>
 
-                    <article className="ledger-job">
+                    <article className="ledger-job ledger-job-spaced">
                         <div>
                             <h3>Product Designer</h3>
                             <span>Bright Labs</span>
@@ -105,5 +110,4 @@ function LedgerTemplate() {
         </article>
     );
 }
-
 export default LedgerTemplate;

@@ -1,6 +1,5 @@
 import React from "react";
 import "./orbit.css";
-
 function OrbitTemplate() {
     return (
         <article className="orbit-template">
@@ -24,7 +23,10 @@ function OrbitTemplate() {
 
             <section className="orbit-profile">
                 <span>Profile</span>
-                <p>Product designer focused on clear, useful and human-centered digital experiences. I combine research, visual design and close collaboration with development teams.</p>
+                <p>
+                    Product designer focused on clear, useful and human-centered digital experiences. I combine
+                    research, visual design and close collaboration with development teams.
+                </p>
             </section>
 
             <div className="orbit-layout">
@@ -42,8 +44,8 @@ function OrbitTemplate() {
                                 <h3>Senior Product Designer</h3>
                                 <strong>Northline Studio</strong>
                                 <p>
-                                    Led product discovery, interaction design and
-                                    design-system work across multiple SaaS products.
+                                    Led product discovery, interaction design and design-system work across multiple
+                                    SaaS products.
                                 </p>
                                 <ul>
                                     <li>Improved onboarding completion by 28%.</li>
@@ -59,7 +61,10 @@ function OrbitTemplate() {
                             <div>
                                 <h3>Product Designer</h3>
                                 <strong>Bright Labs</strong>
-                                <p>Designed responsive web and mobile products from early research to final implementation.</p>
+                                <p>
+                                    Designed responsive web and mobile products from early research to final
+                                    implementation.
+                                </p>
                                 <ul>
                                     <li>Created interactive prototypes and user flows.</li>
                                     <li>Introduced lightweight usability testing.</li>
@@ -68,7 +73,7 @@ function OrbitTemplate() {
                         </article>
                     </section>
 
-                    <section className="orbit-section">
+                    <section className="orbit-section orbit-section-spaced">
                         <div className="orbit-section-title">
                             <span>02</span>
                             <h2>Education</h2>
@@ -97,21 +102,23 @@ function OrbitTemplate() {
                         </div>
                     </section>
 
-                    <section>
+                    <section className="orbit-sidebar-section-spaced">
                         <h2>Languages</h2>
                         <p>Bulgarian Native</p>
                         <p>English C1</p>
                     </section>
 
-                    <section>
+                    <section className="orbit-sidebar-section-spaced">
                         <h2>Selected project</h2>
                         <h3>Civic Path</h3>
-                        <p>A service-design concept that simplifies municipal processes through clearer language and fewer steps.</p>
+                        <p>
+                            A service-design concept that simplifies municipal processes through clearer language and
+                            fewer steps.
+                        </p>
                     </section>
                 </aside>
             </div>
         </article>
     );
 }
-
 export default OrbitTemplate;

@@ -1,4 +1,5 @@
 .atlas-template {
+    font-size: 0.42rem;
     width: 100%;
     max-width: 34rem;
     aspect-ratio: 210 / 297;
@@ -116,7 +117,7 @@
     gap: 1.4rem;
 }
 
-.atlas-section + .atlas-section {
+.atlas-section.atlas-section-spaced {
     margin-top: 1.2rem;
 }
 
@@ -228,7 +229,8 @@
     margin-top: 0.12rem;
 }
 
-.atlas-role ul {
+.atlas-role ul,
+.atlas-role ol {
     margin: 0.4rem 0 0;
     padding-left: 0.8rem;
     color: #566366;
@@ -290,7 +292,7 @@
     border-left: 0.0625rem solid #d3d9d5;
 }
 
-.atlas-sidebar section + section {
+.atlas-sidebar .atlas-sidebar-section-spaced {
     margin-top: 1rem;
     padding-top: 0.8rem;
     border-top: 0.0625rem solid #d3d9d5;
@@ -446,7 +448,7 @@
     gap: 0.9rem;
 }
 
-.template-card-preview .atlas-section + .atlas-section {
+.template-card-preview .atlas-section.atlas-section-spaced {
     margin-top: 0.65rem;
 }
 
@@ -519,7 +521,7 @@
     padding-left: 0.65rem;
 }
 
-.template-card-preview .atlas-sidebar section + section {
+.template-card-preview .atlas-sidebar .atlas-sidebar-section-spaced {
     margin-top: 0.58rem;
     padding-top: 0.48rem;
 }
@@ -569,4 +571,19 @@
 .template-card-preview .atlas-sidebar .atlas-education-row h3,
 .template-card-preview .atlas-sidebar .atlas-education-row p {
     margin: 0;
+}
+
+.document-preview-page-content .atlas-template,
+.document-preview-measurement .atlas-template {
+    font-family: "MyPrimeCV Sans", sans-serif;
+}
+
+.document-preview-page-content .atlas-metrics strong,
+.document-preview-measurement .atlas-metrics strong {
+    font-family: "MyPrimeCV Serif", serif;
+}
+
+.document-preview-page-content .atlas-case > span,
+.document-preview-measurement .atlas-case > span {
+    font-family: "MyPrimeCV Serif", serif;
 }

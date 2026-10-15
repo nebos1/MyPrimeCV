@@ -1,5 +1,4 @@
 import "./violet.css";
-
 function VioletTemplate() {
     return (
         <article className="violet-template">
@@ -20,10 +19,13 @@ function VioletTemplate() {
                 <main className="violet-main-card">
                     <section>
                         <h2>Professional summary</h2>
-                        <p>Product designer focused on clear, useful and human-centered digital experiences. I combine research, visual design and close collaboration with development teams.</p>
+                        <p>
+                            Product designer focused on clear, useful and human-centered digital experiences. I combine
+                            research, visual design and close collaboration with development teams.
+                        </p>
                     </section>
 
-                    <section>
+                    <section className="violet-main-card-section-spaced">
                         <h2>Employment history</h2>
 
                         <article className="violet-job">
@@ -42,7 +44,7 @@ function VioletTemplate() {
                             </ul>
                         </article>
 
-                        <article className="violet-job">
+                        <article className="violet-job violet-job-spaced">
                             <div className="violet-job-heading">
                                 <div>
                                     <h3>Product Designer</h3>
@@ -58,7 +60,7 @@ function VioletTemplate() {
                         </article>
                     </section>
 
-                    <section>
+                    <section className="violet-main-card-section-spaced">
                         <h2>Education</h2>
 
                         <div className="violet-row">
@@ -70,7 +72,7 @@ function VioletTemplate() {
                         </div>
                     </section>
 
-                    <section>
+                    <section className="violet-main-card-section-spaced">
                         <h2>Selected project</h2>
 
                         <div className="violet-row">
@@ -81,7 +83,10 @@ function VioletTemplate() {
                             <small>2025</small>
                         </div>
 
-                        <p>A service-design concept that simplifies municipal processes through clearer language and fewer steps.</p>
+                        <p>
+                            A service-design concept that simplifies municipal processes through clearer language and
+                            fewer steps.
+                        </p>
                     </section>
                 </main>
 
@@ -93,7 +98,7 @@ function VioletTemplate() {
                         <p>Sofia, Bulgaria</p>
                     </section>
 
-                    <section>
+                    <section className="violet-sidebar-card-section-spaced">
                         <h2>Skills</h2>
                         <strong>Product strategy</strong>
                         <strong>UX research</strong>
@@ -103,7 +108,7 @@ function VioletTemplate() {
                         <strong>Figma</strong>
                     </section>
 
-                    <section>
+                    <section className="violet-sidebar-card-section-spaced">
                         <h2>Languages</h2>
                         <div className="violet-pair">
                             <span>Bulgarian</span>
@@ -115,7 +120,7 @@ function VioletTemplate() {
                         </div>
                     </section>
 
-                    <section>
+                    <section className="violet-sidebar-card-section-spaced">
                         <h2>Links</h2>
                         <p>maya-petrova.design</p>
                         <p>linkedin.com/in/mayapetrova</p>
@@ -125,5 +130,4 @@ function VioletTemplate() {
         </article>
     );
 }
-
 export default VioletTemplate;

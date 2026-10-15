@@ -83,11 +83,11 @@
     padding: 1rem 0.8rem;
 }
 
-.violet-main-card section + section,
-.violet-sidebar-card section + section {
+.violet-main-card .violet-main-card-section-spaced,
+.violet-sidebar-card .violet-sidebar-card-section-spaced {
     margin-top: 0.8rem;
     padding-top: 0.65rem;
-    border-top: 0.0625rem solid rgba(255,255,255,0.28);
+    border-top: 0.0625rem solid rgba(255, 255, 255, 0.28);
 }
 
 .violet-main-card h2,
@@ -115,7 +115,7 @@
     color: #d8e1df;
 }
 
-.violet-job + .violet-job {
+.violet-job.violet-job-spaced {
     margin-top: 0.55rem;
 }
 
@@ -218,8 +218,8 @@
     padding: 0.62rem 0.52rem;
 }
 
-.template-card-preview .violet-main-card section + section,
-.template-card-preview .violet-sidebar-card section + section {
+.template-card-preview .violet-main-card .violet-main-card-section-spaced,
+.template-card-preview .violet-sidebar-card .violet-sidebar-card-section-spaced {
     margin-top: 0.45rem;
     padding-top: 0.36rem;
 }
@@ -239,7 +239,7 @@
     line-height: 1.22;
 }
 
-.template-card-preview .violet-job + .violet-job {
+.template-card-preview .violet-job.violet-job-spaced {
     margin-top: 0.32rem;
 }
 

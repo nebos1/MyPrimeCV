@@ -42,7 +42,7 @@
     flex-shrink: 0;
 }
 
-.native-date-input {
+.letter-native-date-input {
     position: absolute;
     inset: 0;
     width: 100%;

@@ -33,10 +33,10 @@
     font-weight: 900;
 }
 
-.cove-sidebar section + section {
+.cove-sidebar .cove-sidebar-section-spaced {
     margin-top: 1rem;
     padding-top: 0.8rem;
-    border-top: 0.0625rem solid rgba(255,255,255,0.35);
+    border-top: 0.0625rem solid rgba(255, 255, 255, 0.35);
 }
 
 .cove-sidebar h2,
@@ -199,7 +199,7 @@
     font-size: 0.42rem;
 }
 
-.template-card-preview .cove-sidebar section + section {
+.template-card-preview .cove-sidebar .cove-sidebar-section-spaced {
     margin-top: 0.58rem;
     padding-top: 0.48rem;
 }

@@ -1,9 +1,10 @@
 import "./PaginatedPreview.css";
+import "./document-fonts.css";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { CreatePreview, InitialPreview, IsSamePreview, PageGap, PageHeight, PageWidth } from "./page-layout";
-
 function PaginatedPreview({ TemplateComponent, data, onPageCountChange, zoom = 100 }) {
     const measurementRef = useRef(null);
+    const [pageClassName, setPageClassName] = useState("document-preview-page");
     const [preview, setPreview] = useState(InitialPreview);
     const [browserZoom, setBrowserZoom] = useState(window.devicePixelRatio || 1);
 
@@ -12,7 +13,7 @@ function PaginatedPreview({ TemplateComponent, data, onPageCountChange, zoom = 1
         const measurement = measurementRef.current;
         const article = measurement?.firstElementChild;
         if (!article) return;
-
+        setPageClassName("document-preview-page " + article.classList[0] + "-page");
         function MeasurePreview() {
             // Keep text layout stable when browser zoom changes pixel rounding.
             setBrowserZoom(window.devicePixelRatio || 1);
@@ -25,7 +26,6 @@ function PaginatedPreview({ TemplateComponent, data, onPageCountChange, zoom = 1
                 }
             });
         }
-
         MeasurePreview();
         let observer;
         if (typeof ResizeObserver === "undefined") {
@@ -37,7 +37,6 @@ function PaginatedPreview({ TemplateComponent, data, onPageCountChange, zoom = 1
         window.addEventListener("resize", MeasurePreview);
         document.fonts?.addEventListener("loadingdone", MeasurePreview);
         article.addEventListener("load", MeasurePreview, true);
-
         return () => {
             observer?.disconnect();
             window.removeEventListener("resize", MeasurePreview);
@@ -45,7 +44,6 @@ function PaginatedPreview({ TemplateComponent, data, onPageCountChange, zoom = 1
             article.removeEventListener("load", MeasurePreview, true);
         };
     }, [TemplateComponent, data, browserZoom]);
-
     const pageCount = preview.pages.length;
     useEffect(() => {
         onPageCountChange(pageCount);
@@ -54,14 +52,16 @@ function PaginatedPreview({ TemplateComponent, data, onPageCountChange, zoom = 1
     // Zoom changes the displayed size, not where the pages break.
     const scale = zoom / 100;
     const totalHeight = PageHeight * pageCount + PageGap * (pageCount - 1);
-
     return (
         <>
             <div
                 className="document-preview-measurement"
                 ref={measurementRef}
                 aria-hidden="true"
-                style={{ zoom: 1 / browserZoom, transform: `scale(${browserZoom})` }}
+                style={{
+                    zoom: 1 / browserZoom,
+                    transform: `scale(${browserZoom})`,
+                }}
             >
                 <TemplateComponent data={data} />
             </div>
@@ -73,15 +73,29 @@ function PaginatedPreview({ TemplateComponent, data, onPageCountChange, zoom = 1
                     height: totalHeight * scale,
                 }}
             >
-                <div className="document-preview-pages" style={{ gap: PageGap, transform: `scale(${scale})` }}>
+                <div
+                    className="document-preview-pages"
+                    style={{
+                        gap: PageGap,
+                        transform: `scale(${scale})`,
+                    }}
+                >
                     {preview.pages.map((page, index) => (
                         <div
-                            className="document-preview-page"
+                            className={pageClassName}
                             key={index}
                             aria-label={`Document preview page ${index + 1} of ${pageCount}`}
-                            style={{ backgroundColor: preview.background }}
+                            style={{
+                                backgroundColor: preview.background,
+                            }}
                         >
-                            <div className="document-preview-page-clip" style={{ top: page.top, height: page.height }}>
+                            <div
+                                className="document-preview-page-clip"
+                                style={{
+                                    top: page.top,
+                                    height: page.height,
+                                }}
+                            >
                                 <div
                                     className="document-preview-page-content"
                                     style={{
@@ -99,5 +113,4 @@ function PaginatedPreview({ TemplateComponent, data, onPageCountChange, zoom = 1
         </>
     );
 }
-
 export default PaginatedPreview;

@@ -9,79 +9,46 @@ import {
     NormalizeCustomItemData,
     SampleCvData,
 } from "../create-cv-data";
-
 function HasText(value) {
     return String(value ?? "").trim().length > 0;
 }
-
 function HasAnyText(values) {
     return values.some(HasText);
 }
-
-function FieldText({ as: Tag = "span", className, children }) {
-    if (!HasText(children)) {
-        return null;
-    }
-
-    return <Tag className={className}>{children}</Tag>;
-}
-
-function ItemText({ item, field, as: Tag = "span", className, children }) {
-    return (
-        <FieldText as={Tag} className={className}>
-            {children ?? item[field]}
-        </FieldText>
-    );
-}
-
 function NameText({ view }) {
     const hasFirstName = HasText(view.firstName);
     const hasLastName = HasText(view.lastName);
-
     let nameSeparator;
     if (hasFirstName && hasLastName) {
         nameSeparator = " ";
     } else {
         nameSeparator = "";
     }
-
     return (
         <>
-            {hasFirstName && <FieldText>{view.firstName}</FieldText>}
+            {hasFirstName && HasText(view.firstName) && <span>{view.firstName}</span>}
             {nameSeparator}
-            {hasLastName && <FieldText>{view.lastName}</FieldText>}
+            {hasLastName && HasText(view.lastName) && <span>{view.lastName}</span>}
         </>
     );
 }
-
-function TitleText({ view, as = "span", className }) {
-    return (
-        <FieldText as={as} className={className}>
-            {view.title}
-        </FieldText>
-    );
-}
-
 function LocationText({ view }) {
     const hasCity = HasText(view.basics.city);
     const hasCountry = HasText(view.basics.country);
-
     let locationSeparator;
     if (hasCity && hasCountry) {
         locationSeparator = ", ";
     } else {
         locationSeparator = "";
     }
-
     return (
         <>
-            {hasCity && <FieldText>{view.basics.city}</FieldText>}
+            {hasCity && HasText(view.basics.city) && <span>{view.basics.city}</span>}
             {locationSeparator}
-            {hasCountry && <FieldText>{view.basics.country}</FieldText>}
+            {hasCountry && HasText(view.basics.country) && <span>{view.basics.country}</span>}
         </>
     );
 }
-
 function DateRangeText({ item, useStoredFormat = true }) {
     const hasStart = HasText(item.startDate);
     const hasEnd = HasText(item.endDate);
@@ -97,30 +64,30 @@ function DateRangeText({ item, useStoredFormat = true }) {
     } else {
         endFormat = "full";
     }
-
     let dateSeparator;
     if (hasStart && hasEnd) {
         dateSeparator = " - ";
     } else {
         dateSeparator = "";
     }
-
     return (
         <>
-            {hasStart && <FieldText>{FormatCvDate(item.startDate, startFormat)}</FieldText>}
+            {hasStart && HasText(FormatCvDate(item.startDate, startFormat)) && (
+                <span>{FormatCvDate(item.startDate, startFormat)}</span>
+            )}
             {dateSeparator}
-            {hasEnd && <FieldText>{FormatCvDate(item.endDate, endFormat)}</FieldText>}
+            {hasEnd && HasText(FormatCvDate(item.endDate, endFormat)) && (
+                <span>{FormatCvDate(item.endDate, endFormat)}</span>
+            )}
         </>
     );
 }
-
 function SplitDescription(description) {
     return String(description ?? "")
         .split("\n")
         .map((line) => line.trim())
         .filter(Boolean);
 }
-
 function NormalizeSkill(skill) {
     if (typeof skill === "string") {
         return {
@@ -129,14 +96,12 @@ function NormalizeSkill(skill) {
             ratingStyle: "none",
         };
     }
-
     return {
         label: skill?.label ?? skill?.name ?? "",
         rating: Number(skill?.rating ?? 0),
         ratingStyle: skill?.ratingStyle ?? "none",
     };
 }
-
 function NormalizeLink(link) {
     if (typeof link === "string") {
         return {
@@ -144,13 +109,11 @@ function NormalizeLink(link) {
             url: link,
         };
     }
-
     return {
         label: link?.label ?? "",
         url: link?.url ?? "",
     };
 }
-
 function NormalizeLanguage(language) {
     return Object.assign({}, language, {
         name: language?.name ?? "",
@@ -159,38 +122,29 @@ function NormalizeLanguage(language) {
         ratingStyle: language?.ratingStyle ?? "none",
     });
 }
-
 function GetFullName(basics) {
     return [basics.firstName, basics.lastName].filter(HasText).join(" ");
 }
-
 function GetInitials(basics) {
     const initials = [basics.firstName, basics.lastName]
         .filter(HasText)
         .map((value) => value.trim()[0])
         .join("");
-
     return initials || "";
 }
-
 function GetLocation(basics) {
     return [basics.city, basics.country].filter(HasText).join(", ");
 }
-
 function GetDateRange(item) {
     return [item.startDate, item.endDate].filter(HasText).join(" - ");
 }
-
 function GetProjectTitle(data, templateId) {
     const title = String(data.sectionTitles?.projects ?? "").trim();
-
     if (templateId === "atlas" && title.toLowerCase() === "projects") {
         return GetDefaultProjectTitle(templateId);
     }
-
     return title || GetDefaultProjectTitle(templateId);
 }
-
 function HasEmployment(item) {
     return HasAnyText([
         item.role,
@@ -202,23 +156,18 @@ function HasEmployment(item) {
         item.description,
     ]);
 }
-
 function HasEducation(item) {
     return HasAnyText([item.degree, item.school, item.location, item.additions, item.startDate, item.endDate]);
 }
-
 function HasProject(item) {
     return HasAnyText([item.name, item.subtitle, item.description]);
 }
-
 function HasCustomItem(item) {
     return HasAnyText([item.name, item.subtitle, item.description]);
 }
-
 function HasAtlasMetric(item) {
     return HasAnyText([item.addition, item.label]);
 }
-
 function BuildView(cv, templateId) {
     const data = cv ?? SampleCvData;
     const basics = data.basics ?? {};
@@ -230,31 +179,65 @@ function BuildView(cv, templateId) {
     const location = GetLocation(basics);
     const contactLines = [location, basics.email, basics.phone, basics.birthDate, basics.gender].filter(HasText);
     const links = (data.links ?? [])
-        .map((link, index) => Object.assign({}, NormalizeLink(link), { styleIndex: index }))
+        .map((link, index) =>
+            Object.assign({}, NormalizeLink(link), {
+                styleIndex: index,
+            }),
+        )
         .filter((link) => HasText(link.label));
     const employment = (data.employment ?? [])
-        .map((item, index) => Object.assign({}, item, { styleIndex: index }))
+        .map((item, index) =>
+            Object.assign({}, item, {
+                styleIndex: index,
+            }),
+        )
         .filter(HasEmployment);
     const education = (data.education ?? [])
-        .map((item, index) => Object.assign({}, item, { styleIndex: index }))
+        .map((item, index) =>
+            Object.assign({}, item, {
+                styleIndex: index,
+            }),
+        )
         .filter(HasEducation);
     const skills = (data.skills ?? [])
-        .map((skill, index) => Object.assign({}, NormalizeSkill(skill), { styleIndex: index }))
+        .map((skill, index) =>
+            Object.assign({}, NormalizeSkill(skill), {
+                styleIndex: index,
+            }),
+        )
         .filter((skill) => HasText(skill.label));
     const languages = (data.languages ?? [])
-        .map((item, index) => Object.assign({}, NormalizeLanguage(item), { styleIndex: index }))
+        .map((item, index) =>
+            Object.assign({}, NormalizeLanguage(item), {
+                styleIndex: index,
+            }),
+        )
         .filter((item) => HasText(item.name) || HasText(item.level));
     const projects = (data.projects ?? [])
-        .map((item, index) => Object.assign({}, item, { styleIndex: index }))
+        .map((item, index) =>
+            Object.assign({}, item, {
+                styleIndex: index,
+            }),
+        )
         .filter(HasProject);
     const mainCustom = (data.mainCustom ?? [])
-        .map((item, index) => Object.assign({}, NormalizeCustomItemData(item), { styleIndex: index }))
+        .map((item, index) =>
+            Object.assign({}, NormalizeCustomItemData(item), {
+                styleIndex: index,
+            }),
+        )
         .filter(HasCustomItem);
     const sideCustom = (data.sideCustom ?? [])
-        .map((item, index) => Object.assign({}, NormalizeCustomItemData(item), { styleIndex: index }))
+        .map((item, index) =>
+            Object.assign({}, NormalizeCustomItemData(item), {
+                styleIndex: index,
+            }),
+        )
         .filter(HasCustomItem);
     const atlasMetrics = NormalizeAtlasMetrics(data.atlasMetrics).map((item, index) =>
-        Object.assign({}, item, { styleIndex: index }),
+        Object.assign({}, item, {
+            styleIndex: index,
+        }),
     );
     const hasAtlasMetrics = atlasMetrics.some(HasAtlasMetric);
     const projectTitle = GetProjectTitle(data, templateId);
@@ -284,7 +267,6 @@ function BuildView(cv, templateId) {
         projects.length === 0 &&
         mainCustom.length === 0 &&
         sideCustom.length === 0;
-
     return {
         basics,
         atlasMetrics,
@@ -314,68 +296,55 @@ function BuildView(cv, templateId) {
         title: basics.professionalTitle ?? "",
     };
 }
-
-function Section({ show, className, children }) {
-    if (!show) {
-        return null;
-    }
-
-    return <section className={className}>{children}</section>;
-}
-
 function DescriptionList({ item, className }) {
     const lines = SplitDescription(item.description);
     const listStyle = item.descriptionListStyle ?? "disc";
-
     if (lines.length === 0) {
         return null;
     }
-
     if (listStyle === "none") {
         return lines.map((line, index) => <p key={`${line}-${index}`}>{line}</p>);
     }
-
     let ListTag;
     if (listStyle === "decimal") {
         ListTag = "ol";
     } else {
         ListTag = "ul";
     }
-
     return (
         <ListTag
             className={["cv-description-list", className].filter(Boolean).join(" ")}
-            style={{ listStyleType: listStyle }}
+            style={{
+                listStyleType: listStyle,
+            }}
         >
             {lines.map((line, index) => (
-                <li key={`${line}-${index}`}>{line}</li>
+                <li key={`${line}-${index}`} className={index > 0 ? "cv-description-list-li-spaced" : ""}>
+                    {line}
+                </li>
             ))}
         </ListTag>
     );
 }
-
 function MeadowEntrySideMeta({ item }) {
     if (!HasText(GetDateRange(item)) && !HasText(item.location)) {
         return null;
     }
-
     return (
-        <div className="maya-template-entry-side-meta">
+        <div className="meadow-template-entry-side-meta">
             {HasText(GetDateRange(item)) && (
                 <small>
                     <DateRangeText item={item} useStoredFormat={false} />
                 </small>
             )}
-            <ItemText item={item} field="location" className="maya-template-entry-location" />
+            {HasText(item.location) && <span className="meadow-template-entry-location">{item.location}</span>}
         </div>
     );
 }
-
 function AtlasEntrySideMeta({ item }) {
     if (!HasText(GetDateRange(item)) && !HasText(item.location)) {
         return null;
     }
-
     return (
         <div className="atlas-entry-side-meta">
             {HasText(GetDateRange(item)) && (
@@ -383,24 +352,17 @@ function AtlasEntrySideMeta({ item }) {
                     <DateRangeText item={item} />
                 </small>
             )}
-            <ItemText item={item} field="location" className="atlas-entry-location" />
+            {HasText(item.location) && <span className="atlas-entry-location">{item.location}</span>}
         </div>
     );
 }
-
 function ProfileContent({ view }) {
-    return (
-        <p>
-            <FieldText>{view.profile}</FieldText>
-        </p>
-    );
+    return <p>{HasText(view.profile) && <span>{view.profile}</span>}</p>;
 }
-
 function AtlasMetrics({ metrics, show }) {
     if (!show) {
         return null;
     }
-
     return (
         <section className="atlas-metrics">
             {metrics.map((metric, index) => {
@@ -410,18 +372,16 @@ function AtlasMetrics({ metrics, show }) {
                 } else {
                     atlasMetricLastClassName = "";
                 }
-
                 return (
                     <div className={atlasMetricLastClassName} key={metric.styleIndex}>
-                        <FieldText as="strong">{metric.addition}</FieldText>
-                        <FieldText>{metric.label}</FieldText>
+                        {HasText(metric.addition) && <strong>{metric.addition}</strong>}
+                        {HasText(metric.label) && <span>{metric.label}</span>}
                     </div>
                 );
             })}
         </section>
     );
 }
-
 function LinkAnchor({ link }) {
     let href;
     if (/^https?:\/\//i.test(link.url)) {
@@ -429,98 +389,89 @@ function LinkAnchor({ link }) {
     } else {
         href = `https://${link.url}`;
     }
-
     if (!HasText(link.url)) {
         return <span>{link.label}</span>;
     }
-
     return (
         <a href={href} target="_blank" rel="noreferrer">
             {link.label}
         </a>
     );
 }
-
 function Rating({ item }) {
     if (item.ratingStyle === "none" || !item.rating) {
         return null;
     }
-
     return (
         <span className={`cv-rating cv-rating-${item.ratingStyle}`} aria-label={`${item.rating} out of 5`}>
-            {Array.from({ length: 5 }, (_, index) => {
-                let isFilledClassName;
-                if (index < item.rating) {
-                    isFilledClassName = "is-filled";
-                } else {
-                    isFilledClassName = "";
-                }
-
-                return <i key={index} className={isFilledClassName}></i>;
-            })}
+            {Array.from(
+                {
+                    length: 5,
+                },
+                (_, index) => {
+                    let isFilledClassName;
+                    if (index < item.rating) {
+                        isFilledClassName = "cv-rating-filled";
+                    } else {
+                        isFilledClassName = "";
+                    }
+                    return <i key={index} className={isFilledClassName}></i>;
+                },
+            )}
         </span>
     );
 }
-
 function CustomItems({ items, itemClassName = "" }) {
     return items.map((item, index) => (
-        <div className={["cv-custom-item", itemClassName].filter(Boolean).join(" ")} key={index}>
+        <div
+            className={
+                ["cv-custom-item", itemClassName].filter(Boolean).join(" ") +
+                (index > 0 ? " cv-custom-item-spaced" : "")
+            }
+            key={index}
+        >
             <div className="cv-custom-item-heading">
                 <div>
-                    <ItemText item={item} field="name" as="h3" />
-                    <ItemText item={item} field="subtitle" />
+                    {HasText(item.name) && <h3>{item.name}</h3>}
+                    {HasText(item.subtitle) && <span>{item.subtitle}</span>}
                 </div>
             </div>
             <DescriptionList item={item} />
         </div>
     ));
 }
-
 function SkillText({ item }) {
     return (
         <span className="cv-knowledge-row">
-            <span className="cv-knowledge-label">
-                <ItemText item={item} field="label" />
-            </span>
+            <span className="cv-knowledge-label">{HasText(item.label) && <span>{item.label}</span>}</span>
             <Rating item={item} />
         </span>
     );
 }
-
 function LanguageText({ item }) {
     const hasName = HasText(item.name);
     const hasLevel = HasText(item.level);
     const hasRating = item.ratingStyle !== "none" && item.rating > 0;
-
     return (
         <span className="cv-knowledge-row">
-            {hasName && (
-                <span className="cv-knowledge-label">
-                    <ItemText item={item} field="name" />
-                </span>
-            )}
+            {hasName && <span className="cv-knowledge-label">{HasText(item.name) && <span>{item.name}</span>}</span>}
             {(hasLevel || hasRating) && (
                 <span className="cv-knowledge-meta">
-                    {hasLevel && <ItemText item={item} field="level" />}
+                    {hasLevel && HasText(item.level) && <span>{item.level}</span>}
                     <Rating item={item} />
                 </span>
             )}
         </span>
     );
 }
-
 function MeadowContact({ view }) {
     return (
         <>
             {HasText(view.basics.email) && (
-                <span>
-                    <FieldText>{view.basics.email}</FieldText>
-                </span>
+                <span>{HasText(view.basics.email) && <span>{view.basics.email}</span>}</span>
             )}
             {HasText(view.basics.phone) && (
-                <span>
-                    <FieldText>{view.basics.phone}</FieldText>
-                </span>
+                <span>{HasText(view.basics.phone) && <span>{view.basics.phone}</span>}</span>
             )}
             {HasText(view.location) && (
                 <span>
@@ -529,74 +480,59 @@ function MeadowContact({ view }) {
             )}
             {HasText(view.basics.birthDate) && (
                 <span>
-                    <FieldText>{FormatCvDate(view.basics.birthDate, "full")}</FieldText>
+                    {HasText(FormatCvDate(view.basics.birthDate, "full")) && (
+                        <span>{FormatCvDate(view.basics.birthDate, "full")}</span>
+                    )}
                 </span>
             )}
             {HasText(view.basics.gender) && (
-                <span>
-                    <FieldText>{view.basics.gender}</FieldText>
-                </span>
+                <span>{HasText(view.basics.gender) && <span>{view.basics.gender}</span>}</span>
             )}
         </>
     );
 }
-
 function ContactLineText({ view, line }) {
     if (line === view.basics.email) {
-        return <FieldText>{line}</FieldText>;
+        return HasText(line) && <span>{line}</span>;
     }
-
     if (line === view.basics.phone) {
-        return <FieldText>{line}</FieldText>;
+        return HasText(line) && <span>{line}</span>;
     }
-
     if (line === view.location) {
         return <LocationText view={view} />;
     }
-
     if (line === view.basics.birthDate) {
         return (
             <>
-                Date of birth: <FieldText>{FormatCvDate(line, view.basics.birthDateFormat)}</FieldText>
+                Date of birth:{" "}
+                {HasText(FormatCvDate(line, view.basics.birthDateFormat)) && (
+                    <span>{FormatCvDate(line, view.basics.birthDateFormat)}</span>
+                )}
             </>
         );
     }
-
     if (line === view.basics.gender) {
-        return <FieldText>{line}</FieldText>;
+        return HasText(line) && <span>{line}</span>;
     }
-
     return line;
 }
-
 function BlankTemplate() {
     return <article className="create-cv-blank-template"></article>;
 }
-
-function UnavailableTemplate() {
-    return (
-        <article className="create-cv-unavailable-template">
-            <p>This template does not have implemented logic yet. Coming soon.</p>
-        </article>
-    );
-}
-
-function MeadowTemplate({ view }) {
+function MeadowTemplate({ data }) {
+    const view = BuildView(data, "meadow");
     if (view.isEmpty) {
         return <BlankTemplate />;
     }
-
     const hasHeader = view.hasPhoto || view.hasName || HasText(view.title) || view.contactLines.length > 0;
-
-    let mayaTemplatePhotoClassName;
+    let meadowPhotoClassName;
     if (hasHeader && (view.hasPhoto || view.hasName || HasText(view.title)) && view.hasPhoto) {
         if (HasText(view.photo)) {
-            mayaTemplatePhotoClassName = "maya-template-photo maya-template-photo-image";
+            meadowPhotoClassName = "meadow-template-photo meadow-template-photo-image";
         } else {
-            mayaTemplatePhotoClassName = "maya-template-photo";
+            meadowPhotoClassName = "meadow-template-photo";
         }
     }
-
     let photoContent;
     if (hasHeader && (view.hasPhoto || view.hasName || HasText(view.title)) && view.hasPhoto) {
         if (HasText(view.photo)) {
@@ -605,153 +541,217 @@ function MeadowTemplate({ view }) {
             photoContent = view.initials;
         }
     }
-
     return (
-        <article className="maya-template">
+        <article className="meadow-template">
             {hasHeader && (
-                <header className="maya-template-header">
+                <header className="meadow-template-header">
                     {(view.hasPhoto || view.hasName || HasText(view.title)) && (
-                        <div className="maya-template-person">
-                            {view.hasPhoto && <span className={mayaTemplatePhotoClassName}>{photoContent}</span>}
+                        <div className="meadow-template-person">
+                            {view.hasPhoto && <span className={meadowPhotoClassName}>{photoContent}</span>}
                             <div>
                                 {view.hasName && (
                                     <h1>
                                         <NameText view={view} />
                                     </h1>
                                 )}
-                                {HasText(view.title) && (
-                                    <p>
-                                        <TitleText view={view} />
-                                    </p>
-                                )}
+                                {HasText(view.title) && <p>{HasText(view.title) && <span>{view.title}</span>}</p>}
                             </div>
                         </div>
                     )}
 
-                    <div className="maya-template-contact">
+                    <div className="meadow-template-contact">
                         <MeadowContact view={view} />
                     </div>
                 </header>
             )}
 
-            {hasHeader && <div className="maya-template-line"></div>}
+            {hasHeader && <div className="meadow-template-line"></div>}
 
-            <div className="maya-template-content">
-                <main className="maya-template-main">
-                    <Section show={HasText(view.profile)} className="maya-template-section">
-                        <ProfileContent view={view} />
-                    </Section>
+            <div className="meadow-template-content">
+                <main className="meadow-template-main">
+                    {HasText(view.profile) && (
+                        <section className="meadow-template-section">
+                            <ProfileContent view={view} />
+                        </section>
+                    )}
 
-                    <Section show={view.employment.length > 0} className="maya-template-section">
-                        <h2>Employment history</h2>
-                        {view.employment.map((item, index) => (
-                            <div className="maya-template-job" key={index}>
-                                <div className="maya-template-job-heading">
-                                    <div>
-                                        <ItemText item={item} field="role" as="h3" />
-                                        <ItemText item={item} field="company" />
-                                        <ItemText item={item} field="additions" className="maya-template-entry-extra" />
+                    {view.employment.length > 0 && (
+                        <section
+                            className={
+                                HasText(view.profile)
+                                    ? "meadow-template-section meadow-template-section-spaced"
+                                    : "meadow-template-section"
+                            }
+                        >
+                            <h2>Employment history</h2>
+                            {view.employment.map((employmentEntry, employmentEntryIndex) => (
+                                <div className="meadow-template-job" key={employmentEntryIndex}>
+                                    <div className="meadow-template-job-heading">
+                                        <div>
+                                            {HasText(employmentEntry.role) && <h3>{employmentEntry.role}</h3>}
+                                            {HasText(employmentEntry.company) && <span>{employmentEntry.company}</span>}
+                                            {HasText(employmentEntry.additions) && (
+                                                <span className="meadow-template-entry-extra">
+                                                    {employmentEntry.additions}
+                                                </span>
+                                            )}
+                                        </div>
+                                        <MeadowEntrySideMeta item={employmentEntry} />
                                     </div>
-                                    <MeadowEntrySideMeta item={item} />
+                                    <DescriptionList item={employmentEntry} />
                                 </div>
-                                <DescriptionList item={item} />
-                            </div>
-                        ))}
-                    </Section>
+                            ))}
+                        </section>
+                    )}
 
-                    <Section show={view.education.length > 0} className="maya-template-section">
-                        <h2>Education</h2>
-                        {view.education.map((item, index) => (
-                            <div className="maya-template-education" key={index}>
-                                <div>
-                                    <ItemText item={item} field="degree" as="h3" />
-                                    <ItemText item={item} field="school" />
-                                    <ItemText item={item} field="additions" className="maya-template-entry-extra" />
+                    {view.education.length > 0 && (
+                        <section
+                            className={
+                                view.employment.length > 0 || HasText(view.profile)
+                                    ? "meadow-template-section meadow-template-section-spaced"
+                                    : "meadow-template-section"
+                            }
+                        >
+                            <h2>Education</h2>
+                            {view.education.map((educationEntry, educationEntryIndex) => (
+                                <div className="meadow-template-education" key={educationEntryIndex}>
+                                    <div>
+                                        {HasText(educationEntry.degree) && <h3>{educationEntry.degree}</h3>}
+                                        {HasText(educationEntry.school) && <span>{educationEntry.school}</span>}
+                                        {HasText(educationEntry.additions) && (
+                                            <span className="meadow-template-entry-extra">
+                                                {educationEntry.additions}
+                                            </span>
+                                        )}
+                                    </div>
+                                    <MeadowEntrySideMeta item={educationEntry} />
                                 </div>
-                                <MeadowEntrySideMeta item={item} />
-                            </div>
-                        ))}
-                    </Section>
+                            ))}
+                        </section>
+                    )}
 
-                    <Section show={view.projects.length > 0} className="maya-template-section">
-                        <h2>{view.projectTitle}</h2>
-                        {view.projects.map((item, index) => (
-                            <div className="maya-template-project" key={index}>
-                                <ItemText item={item} field="name" as="h3" />
-                                <ItemText item={item} field="subtitle" />
-                                <DescriptionList item={item} />
-                            </div>
-                        ))}
-                    </Section>
+                    {view.projects.length > 0 && (
+                        <section
+                            className={
+                                view.education.length > 0 || view.employment.length > 0 || HasText(view.profile)
+                                    ? "meadow-template-section meadow-template-section-spaced"
+                                    : "meadow-template-section"
+                            }
+                        >
+                            <h2>{view.projectTitle}</h2>
+                            {view.projects.map((project, projectIndex) => (
+                                <div className="meadow-template-project" key={projectIndex}>
+                                    {HasText(project.name) && <h3>{project.name}</h3>}
+                                    {HasText(project.subtitle) && <span>{project.subtitle}</span>}
+                                    <DescriptionList item={project} />
+                                </div>
+                            ))}
+                        </section>
+                    )}
 
-                    <Section show={view.mainCustom.length > 0} className="maya-template-section">
-                        <h2>{view.mainCustomTitle}</h2>
-                        <CustomItems items={view.mainCustom} itemClassName="maya-template-project" />
-                    </Section>
+                    {view.mainCustom.length > 0 && (
+                        <section
+                            className={
+                                view.projects.length > 0 ||
+                                view.education.length > 0 ||
+                                view.employment.length > 0 ||
+                                HasText(view.profile)
+                                    ? "meadow-template-section meadow-template-section-spaced"
+                                    : "meadow-template-section"
+                            }
+                        >
+                            <h2>{view.mainCustomTitle}</h2>
+                            <CustomItems items={view.mainCustom} itemClassName="meadow-template-project" />
+                        </section>
+                    )}
                 </main>
 
                 {(view.skills.length > 0 ||
                     view.languages.length > 0 ||
                     view.links.length > 0 ||
                     view.sideCustom.length > 0) && (
-                    <aside className="maya-template-sidebar">
-                        <Section show={view.skills.length > 0}>
-                            <h2>Skills</h2>
-                            <ul>
-                                {view.skills.map((item, index) => (
-                                    <li key={index}>
-                                        <SkillText item={item} />
-                                    </li>
+                    <aside className="meadow-template-sidebar">
+                        {view.skills.length > 0 && (
+                            <section>
+                                <h2>Skills</h2>
+                                <ul>
+                                    {view.skills.map((skill, skillIndex) => (
+                                        <li key={skillIndex}>
+                                            <SkillText item={skill} />
+                                        </li>
+                                    ))}
+                                </ul>
+                            </section>
+                        )}
+
+                        {view.languages.length > 0 && (
+                            <section className={view.skills.length > 0 ? "meadow-template-sidebar-section-spaced" : ""}>
+                                <h2>Languages</h2>
+                                {view.languages.map((language, languageIndex) => (
+                                    <div className="meadow-template-language" key={languageIndex}>
+                                        {HasText(language.name) && (
+                                            <span className="meadow-template-language-name">{language.name}</span>
+                                        )}
+                                        {(HasText(language.level) ||
+                                            (language.ratingStyle !== "none" && language.rating > 0)) && (
+                                            <span className="meadow-template-language-meta">
+                                                {HasText(language.level) && <small>{language.level}</small>}
+                                                <Rating item={language} />
+                                            </span>
+                                        )}
+                                    </div>
                                 ))}
-                            </ul>
-                        </Section>
+                            </section>
+                        )}
 
-                        <Section show={view.languages.length > 0}>
-                            <h2>Languages</h2>
-                            {view.languages.map((item, index) => (
-                                <div className="maya-template-language" key={index}>
-                                    <ItemText item={item} field="name" className="maya-template-language-name" />
-                                    {(HasText(item.level) || (item.ratingStyle !== "none" && item.rating > 0)) && (
-                                        <span className="maya-template-language-meta">
-                                            <ItemText item={item} field="level" as="small" />
-                                            <Rating item={item} />
-                                        </span>
-                                    )}
-                                </div>
-                            ))}
-                        </Section>
+                        {view.links.length > 0 && (
+                            <section
+                                className={
+                                    view.languages.length > 0 || view.skills.length > 0
+                                        ? "meadow-template-sidebar-section-spaced"
+                                        : ""
+                                }
+                            >
+                                <h2>Links</h2>
+                                {view.links.map((link, linkIndex) => (
+                                    <p key={linkIndex}>
+                                        <LinkAnchor link={link} />
+                                    </p>
+                                ))}
+                            </section>
+                        )}
 
-                        <Section show={view.links.length > 0}>
-                            <h2>Links</h2>
-                            {view.links.map((link, index) => (
-                                <p key={index}>
-                                    <LinkAnchor link={link} />
-                                </p>
-                            ))}
-                        </Section>
-
-                        <Section show={view.sideCustom.length > 0}>
-                            <h2>{view.sideCustomTitle}</h2>
-                            <CustomItems items={view.sideCustom} />
-                        </Section>
+                        {view.sideCustom.length > 0 && (
+                            <section
+                                className={
+                                    view.links.length > 0 || view.languages.length > 0 || view.skills.length > 0
+                                        ? "meadow-template-sidebar-section-spaced"
+                                        : ""
+                                }
+                            >
+                                <h2>{view.sideCustomTitle}</h2>
+                                <CustomItems items={view.sideCustom} />
+                            </section>
+                        )}
                     </aside>
                 )}
             </div>
         </article>
     );
 }
-
-function AtlasTemplate({ view }) {
+function AtlasTemplate({ data }) {
+    const view = BuildView(data, "atlas");
     if (view.isEmpty) {
         return <BlankTemplate />;
     }
-
     return (
         <article className="atlas-template">
             {(view.hasName || HasText(view.title) || HasText(view.profile) || view.contactLines.length > 0) && (
                 <header className="atlas-header">
                     <div>
-                        {HasText(view.title) && <TitleText view={view} className="atlas-header-label" />}
+                        {HasText(view.title) && HasText(view.title) && (
+                            <span className="atlas-header-label">{view.title}</span>
+                        )}
                         {view.hasName && (
                             <h1>
                                 <NameText view={view} />
@@ -780,54 +780,75 @@ function AtlasTemplate({ view }) {
 
             <div className="atlas-layout">
                 <main className="atlas-main">
-                    <Section show={view.employment.length > 0} className="atlas-section">
-                        <h2>Professional experience</h2>
-                        {view.employment.map((item, index) => {
-                            let atlasRoleClassName;
-                            if (index === view.employment.length - 1) {
-                                atlasRoleClassName = "atlas-role atlas-role-last";
-                            } else {
-                                atlasRoleClassName = "atlas-role";
-                            }
-
-                            return (
-                                <article className={atlasRoleClassName} key={index}>
-                                    <div className="atlas-role-line">
-                                        <span></span>
-                                    </div>
-                                    <div className="atlas-role-content">
-                                        <div className="atlas-role-heading">
-                                            <div>
-                                                <ItemText item={item} field="role" as="h3" />
-                                                <ItemText item={item} field="company" as="p" />
-                                                <ItemText item={item} field="additions" className="atlas-entry-extra" />
-                                            </div>
-                                            <AtlasEntrySideMeta item={item} />
+                    {view.employment.length > 0 && (
+                        <section className="atlas-section">
+                            <h2>Professional experience</h2>
+                            {view.employment.map((employmentEntry, employmentEntryIndex) => {
+                                let atlasRoleClassName;
+                                if (employmentEntryIndex === view.employment.length - 1) {
+                                    atlasRoleClassName = "atlas-role atlas-role-last";
+                                } else {
+                                    atlasRoleClassName = "atlas-role";
+                                }
+                                return (
+                                    <article className={atlasRoleClassName} key={employmentEntryIndex}>
+                                        <div className="atlas-role-line">
+                                            <span></span>
                                         </div>
-                                        <DescriptionList item={item} />
+                                        <div className="atlas-role-content">
+                                            <div className="atlas-role-heading">
+                                                <div>
+                                                    {HasText(employmentEntry.role) && <h3>{employmentEntry.role}</h3>}
+                                                    {HasText(employmentEntry.company) && (
+                                                        <p>{employmentEntry.company}</p>
+                                                    )}
+                                                    {HasText(employmentEntry.additions) && (
+                                                        <span className="atlas-entry-extra">
+                                                            {employmentEntry.additions}
+                                                        </span>
+                                                    )}
+                                                </div>
+                                                <AtlasEntrySideMeta item={employmentEntry} />
+                                            </div>
+                                            <DescriptionList item={employmentEntry} />
+                                        </div>
+                                    </article>
+                                );
+                            })}
+                        </section>
+                    )}
+
+                    {view.projects.length > 0 && (
+                        <section
+                            className={
+                                view.employment.length > 0 ? "atlas-section atlas-section-spaced" : "atlas-section"
+                            }
+                        >
+                            <h2>{view.projectTitle}</h2>
+                            {view.projects.map((project, projectIndex) => (
+                                <div className="atlas-case" key={projectIndex}>
+                                    <span>{String(projectIndex + 1).padStart(2, "0")}</span>
+                                    <div>
+                                        {HasText(project.name) && <h3>{project.name}</h3>}
+                                        <DescriptionList item={project} />
                                     </div>
-                                </article>
-                            );
-                        })}
-                    </Section>
-
-                    <Section show={view.projects.length > 0} className="atlas-section">
-                        <h2>{view.projectTitle}</h2>
-                        {view.projects.map((item, index) => (
-                            <div className="atlas-case" key={index}>
-                                <span>{String(index + 1).padStart(2, "0")}</span>
-                                <div>
-                                    <ItemText item={item} field="name" as="h3" />
-                                    <DescriptionList item={item} />
                                 </div>
-                            </div>
-                        ))}
-                    </Section>
+                            ))}
+                        </section>
+                    )}
 
-                    <Section show={view.mainCustom.length > 0} className="atlas-section atlas-main-custom-section">
-                        <h2>{view.mainCustomTitle}</h2>
-                        <CustomItems items={view.mainCustom} />
-                    </Section>
+                    {view.mainCustom.length > 0 && (
+                        <section
+                            className={
+                                view.projects.length > 0 || view.employment.length > 0
+                                    ? "atlas-section atlas-main-custom-section atlas-section-spaced"
+                                    : "atlas-section atlas-main-custom-section"
+                            }
+                        >
+                            <h2>{view.mainCustomTitle}</h2>
+                            <CustomItems items={view.mainCustom} />
+                        </section>
+                    )}
                 </main>
 
                 {(view.skills.length > 0 ||
@@ -836,68 +857,102 @@ function AtlasTemplate({ view }) {
                     view.links.length > 0 ||
                     view.sideCustom.length > 0) && (
                     <aside className="atlas-sidebar">
-                        <Section show={view.skills.length > 0}>
-                            <h2>Core strengths</h2>
-                            <ul>
-                                {view.skills.map((item, index) => (
-                                    <li key={index}>
-                                        <SkillText item={item} />
-                                    </li>
-                                ))}
-                            </ul>
-                        </Section>
-                        <Section show={view.education.length > 0}>
-                            <h2>Education</h2>
-                            {view.education.map((item, index) => (
-                                <div className="atlas-education" key={index}>
-                                    <div className="atlas-education-row">
-                                        <ItemText item={item} field="degree" as="h3" />
-                                        {HasText(GetDateRange(item)) && (
-                                            <small>
-                                                <DateRangeText item={item} />
-                                            </small>
+                        {view.skills.length > 0 && (
+                            <section>
+                                <h2>Core strengths</h2>
+                                <ul>
+                                    {view.skills.map((skill, skillIndex) => (
+                                        <li key={skillIndex}>
+                                            <SkillText item={skill} />
+                                        </li>
+                                    ))}
+                                </ul>
+                            </section>
+                        )}
+                        {view.education.length > 0 && (
+                            <section className={view.skills.length > 0 ? "atlas-sidebar-section-spaced" : ""}>
+                                <h2>Education</h2>
+                                {view.education.map((educationEntry, educationEntryIndex) => (
+                                    <div className="atlas-education" key={educationEntryIndex}>
+                                        <div className="atlas-education-row">
+                                            {HasText(educationEntry.degree) && <h3>{educationEntry.degree}</h3>}
+                                            {HasText(GetDateRange(educationEntry)) && (
+                                                <small>
+                                                    <DateRangeText item={educationEntry} />
+                                                </small>
+                                            )}
+                                        </div>
+                                        <div className="atlas-education-row">
+                                            {HasText(educationEntry.school) && <p>{educationEntry.school}</p>}
+                                            {HasText(educationEntry.location) && (
+                                                <span className="atlas-entry-location">{educationEntry.location}</span>
+                                            )}
+                                        </div>
+                                        {HasText(educationEntry.additions) && (
+                                            <span className="atlas-entry-extra">{educationEntry.additions}</span>
                                         )}
                                     </div>
-                                    <div className="atlas-education-row">
-                                        <ItemText item={item} field="school" as="p" />
-                                        <ItemText item={item} field="location" className="atlas-entry-location" />
-                                    </div>
-                                    <ItemText item={item} field="additions" className="atlas-entry-extra" />
-                                </div>
-                            ))}
-                        </Section>
-                        <Section show={view.languages.length > 0}>
-                            <h2>Languages</h2>
-                            {view.languages.map((item, index) => (
-                                <p key={index}>
-                                    <LanguageText item={item} />
-                                </p>
-                            ))}
-                        </Section>
-                        <Section show={view.links.length > 0}>
-                            <h2>Links</h2>
-                            {view.links.map((link, index) => (
-                                <p key={index}>
-                                    <LinkAnchor link={link} />
-                                </p>
-                            ))}
-                        </Section>
-                        <Section show={view.sideCustom.length > 0} className="atlas-side-custom-section">
-                            <h2>{view.sideCustomTitle}</h2>
-                            <CustomItems items={view.sideCustom} />
-                        </Section>
+                                ))}
+                            </section>
+                        )}
+                        {view.languages.length > 0 && (
+                            <section
+                                className={
+                                    view.education.length > 0 || view.skills.length > 0
+                                        ? "atlas-sidebar-section-spaced"
+                                        : ""
+                                }
+                            >
+                                <h2>Languages</h2>
+                                {view.languages.map((language, languageIndex) => (
+                                    <p key={languageIndex}>
+                                        <LanguageText item={language} />
+                                    </p>
+                                ))}
+                            </section>
+                        )}
+                        {view.links.length > 0 && (
+                            <section
+                                className={
+                                    view.languages.length > 0 || view.education.length > 0 || view.skills.length > 0
+                                        ? "atlas-sidebar-section-spaced"
+                                        : ""
+                                }
+                            >
+                                <h2>Links</h2>
+                                {view.links.map((link, linkIndex) => (
+                                    <p key={linkIndex}>
+                                        <LinkAnchor link={link} />
+                                    </p>
+                                ))}
+                            </section>
+                        )}
+                        {view.sideCustom.length > 0 && (
+                            <section
+                                className={
+                                    view.links.length > 0 ||
+                                    view.languages.length > 0 ||
+                                    view.education.length > 0 ||
+                                    view.skills.length > 0
+                                        ? "atlas-side-custom-section atlas-sidebar-section-spaced"
+                                        : "atlas-side-custom-section"
+                                }
+                            >
+                                <h2>{view.sideCustomTitle}</h2>
+                                <CustomItems items={view.sideCustom} />
+                            </section>
+                        )}
                     </aside>
                 )}
             </div>
         </article>
     );
 }
-
-function NorthTemplate({ view }) {
+function NorthTemplate({ data }) {
+    const view = BuildView(data, "north");
     if (view.isEmpty) {
         return <BlankTemplate />;
     }
-
     return (
         <article className="north-template">
             <header className="north-header">
@@ -907,11 +962,7 @@ function NorthTemplate({ view }) {
                             <NameText view={view} />
                         </h1>
                     )}
-                    {HasText(view.title) && (
-                        <p>
-                            <TitleText view={view} />
-                        </p>
-                    )}
+                    {HasText(view.title) && <p>{HasText(view.title) && <span>{view.title}</span>}</p>}
                 </div>
                 <div className="north-contact">
                     {view.contactLines.map((line) => (
@@ -919,103 +970,98 @@ function NorthTemplate({ view }) {
                             <ContactLineText view={view} line={line} />
                         </span>
                     ))}
-                    {view.links.map((link, index) => (
-                        <span key={index}>
+                    {view.links.map((link, linkIndex) => (
+                        <span key={linkIndex}>
                             <LinkAnchor link={link} />
                         </span>
                     ))}
                 </div>
             </header>
-            <Section show={HasText(view.profile)} className="north-summary">
-                <h2>Profile</h2>
-                <ProfileContent view={view} />
-            </Section>
-            <Section show={view.employment.length > 0} className="north-section">
-                <h2>Experience</h2>
-                {view.employment.map((item, index) => (
-                    <div className="north-entry" key={index}>
-                        {HasText(GetDateRange(item)) && (
-                            <div className="north-entry-date">
-                                <DateRangeText item={item} />
+            {HasText(view.profile) && (
+                <section className="north-summary">
+                    <h2>Profile</h2>
+                    <ProfileContent view={view} />
+                </section>
+            )}
+            {view.employment.length > 0 && (
+                <section className="north-section">
+                    <h2>Experience</h2>
+                    {view.employment.map((employmentEntry, employmentEntryIndex) => (
+                        <div className="north-entry" key={employmentEntryIndex}>
+                            {HasText(GetDateRange(employmentEntry)) && (
+                                <div className="north-entry-date">
+                                    <DateRangeText item={employmentEntry} />
+                                </div>
+                            )}
+                            <div className="north-entry-details">
+                                {HasText(employmentEntry.role) && <h3>{employmentEntry.role}</h3>}
+                                {HasText(employmentEntry.company) && <span>{employmentEntry.company}</span>}
+                                <DescriptionList item={employmentEntry} />
                             </div>
-                        )}
-                        <div className="north-entry-details">
-                            <ItemText item={item} field="role" as="h3" />
-                            <ItemText item={item} field="company" />
-                            <DescriptionList item={item} />
                         </div>
-                    </div>
-                ))}
-            </Section>
-            <Section show={view.projects.length > 0} className="north-section">
-                <h2>{view.projectTitle}</h2>
-                {view.projects.map((item, index) => (
-                    <div className="north-entry" key={index}>
-                        <div></div>
-                        <div>
-                            <ItemText item={item} field="name" as="h3" />
-                            <ItemText item={item} field="subtitle" />
-                            <DescriptionList item={item} />
+                    ))}
+                </section>
+            )}
+            {view.projects.length > 0 && (
+                <section className="north-section">
+                    <h2>{view.projectTitle}</h2>
+                    {view.projects.map((project, projectIndex) => (
+                        <div className="north-entry" key={projectIndex}>
+                            <div></div>
+                            <div>
+                                {HasText(project.name) && <h3>{project.name}</h3>}
+                                {HasText(project.subtitle) && <span>{project.subtitle}</span>}
+                                <DescriptionList item={project} />
+                            </div>
                         </div>
-                    </div>
-                ))}
-            </Section>
-            <Section show={view.mainCustom.length > 0} className="north-section">
-                <h2>{view.mainCustomTitle}</h2>
-                <CustomItems items={view.mainCustom} itemClassName="north-small-entry" />
-            </Section>
+                    ))}
+                </section>
+            )}
+            {view.mainCustom.length > 0 && (
+                <section className="north-section">
+                    <h2>{view.mainCustomTitle}</h2>
+                    <CustomItems items={view.mainCustom} itemClassName="north-small-entry" />
+                </section>
+            )}
             {(view.education.length > 0 || view.skills.length > 0 || view.sideCustom.length > 0) && (
                 <div className="north-bottom-grid">
-                    <Section show={view.education.length > 0} className="north-section">
-                        <h2>Education</h2>
-                        {view.education.map((item, index) => (
-                            <div className="north-small-entry" key={index}>
-                                {HasText(GetDateRange(item)) && (
-                                    <small>
-                                        <DateRangeText item={item} />
-                                    </small>
-                                )}
-                                <ItemText item={item} field="degree" as="strong" />
-                                <ItemText item={item} field="school" />
-                            </div>
-                        ))}
-                    </Section>
-                    <Section show={view.skills.length > 0} className="north-section">
-                        <h2>Skills</h2>
-                        <div className="north-skills">
-                            {view.skills.map((item, index) => (
-                                <span key={index}>
-                                    <SkillText item={item} />
-                                </span>
+                    {view.education.length > 0 && (
+                        <section className="north-section">
+                            <h2>Education</h2>
+                            {view.education.map((educationEntry, educationEntryIndex) => (
+                                <div className="north-small-entry" key={educationEntryIndex}>
+                                    {HasText(GetDateRange(educationEntry)) && (
+                                        <small>
+                                            <DateRangeText item={educationEntry} />
+                                        </small>
+                                    )}
+                                    {HasText(educationEntry.degree) && <strong>{educationEntry.degree}</strong>}
+                                    {HasText(educationEntry.school) && <span>{educationEntry.school}</span>}
+                                </div>
                             ))}
-                        </div>
-                    </Section>
-                    <Section show={view.sideCustom.length > 0} className="north-section">
-                        <h2>{view.sideCustomTitle}</h2>
-                        <CustomItems items={view.sideCustom} />
-                    </Section>
+                        </section>
+                    )}
+                    {view.skills.length > 0 && (
+                        <section className="north-section">
+                            <h2>Skills</h2>
+                            <div className="north-skills">
+                                {view.skills.map((skill, skillIndex) => (
+                                    <span key={skillIndex}>
+                                        <SkillText item={skill} />
+                                    </span>
+                                ))}
+                            </div>
+                        </section>
+                    )}
+                    {view.sideCustom.length > 0 && (
+                        <section className="north-section">
+                            <h2>{view.sideCustomTitle}</h2>
+                            <CustomItems items={view.sideCustom} />
+                        </section>
+                    )}
                 </div>
             )}
         </article>
     );
 }
-
-function DynamicCvTemplate({ cv, templateId }) {
-    if (templateId !== "meadow" && templateId !== "atlas" && templateId !== "north") {
-        return <UnavailableTemplate />;
-    }
-
-    const view = BuildView(cv, templateId);
-
-    if (templateId === "atlas") {
-        return <AtlasTemplate view={view} />;
-    }
-
-    if (templateId === "north") {
-        return <NorthTemplate view={view} />;
-    }
-
-    return <MeadowTemplate view={view} />;
-}
-
-export default DynamicCvTemplate;
+export { MeadowTemplate, AtlasTemplate, NorthTemplate };

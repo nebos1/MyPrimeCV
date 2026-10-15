@@ -1,5 +1,4 @@
 import "./bridge.css";
-
 function BridgeTemplate() {
     return (
         <article className="bridge-template">
@@ -21,7 +20,10 @@ function BridgeTemplate() {
 
             <section className="bridge-profile">
                 <span>Profile</span>
-                <p>Product designer focused on clear, useful and human-centered digital experiences. I combine research, visual design and close collaboration with development teams.</p>
+                <p>
+                    Product designer focused on clear, useful and human-centered digital experiences. I combine
+                    research, visual design and close collaboration with development teams.
+                </p>
             </section>
 
             <section className="bridge-experience">
@@ -40,7 +42,10 @@ function BridgeTemplate() {
                             <small>2023 — Present</small>
                         </div>
 
-                        <p>Led product discovery, interaction design and design-system work across multiple SaaS products.</p>
+                        <p>
+                            Led product discovery, interaction design and design-system work across multiple SaaS
+                            products.
+                        </p>
 
                         <ul>
                             <li>Improved onboarding completion by 28%.</li>
@@ -49,7 +54,7 @@ function BridgeTemplate() {
                         </ul>
                     </article>
 
-                    <article className="bridge-job">
+                    <article className="bridge-job bridge-job-spaced">
                         <div className="bridge-job-top">
                             <div>
                                 <h3>Product Designer</h3>
@@ -77,7 +82,7 @@ function BridgeTemplate() {
                     <small>2017 — 2021</small>
                 </div>
 
-                <div className="bridge-panel bridge-panel-dark">
+                <div className="bridge-panel bridge-panel-dark bridge-panel-spaced">
                     <span>03</span>
                     <h2>Skills</h2>
                     <p>Product strategy</p>
@@ -88,11 +93,14 @@ function BridgeTemplate() {
                     <p>Figma</p>
                 </div>
 
-                <div className="bridge-panel bridge-panel-accent">
+                <div className="bridge-panel bridge-panel-accent bridge-panel-spaced">
                     <span>04</span>
                     <h2>Selected project</h2>
                     <h3>Civic Path</h3>
-                    <p>A service-design concept that simplifies municipal processes through clearer language and fewer steps.</p>
+                    <p>
+                        A service-design concept that simplifies municipal processes through clearer language and fewer
+                        steps.
+                    </p>
 
                     <h2 className="bridge-languages-title">Languages</h2>
                     <p>Bulgarian Native</p>
@@ -102,5 +110,4 @@ function BridgeTemplate() {
         </article>
     );
 }
-
 export default BridgeTemplate;

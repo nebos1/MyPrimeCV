@@ -20,7 +20,10 @@ for (const path of Object.keys(PageMetadata)) {
         "twitter:description": page.description,
     };
     for (const [name, value] of Object.entries(tags)) {
-        html = html.replace(new RegExp(`(<meta (?:name|property)="${name}" content=")[^"]*(")`), `$1${EscapeHtml(value)}$2`);
+        html = html.replace(
+            new RegExp(`(<meta (?:name|property)="${name}" content=")[^"]*(")`),
+            `$1${EscapeHtml(value)}$2`,
+        );
     }
     html = html.replace(/(<link rel="canonical" href=")[^"]*(")/, `$1${EscapeHtml(page.canonical)}$2`);
     const directory = new URL(`../dist${path === "/" ? "" : path}/`, import.meta.url);

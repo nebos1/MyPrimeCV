@@ -1,5 +1,4 @@
 import "./terrace.css";
-
 function TerraceTemplate() {
     return (
         <article className="terrace-template">
@@ -22,7 +21,10 @@ function TerraceTemplate() {
                 <div className="terrace-number">00</div>
                 <div>
                     <h2>Professional summary</h2>
-                    <p>Product designer focused on clear, useful and human-centered digital experiences. I combine research, visual design and close collaboration with development teams.</p>
+                    <p>
+                        Product designer focused on clear, useful and human-centered digital experiences. I combine
+                        research, visual design and close collaboration with development teams.
+                    </p>
                 </div>
             </section>
 
@@ -38,7 +40,10 @@ function TerraceTemplate() {
                             <span>Northline Studio</span>
                         </div>
                         <small>2023 — Present</small>
-                        <p>Led product discovery, interaction design and design-system work across multiple SaaS products.</p>
+                        <p>
+                            Led product discovery, interaction design and design-system work across multiple SaaS
+                            products.
+                        </p>
                         <ul>
                             <li>Improved onboarding completion by 28%.</li>
                             <li>Built a shared component library for three products.</li>
@@ -46,7 +51,7 @@ function TerraceTemplate() {
                         </ul>
                     </article>
 
-                    <article className="terrace-job">
+                    <article className="terrace-job terrace-job-spaced">
                         <div>
                             <h3>Product Designer</h3>
                             <span>Bright Labs</span>
@@ -96,7 +101,10 @@ function TerraceTemplate() {
                 <div>
                     <h2>Selected project</h2>
                     <h3>Civic Path</h3>
-                    <p>A service-design concept that simplifies municipal processes through clearer language and fewer steps.</p>
+                    <p>
+                        A service-design concept that simplifies municipal processes through clearer language and fewer
+                        steps.
+                    </p>
 
                     <div className="terrace-meta">
                         <span>Bulgarian Native</span>
@@ -108,5 +116,4 @@ function TerraceTemplate() {
         </article>
     );
 }
-
 export default TerraceTemplate;

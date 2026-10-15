@@ -8,11 +8,10 @@ import Favorites from "./pages/folder-storage/folder-favorites/favorites";
 import MotivationLetters from "./pages/folder-storage/folder-motivation-letters/motivation-letters";
 import Resumes from "./pages/folder-storage/folder-resumes/resumes";
 import Trash from "./pages/folder-storage/trash/trash";
-
+import NotFound from "./pages/NotFound";
 function App() {
     const currentPage = window.location.pathname;
     const currentHash = window.location.hash;
-
     if (
         currentPage === "/workspace" ||
         currentPage === "/workspace/" ||
@@ -22,15 +21,12 @@ function App() {
     ) {
         return <AllDocuments />;
     }
-
     if (currentPage === "/favorites" || currentPage === "/favorites/" || currentHash === "#favorites") {
         return <Favorites />;
     }
-
     if (currentPage === "/resumes" || currentPage === "/resumes/" || currentHash === "#resumes") {
         return <Resumes />;
     }
-
     if (
         currentPage === "/motivation-letters" ||
         currentPage === "/motivation-letters/" ||
@@ -38,19 +34,15 @@ function App() {
     ) {
         return <MotivationLetters />;
     }
-
     if (currentPage === "/create-motivation-letter" || currentPage === "/create-motivation-letter/") {
         return <CreateMotivationLetter />;
     }
-
     if (currentPage === "/create-cv" || currentPage === "/create-cv/") {
         return <CreateCV />;
     }
-
     if (currentPage === "/trash" || currentPage === "/trash/" || currentHash === "#trash") {
         return <Trash />;
     }
-
     if (currentPage === "/cv-templates" || currentPage === "/cv-templates/") {
         return (
             <MainNavbarShell>
@@ -58,8 +50,9 @@ function App() {
             </MainNavbarShell>
         );
     }
-
-    return <HomePage />;
+    if (currentPage === "/") {
+        return <HomePage />;
+    }
+    return <NotFound />;
 }
-
 export default App;

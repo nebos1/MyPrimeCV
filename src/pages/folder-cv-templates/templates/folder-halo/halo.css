@@ -187,7 +187,7 @@
     top: 11.3rem;
 }
 
-.halo-right section + section {
+.halo-right .halo-right-section-spaced {
     margin-top: 0.9rem;
     padding-top: 0.7rem;
     border-top: 0.0625rem solid #ddd0c2;
@@ -314,7 +314,7 @@
     top: 8.1rem;
 }
 
-.template-card-preview .halo-right section + section {
+.template-card-preview .halo-right .halo-right-section-spaced {
     margin-top: 0.48rem;
     padding-top: 0.38rem;
 }

@@ -68,7 +68,7 @@
 }
 
 .create-cv-section-rename-btn:hover,
-.create-cv-section-rename-btn.is-open {
+.create-cv-section-rename-btn.create-cv-title-open {
     border-color: #b9d7d1;
     color: #006a62;
     background: #eef8f5;
@@ -236,7 +236,7 @@
     line-height: 1.45;
 }
 
-.field-label-row {
+.document-field-label-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -244,7 +244,7 @@
     gap: 0.65rem;
 }
 
-.field-label-row label {
+.document-field-label-row label {
     min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -288,7 +288,7 @@
     background: #ffffff;
 }
 
-.create-cv-list-item + .create-cv-list-item {
+.create-cv-list-item.create-cv-list-item-spaced {
     margin-top: 0.75rem;
 }
 

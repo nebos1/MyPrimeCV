@@ -1,4 +1,4 @@
-.empty-documents button {
+.workspace-empty-documents button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -12,11 +12,11 @@
     gap: 0.45rem;
 }
 
-.empty-documents button:hover {
+.workspace-empty-documents button:hover {
     background: #c94036;
 }
 
-.empty-documents {
+.workspace-empty-documents {
     display: grid;
     justify-items: center;
     min-height: 31rem;
@@ -28,20 +28,20 @@
     text-align: center;
 }
 
-.empty-documents h3 {
+.workspace-empty-documents h3 {
     margin-top: 1.2rem;
     font-family: Georgia, "Times New Roman", serif;
     font-size: 1.75rem;
     line-height: 1.05;
 }
 
-.empty-documents p {
+.workspace-empty-documents p {
     margin-top: 0.65rem;
     color: #718083;
     font-size: 0.92rem;
 }
 
-.empty-documents button {
+.workspace-empty-documents button {
     margin-top: 1.5rem;
     padding: 0 1.25rem;
 }
@@ -170,11 +170,11 @@
     background: #fff0ee;
 }
 
-.workspace-document-favorite-toggle.is-favorite {
+.workspace-document-favorite-toggle.workspace-document-favorite {
     color: #d94e42;
 }
 
-.workspace-document-favorite-toggle.is-favorite svg {
+.workspace-document-favorite-toggle.workspace-document-favorite svg {
     fill: #d94e42;
 }
 
@@ -243,7 +243,7 @@
 }
 
 @media (max-width: 36rem) {
-    .empty-documents {
+    .workspace-empty-documents {
         min-height: 24rem;
         padding: 4rem 1rem;
     }

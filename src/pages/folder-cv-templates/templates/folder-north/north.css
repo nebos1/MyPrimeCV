@@ -1,4 +1,5 @@
 .north-template {
+    font-size: 0.46rem;
     width: 100%;
     max-width: 34rem;
     aspect-ratio: 210 / 297;
@@ -116,7 +117,8 @@
     line-height: 1.5;
 }
 
-.north-entry ul {
+.north-entry ul,
+.north-entry ol {
     margin: 0.35rem 0 0;
     padding-left: 0.8rem;
     color: #536164;
@@ -278,4 +280,9 @@
 .template-card-preview .north-skills > span {
     padding: 0.18rem 0.32rem;
     font-size: 0.29rem;
+}
+
+.document-preview-page-content .north-template,
+.document-preview-measurement .north-template {
+    font-family: "MyPrimeCV Sans", sans-serif;
 }

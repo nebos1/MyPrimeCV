@@ -1,5 +1,4 @@
 import "./summit.css";
-
 function SummitTemplate() {
     return (
         <article className="summit-template">
@@ -20,7 +19,10 @@ function SummitTemplate() {
             </header>
 
             <section className="summit-profile">
-                <p>Product designer focused on clear, useful and human-centered digital experiences. I combine research, visual design and close collaboration with development teams.</p>
+                <p>
+                    Product designer focused on clear, useful and human-centered digital experiences. I combine
+                    research, visual design and close collaboration with development teams.
+                </p>
             </section>
 
             <div className="summit-layout">
@@ -34,7 +36,10 @@ function SummitTemplate() {
                             <div>
                                 <h3>Senior Product Designer</h3>
                                 <span>Northline Studio</span>
-                                <p>Led product discovery, interaction design and design-system work across multiple SaaS products.</p>
+                                <p>
+                                    Led product discovery, interaction design and design-system work across multiple
+                                    SaaS products.
+                                </p>
                                 <ul>
                                     <li>Improved onboarding completion by 28%.</li>
                                     <li>Built a shared component library for three products.</li>
@@ -49,7 +54,10 @@ function SummitTemplate() {
                             <div>
                                 <h3>Product Designer</h3>
                                 <span>Bright Labs</span>
-                                <p>Designed responsive web and mobile products from early research to final implementation.</p>
+                                <p>
+                                    Designed responsive web and mobile products from early research to final
+                                    implementation.
+                                </p>
                                 <ul>
                                     <li>Created interactive prototypes and user flows.</li>
                                     <li>Introduced lightweight usability testing.</li>
@@ -58,7 +66,7 @@ function SummitTemplate() {
                         </article>
                     </section>
 
-                    <section className="summit-section">
+                    <section className="summit-section summit-section-spaced">
                         <h2>Education</h2>
 
                         <div className="summit-row">
@@ -71,7 +79,7 @@ function SummitTemplate() {
                         </div>
                     </section>
 
-                    <section className="summit-section">
+                    <section className="summit-section summit-section-spaced">
                         <h2>Selected project</h2>
 
                         <div className="summit-row">
@@ -83,7 +91,10 @@ function SummitTemplate() {
                             <small>2025</small>
                         </div>
 
-                        <p>A service-design concept that simplifies municipal processes through clearer language and fewer steps.</p>
+                        <p>
+                            A service-design concept that simplifies municipal processes through clearer language and
+                            fewer steps.
+                        </p>
                     </section>
                 </main>
 
@@ -98,7 +109,7 @@ function SummitTemplate() {
                         <p>Figma</p>
                     </section>
 
-                    <section>
+                    <section className="summit-sidebar-section-spaced">
                         <h2>Languages</h2>
 
                         <div className="summit-language">
@@ -112,7 +123,7 @@ function SummitTemplate() {
                         </div>
                     </section>
 
-                    <section>
+                    <section className="summit-sidebar-section-spaced">
                         <h2>Links</h2>
                         <p>linkedin.com/in/mayapetrova</p>
                         <p>maya-petrova.design</p>
@@ -122,5 +133,4 @@ function SummitTemplate() {
         </article>
     );
 }
-
 export default SummitTemplate;

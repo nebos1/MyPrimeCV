@@ -1,0 +1,36 @@
+.not-found-page {
+    min-height: 100vh;
+    background: #fbfaf7;
+    color: #182528;
+}
+
+.not-found-content {
+    max-width: 42rem;
+    margin: 0 auto;
+    padding: 6rem 1.5rem;
+    text-align: center;
+}
+
+.not-found-code {
+    color: #c94036;
+    font-size: 4rem;
+    font-weight: 700;
+}
+
+.not-found-content p {
+    margin-bottom: 1.5rem;
+}
+
+.not-found-content a {
+    display: inline-block;
+    margin: 0.5rem;
+    padding: 0.85rem 1.1rem;
+    border-radius: 0.5rem;
+    color: #ffffff;
+    background: #27383b;
+    text-decoration: none;
+}
+
+.not-found-content a:hover {
+    background: #c94036;
+}

@@ -1,6 +1,5 @@
 import React from "react";
 import "./halo.css";
-
 function HaloTemplate() {
     return (
         <article className="halo-template">
@@ -21,7 +20,10 @@ function HaloTemplate() {
 
             <section className="halo-profile">
                 <h2>Profile</h2>
-                <p>Product designer focused on clear, useful and human-centered digital experiences. I combine research, visual design and close collaboration with development teams.</p>
+                <p>
+                    Product designer focused on clear, useful and human-centered digital experiences. I combine
+                    research, visual design and close collaboration with development teams.
+                </p>
             </section>
 
             <div className="halo-columns">
@@ -32,7 +34,10 @@ function HaloTemplate() {
                         <span>2023 — Present</span>
                         <h3>Senior Product Designer</h3>
                         <strong>Northline Studio</strong>
-                        <p>Led product discovery, interaction design and design-system work across multiple SaaS products.</p>
+                        <p>
+                            Led product discovery, interaction design and design-system work across multiple SaaS
+                            products.
+                        </p>
                         <ul>
                             <li>Improved onboarding completion by 28%.</li>
                             <li>Built a shared component library for three products.</li>
@@ -62,7 +67,7 @@ function HaloTemplate() {
                         <small>2017 — 2021</small>
                     </section>
 
-                    <section>
+                    <section className="halo-right-section-spaced">
                         <h2>Skills</h2>
                         <p>Product strategy</p>
                         <p>UX research</p>
@@ -72,21 +77,23 @@ function HaloTemplate() {
                         <p>Figma</p>
                     </section>
 
-                    <section>
+                    <section className="halo-right-section-spaced">
                         <h2>Languages</h2>
                         <p>Bulgarian Native</p>
                         <p>English C1</p>
                     </section>
 
-                    <section>
+                    <section className="halo-right-section-spaced">
                         <h2>Selected project</h2>
                         <h3>Civic Path</h3>
-                        <p>A service-design concept that simplifies municipal processes through clearer language and fewer steps.</p>
+                        <p>
+                            A service-design concept that simplifies municipal processes through clearer language and
+                            fewer steps.
+                        </p>
                     </section>
                 </aside>
             </div>
         </article>
     );
 }
-
 export default HaloTemplate;

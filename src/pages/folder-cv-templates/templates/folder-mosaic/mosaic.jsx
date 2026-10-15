@@ -1,6 +1,5 @@
 import React from "react";
 import "./mosaic.css";
-
 function MosaicTemplate() {
     return (
         <article className="mosaic-template">
@@ -19,7 +18,10 @@ function MosaicTemplate() {
 
             <section className="mosaic-profile-card">
                 <h2>Profile</h2>
-                <p>Product designer focused on clear, useful and human-centered digital experiences. I combine research, visual design and close collaboration with development teams.</p>
+                <p>
+                    Product designer focused on clear, useful and human-centered digital experiences. I combine
+                    research, visual design and close collaboration with development teams.
+                </p>
             </section>
 
             <section className="mosaic-highlight-card">
@@ -37,7 +39,9 @@ function MosaicTemplate() {
                         <span>Northline Studio</span>
                     </div>
                     <small>2023 — Present</small>
-                    <p>Led product discovery, interaction design and design-system work across multiple SaaS products.</p>
+                    <p>
+                        Led product discovery, interaction design and design-system work across multiple SaaS products.
+                    </p>
                     <ul>
                         <li>Built a shared component library for three products.</li>
                         <li>Worked directly with product, development and QA.</li>
@@ -74,7 +78,10 @@ function MosaicTemplate() {
             <section className="mosaic-project-card">
                 <h2>Selected project</h2>
                 <h3>Civic Path</h3>
-                <p>A service-design concept that simplifies municipal processes through clearer language and fewer steps.</p>
+                <p>
+                    A service-design concept that simplifies municipal processes through clearer language and fewer
+                    steps.
+                </p>
             </section>
 
             <section className="mosaic-language-card">
@@ -85,5 +92,4 @@ function MosaicTemplate() {
         </article>
     );
 }
-
 export default MosaicTemplate;

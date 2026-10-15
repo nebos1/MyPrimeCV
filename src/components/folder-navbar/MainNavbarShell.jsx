@@ -1,6 +1,5 @@
 import "./MainNavbarShell.css";
 import MainNavbar from "./MainNavbar";
-
 function MainNavbarShell({ children }) {
     return (
         <div className="site-layout">
@@ -9,5 +8,4 @@ function MainNavbarShell({ children }) {
         </div>
     );
 }
-
 export default MainNavbarShell;

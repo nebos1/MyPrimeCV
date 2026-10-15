@@ -52,10 +52,10 @@
     z-index: 2;
 }
 
-.facet-sidebar section + section {
+.facet-sidebar .facet-sidebar-section-spaced {
     margin-top: 0.9rem;
     padding-top: 0.7rem;
-    border-top: 0.0625rem solid rgba(255,255,255,0.35);
+    border-top: 0.0625rem solid rgba(255, 255, 255, 0.35);
 }
 
 .facet-sidebar h2,
@@ -196,7 +196,7 @@
     font-size: 0.4rem;
 }
 
-.template-card-preview .facet-sidebar section + section {
+.template-card-preview .facet-sidebar .facet-sidebar-section-spaced {
     margin-top: 0.55rem;
     padding-top: 0.45rem;
 }

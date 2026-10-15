@@ -1,5 +1,4 @@
 import "./atlas.css";
-
 function AtlasTemplate() {
     return (
         <article className="atlas-template">
@@ -82,7 +81,7 @@ function AtlasTemplate() {
                         </article>
                     </section>
 
-                    <section className="atlas-section">
+                    <section className="atlas-section atlas-section-spaced">
                         <h2>Selected case study</h2>
 
                         <div className="atlas-case">
@@ -108,7 +107,7 @@ function AtlasTemplate() {
                         </ul>
                     </section>
 
-                    <section>
+                    <section className="atlas-sidebar-section-spaced">
                         <h2>Education</h2>
                         <div className="atlas-education">
                             <div className="atlas-education-row">
@@ -119,7 +118,7 @@ function AtlasTemplate() {
                         </div>
                     </section>
 
-                    <section>
+                    <section className="atlas-sidebar-section-spaced">
                         <h2>Languages</h2>
                         <div className="atlas-language-row">
                             <span>Bulgarian</span>
@@ -135,5 +134,4 @@ function AtlasTemplate() {
         </article>
     );
 }
-
 export default AtlasTemplate;

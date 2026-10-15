@@ -18,7 +18,7 @@
     border-radius: 50%;
 }
 
-.cv-rating i.is-filled {
+.cv-rating i.cv-rating-filled {
     background: currentColor;
     opacity: 1;
 }
@@ -71,7 +71,7 @@
     word-break: break-word;
 }
 
-.cv-custom-item + .cv-custom-item {
+.cv-custom-item.cv-custom-item-spaced {
     margin-top: 0.6rem;
 }
 
@@ -105,27 +105,27 @@
     word-break: break-word;
 }
 
-.cv-description-list li + li {
+.cv-description-list .cv-description-list-li-spaced {
     margin-top: 0.25rem;
 }
 
-.document-preview-page-content .maya-template,
-.document-preview-measurement .maya-template {
+.document-preview-page-content .meadow-template,
+.document-preview-measurement .meadow-template {
     padding: 2.4rem;
 }
 
-.document-preview-page-content .maya-template-header,
-.document-preview-measurement .maya-template-header {
+.document-preview-page-content .meadow-template-header,
+.document-preview-measurement .meadow-template-header {
     gap: 2rem;
 }
 
-.document-preview-page-content .maya-template-content,
-.document-preview-measurement .maya-template-content {
+.document-preview-page-content .meadow-template-content,
+.document-preview-measurement .meadow-template-content {
     grid-template-columns: minmax(0, 1.65fr) minmax(8rem, 0.75fr);
     gap: 1.4rem;
 }
 
-.document-preview-page-content .maya-template-sidebar,
-.document-preview-measurement .maya-template-sidebar {
+.document-preview-page-content .meadow-template-sidebar,
+.document-preview-measurement .meadow-template-sidebar {
     padding-left: 1.1rem;
 }

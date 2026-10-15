@@ -1,5 +1,4 @@
 import "./sienna.css";
-
 function SiennaTemplate() {
     return (
         <article className="sienna-template">
@@ -23,7 +22,10 @@ function SiennaTemplate() {
 
             <section className="sienna-profile">
                 <h2>Profile</h2>
-                <p>Product designer focused on clear, useful and human-centered digital experiences. I combine research, visual design and close collaboration with development teams.</p>
+                <p>
+                    Product designer focused on clear, useful and human-centered digital experiences. I combine
+                    research, visual design and close collaboration with development teams.
+                </p>
             </section>
 
             <div className="sienna-layout">
@@ -41,7 +43,10 @@ function SiennaTemplate() {
                                 <small>2023 — Present</small>
                             </div>
 
-                            <p>Led product discovery, interaction design and design-system work across multiple SaaS products.</p>
+                            <p>
+                                Led product discovery, interaction design and design-system work across multiple SaaS
+                                products.
+                            </p>
 
                             <ul>
                                 <li>Improved onboarding completion by 28%.</li>
@@ -60,7 +65,9 @@ function SiennaTemplate() {
                                 <small>2021 — 2023</small>
                             </div>
 
-                            <p>Designed responsive web and mobile products from early research to final implementation.</p>
+                            <p>
+                                Designed responsive web and mobile products from early research to final implementation.
+                            </p>
 
                             <ul>
                                 <li>Created interactive prototypes and user flows.</li>
@@ -69,7 +76,7 @@ function SiennaTemplate() {
                         </article>
                     </section>
 
-                    <section className="sienna-section">
+                    <section className="sienna-section sienna-section-spaced">
                         <h2>Education</h2>
 
                         <div className="sienna-row">
@@ -94,7 +101,7 @@ function SiennaTemplate() {
                         <p>Figma</p>
                     </section>
 
-                    <section>
+                    <section className="sienna-sidebar-section-spaced">
                         <h2>Languages</h2>
 
                         <div className="sienna-language">
@@ -108,13 +115,16 @@ function SiennaTemplate() {
                         </div>
                     </section>
 
-                    <section>
+                    <section className="sienna-sidebar-section-spaced">
                         <h2>Selected project</h2>
                         <h3>Civic Path</h3>
-                        <p>A service-design concept that simplifies municipal processes through clearer language and fewer steps.</p>
+                        <p>
+                            A service-design concept that simplifies municipal processes through clearer language and
+                            fewer steps.
+                        </p>
                     </section>
 
-                    <section>
+                    <section className="sienna-sidebar-section-spaced">
                         <h2>Links</h2>
                         <p>linkedin.com/in/mayapetrova</p>
                         <p>maya-petrova.design</p>
@@ -124,5 +134,4 @@ function SiennaTemplate() {
         </article>
     );
 }
-
 export default SiennaTemplate;

@@ -15,11 +15,11 @@ export function CreateDefaultStyle() {
 }
 
 export function MakeTextStyle(style) {
-    let fontFallback;
-    if (style.fontFamily === "Times New Roman" || style.fontFamily === "Garamond") {
-        fontFallback = "serif";
+    let fontFamily;
+    if (style.fontFamily === "Times New Roman" || style.fontFamily === "Garamond" || style.fontFamily === "Georgia") {
+        fontFamily = '"MyPrimeCV Serif", serif';
     } else {
-        fontFallback = "sans-serif";
+        fontFamily = '"MyPrimeCV Sans", sans-serif';
     }
 
     let fontStyle;
@@ -45,7 +45,7 @@ export function MakeTextStyle(style) {
 
     return {
         color: `rgb(${style.color.r}, ${style.color.g}, ${style.color.b})`,
-        fontFamily: `${style.fontFamily}, ${fontFallback}`,
+        fontFamily: fontFamily,
         fontSize: `${style.size}%`,
         fontStyle,
         fontWeight,

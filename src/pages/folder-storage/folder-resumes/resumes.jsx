@@ -2,7 +2,6 @@ import "../../../folder-logo/logo.css";
 import "../workspace.css";
 import * as Icons from "../../../folder-lucide-icons/lucide-icons";
 import { useRef, useState } from "react";
-
 import WorkspaceBackupActions from "../components/WorkspaceBackupActions";
 import WorkspaceDocumentsList from "../components/WorkspaceDocumentsList";
 import {
@@ -13,39 +12,30 @@ import {
     ToggleWorkspaceDocumentFavorite,
 } from "../../folder-local-storage/workspace-storage";
 import "./resumes.css";
-
 function goToHome() {
     window.location.href = "/";
 }
-
 function goToCVTemplates() {
     window.location.href = "/cv-templates";
 }
-
 function goToWorkspace() {
     window.location.href = "/workspace";
 }
-
 function goToFavorites() {
     window.location.href = "/favorites";
 }
-
 function goToResumes() {
     window.location.href = "/resumes";
 }
-
 function goToMotivationLetters() {
     window.location.href = "/motivation-letters";
 }
-
 function goToCreateMotivationLetter() {
     window.location.href = "/create-motivation-letter";
 }
-
 function goToTrash() {
     window.location.href = "/trash";
 }
-
 function Resumes() {
     const [isOpen, setIsOpen] = useState(false);
     const [search, setSearch] = useState("");
@@ -58,52 +48,45 @@ function Resumes() {
     const resumeCount = counts.resumes;
     const motivationCount = counts.motivationLetters;
     const trashCount = counts.trash;
-
     function HandleMoveToTrash(documentId) {
         setDocuments(MoveWorkspaceDocumentToTrash(documentId));
     }
-
     function HandleToggleFavorite(documentId) {
         setDocuments(ToggleWorkspaceDocumentFavorite(documentId));
     }
-
     function HandleRename(documentId, title) {
         setDocuments(RenameWorkspaceDocument(documentId, title));
     }
-
     let createDocIconClassName;
     if (isOpen) {
-        createDocIconClassName = "create-doc-icon active";
+        createDocIconClassName = "workspace-create-doc-icon workspace-link-active";
     } else {
-        createDocIconClassName = "create-doc-icon";
+        createDocIconClassName = "workspace-create-doc-icon";
     }
-
     let documentDropdownMenuClassName;
     if (isOpen) {
-        documentDropdownMenuClassName = "document-dropdown-menu open";
+        documentDropdownMenuClassName = "workspace-document-dropdown-menu workspace-menu-open";
     } else {
-        documentDropdownMenuClassName = "document-dropdown-menu";
+        documentDropdownMenuClassName = "workspace-document-dropdown-menu";
     }
-
     let documentSuffix;
     if (count === 1) {
         documentSuffix = "";
     } else {
         documentSuffix = "s";
     }
-
     return (
-        <div className="workspace-page resumes-page">
+        <div className="workspace-page workspace-resumes-page">
             <section className="workspace-content">
                 <div className="workspace-header">
                     <div className="workspace-title">
-                        <span className="eyebrow">my workspace</span>
+                        <span className="site-intro-label">my workspace</span>
                         <h1>Welcome back</h1>
                     </div>
 
                     <div className="workspace-actions">
                         <div className="workspace-search">
-                            <Icons.SearchLucideIcon className="search-icon" />
+                            <Icons.SearchLucideIcon className="workspace-search-icon" />
                             <input
                                 placeholder="Search documents"
                                 aria-label="Search documents"
@@ -112,25 +95,29 @@ function Resumes() {
                             />
                         </div>
                         <button
-                            className="create-resume"
+                            className="workspace-create-resume"
                             type="button"
                             onClick={() => setIsOpen((previous) => !previous)}
                         >
-                            <Icons.PlusLucideIcon className="create-doc-icon" />
+                            <Icons.PlusLucideIcon className="workspace-create-doc-icon" />
                             New document
                             <Icons.ChevronDownLucideIcon className={createDocIconClassName} />
                         </button>
 
                         <div className={documentDropdownMenuClassName}>
                             <button type="button" onClick={goToCVTemplates}>
-                                <Icons.FilePlusCornerLucideIcon className="new-doc-icon" />
-                                <span className="new-doc-title">Resume</span>
-                                <span className="new-doc-description">Start with a professional template</span>
+                                <Icons.FilePlusCornerLucideIcon className="workspace-new-doc-icon" />
+                                <span className="workspace-new-doc-title">Resume</span>
+                                <span className="workspace-new-doc-description">
+                                    Start with a professional template
+                                </span>
                             </button>
                             <button type="button" onClick={goToCreateMotivationLetter}>
-                                <Icons.MailLucideIcon className="new-doc-icon" />
-                                <span className="new-doc-title">Motivation letter</span>
-                                <span className="new-doc-description">Start with a professional template</span>
+                                <Icons.MailLucideIcon className="workspace-new-doc-icon" />
+                                <span className="workspace-new-doc-title">Motivation letter</span>
+                                <span className="workspace-new-doc-description">
+                                    Start with a professional template
+                                </span>
                             </button>
                             <button
                                 type="button"
@@ -139,15 +126,15 @@ function Resumes() {
                                     setIsOpen(false);
                                 }}
                             >
-                                <Icons.UploadLucideIcon className="new-doc-icon" />
-                                <span className="new-doc-title">Import backup</span>
-                                <span className="new-doc-description">Import an editable backup</span>
+                                <Icons.UploadLucideIcon className="workspace-new-doc-icon" />
+                                <span className="workspace-new-doc-title">Import backup</span>
+                                <span className="workspace-new-doc-description">Import an editable backup</span>
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <div className="recently-edited">
+                <div className="workspace-recently-edited">
                     <h2>Resumes:</h2>
                     <span>
                         {count} document{documentSuffix}
@@ -168,42 +155,42 @@ function Resumes() {
                 />
             </section>
 
-            <section className="sidebar">
+            <section className="workspace-sidebar">
                 <button type="button" className="workspace-logo" onClick={goToHome} aria-label="MyPrimeCV">
                     <span className="logo-icon"></span>
                     <span className="logo-name">
                         MyPrime<span>CV</span>
                     </span>
                 </button>
-                <div className="sidebar-options">
-                    <button type="button" className="all-documents" onClick={goToWorkspace}>
+                <div className="workspace-sidebar-options">
+                    <button type="button" className="workspace-all-documents" onClick={goToWorkspace}>
                         <Icons.HouseLucideIcon className="workspace-icons" />
                         All documents <small>{counts.all}</small>
                     </button>
-                    <button type="button" className="favourite" onClick={goToFavorites}>
+                    <button type="button" className="workspace-favourite" onClick={goToFavorites}>
                         <Icons.HeartLucideIcon className="workspace-icons" />
                         Favorites <small>{favoriteCount}</small>
                     </button>
-                    <button type="button" className="resumes" onClick={goToResumes}>
+                    <button type="button" className="workspace-resumes" onClick={goToResumes}>
                         <Icons.FileTextLucideIcon className="workspace-icons" />
                         Resumes <small>{resumeCount}</small>
                     </button>
-                    <button type="button" className="motivation-letters" onClick={goToMotivationLetters}>
+                    <button type="button" className="workspace-motivation-letters" onClick={goToMotivationLetters}>
                         <Icons.MailLucideIcon className="workspace-icons" />
                         Motivation letters <small>{motivationCount}</small>
                     </button>
-                    <button type="button" className="trash" onClick={goToTrash}>
+                    <button type="button" className="workspace-trash" onClick={goToTrash}>
                         <Icons.Trash2LucideIcon className="workspace-icons" />
                         Trash <small>{trashCount}</small>
                     </button>
                 </div>
 
-                <div className="sidebar-footer">
-                    <span className="sidebar-icons">
+                <div className="workspace-sidebar-footer">
+                    <span className="workspace-sidebar-icons">
                         <Icons.ShieldCheckLucideIcon className="workspace-icons" />
                         Saved in this browser
                     </span>
-                    <span className="sidebar-footer-description">
+                    <span className="workspace-sidebar-footer-description">
                         Your documents stay here. JSON backup moves the editable workspace. PDFs are downloaded from
                         each document.
                     </span>
@@ -213,5 +200,4 @@ function Resumes() {
         </div>
     );
 }
-
 export default Resumes;

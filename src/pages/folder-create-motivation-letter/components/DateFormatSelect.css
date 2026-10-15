@@ -1,4 +1,4 @@
-.date-format-select {
+.letter-date-format-select {
     display: grid;
     min-width: 0;
     gap: 0.45rem;
@@ -7,7 +7,7 @@
     font-weight: 850;
 }
 
-.date-format-select select {
+.letter-date-format-select select {
     width: 100%;
     min-height: 2.35rem;
     border: 0.0625rem solid #d5d7d1;

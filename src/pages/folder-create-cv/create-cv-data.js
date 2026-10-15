@@ -68,8 +68,13 @@ export function CreateEmptyCvData() {
             gender: "",
         },
         profile: "",
+        tools: "",
+        footerNote: "",
+        studioImpact: { label: "", value: "", description: "" },
         atlasMetrics: CreateEmptyAtlasMetrics(),
         sectionTitles: {
+            linenExpertise: "Expertise",
+            linenTools: "Tools",
             projects: "",
             mainCustom: "Custom section",
             sideCustom: "Custom section",
@@ -110,6 +115,7 @@ export function CreateEmptyEmployment() {
         endDateFormat: "full",
         description: "",
         descriptionListStyle: "disc",
+        summary: "",
     };
 }
 
@@ -173,18 +179,24 @@ export function NormalizeSkillData(skill) {
         return Object.assign({}, CreateEmptySkill(), { label: skill });
     }
 
-    return NormalizeTextFields(CreateEmptySkill(), Object.assign({}, skill, {
-        label: skill?.label ?? skill?.name ?? "",
-        rating: Math.max(0, Math.min(5, Number(skill?.rating ?? 0))),
-        ratingStyle: skill?.ratingStyle ?? "none",
-    }));
+    return NormalizeTextFields(
+        CreateEmptySkill(),
+        Object.assign({}, skill, {
+            label: skill?.label ?? skill?.name ?? "",
+            rating: Math.max(0, Math.min(5, Number(skill?.rating ?? 0))),
+            ratingStyle: skill?.ratingStyle ?? "none",
+        }),
+    );
 }
 
 function NormalizeLanguageData(language) {
-    return NormalizeTextFields(CreateEmptyLanguage(), Object.assign({}, language, {
-        rating: Math.max(0, Math.min(5, Number(language?.rating ?? 0))),
-        ratingStyle: language?.ratingStyle ?? "none",
-    }));
+    return NormalizeTextFields(
+        CreateEmptyLanguage(),
+        Object.assign({}, language, {
+            rating: Math.max(0, Math.min(5, Number(language?.rating ?? 0))),
+            ratingStyle: language?.ratingStyle ?? "none",
+        }),
+    );
 }
 
 function NormalizeAtlasMetricData(metric) {
@@ -221,6 +233,9 @@ export function NormalizeCvData(data) {
 
     next.basics = NormalizeTextFields(defaults.basics, source.basics);
     next.profile = typeof source.profile === "string" ? source.profile : "";
+    next.tools = typeof source.tools === "string" ? source.tools : "";
+    next.footerNote = typeof source.footerNote === "string" ? source.footerNote : "";
+    next.studioImpact = NormalizeTextFields(defaults.studioImpact, source.studioImpact);
     next.basics.birthDateFormat = NormalizeDateFormat(source.basics?.birthDateFormat);
     next.sectionTitles = NormalizeTextFields(defaults.sectionTitles, source.sectionTitles);
     next.atlasMetrics = NormalizeAtlasMetrics(source.atlasMetrics);

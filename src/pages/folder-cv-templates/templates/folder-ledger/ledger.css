@@ -82,7 +82,7 @@
     gap: 0.18rem 0.8rem;
 }
 
-.ledger-job + .ledger-job {
+.ledger-job.ledger-job-spaced {
     margin-top: 0.65rem;
     padding-top: 0.65rem;
     border-top: 0.0625rem dashed #aeb7b4;
@@ -222,7 +222,7 @@
     gap: 0.12rem 0.45rem;
 }
 
-.template-card-preview .ledger-job + .ledger-job {
+.template-card-preview .ledger-job.ledger-job-spaced {
     margin-top: 0.36rem;
     padding-top: 0.34rem;
 }

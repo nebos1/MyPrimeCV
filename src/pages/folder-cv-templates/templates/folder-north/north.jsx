@@ -1,5 +1,4 @@
 import "./north.css";
-
 function NorthTemplate() {
     return (
         <article className="north-template">
@@ -84,5 +83,4 @@ function NorthTemplate() {
         </article>
     );
 }
-
 export default NorthTemplate;

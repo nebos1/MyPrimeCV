@@ -1,5 +1,4 @@
 import "./facet.css";
-
 function FacetTemplate() {
     return (
         <article className="facet-template">
@@ -13,7 +12,7 @@ function FacetTemplate() {
                     <p>Sofia, Bulgaria</p>
                 </section>
 
-                <section>
+                <section className="facet-sidebar-section-spaced">
                     <h2>Skills</h2>
                     <strong>Product strategy</strong>
                     <strong>UX research</strong>
@@ -23,13 +22,13 @@ function FacetTemplate() {
                     <strong>Figma</strong>
                 </section>
 
-                <section>
+                <section className="facet-sidebar-section-spaced">
                     <h2>Languages</h2>
                     <p>Bulgarian Native</p>
                     <p>English C1</p>
                 </section>
 
-                <section>
+                <section className="facet-sidebar-section-spaced">
                     <h2>Links</h2>
                     <p>maya-petrova.design</p>
                     <p>linkedin.com/in/mayapetrova</p>
@@ -39,14 +38,21 @@ function FacetTemplate() {
             <main className="facet-main">
                 <header className="facet-header">
                     <div>
-                        <h1>Maya<br />Petrova</h1>
+                        <h1>
+                            Maya
+                            <br />
+                            Petrova
+                        </h1>
                         <p>Product Designer</p>
                     </div>
                 </header>
 
                 <section className="facet-section">
                     <h2>Professional summary</h2>
-                    <p>Product designer focused on clear, useful and human-centered digital experiences. I combine research, visual design and close collaboration with development teams.</p>
+                    <p>
+                        Product designer focused on clear, useful and human-centered digital experiences. I combine
+                        research, visual design and close collaboration with development teams.
+                    </p>
                 </section>
 
                 <section className="facet-section">
@@ -101,11 +107,13 @@ function FacetTemplate() {
                         <small>2025</small>
                     </article>
 
-                    <p>A service-design concept that simplifies municipal processes through clearer language and fewer steps.</p>
+                    <p>
+                        A service-design concept that simplifies municipal processes through clearer language and fewer
+                        steps.
+                    </p>
                 </section>
             </main>
         </article>
     );
 }
-
 export default FacetTemplate;

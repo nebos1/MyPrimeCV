@@ -1,19 +1,55 @@
-﻿import { PageWidth, PageHeight } from "./page-layout";
+import { PageWidth, PageHeight } from "./page-layout";
+import { EncodeEditableCv } from "../folder-upload-cv/editable-cv-data";
 
-// Local fonts keep Bulgarian text readable in the downloaded PDF.
 const FontFaces = [
-    { family: "Inter", weight: 400, style: "normal", src: [{ url: "/fonts/LiberationSans-Regular.ttf", format: "truetype" }] },
-    { family: "Inter", weight: 700, style: "normal", src: [{ url: "/fonts/LiberationSans-Bold.ttf", format: "truetype" }] },
-    { family: "Inter", weight: 400, style: "italic", src: [{ url: "/fonts/LiberationSans-Italic.ttf", format: "truetype" }] },
-    { family: "Inter", weight: 700, style: "italic", src: [{ url: "/fonts/LiberationSans-BoldItalic.ttf", format: "truetype" }] },
-    { family: "Arial", weight: 400, style: "normal", src: [{ url: "/fonts/LiberationSans-Regular.ttf", format: "truetype" }] },
-    { family: "Arial", weight: 700, style: "normal", src: [{ url: "/fonts/LiberationSans-Bold.ttf", format: "truetype" }] },
-    { family: "Arial", weight: 400, style: "italic", src: [{ url: "/fonts/LiberationSans-Italic.ttf", format: "truetype" }] },
-    { family: "Arial", weight: 700, style: "italic", src: [{ url: "/fonts/LiberationSans-BoldItalic.ttf", format: "truetype" }] },
-    { family: "Georgia", weight: 400, style: "normal", src: [{ url: "/fonts/LiberationSerif-Regular.ttf", format: "truetype" }] },
-    { family: "Georgia", weight: 700, style: "normal", src: [{ url: "/fonts/LiberationSerif-Bold.ttf", format: "truetype" }] },
-    { family: "Georgia", weight: 400, style: "italic", src: [{ url: "/fonts/LiberationSerif-Italic.ttf", format: "truetype" }] },
-    { family: "Georgia", weight: 700, style: "italic", src: [{ url: "/fonts/LiberationSerif-BoldItalic.ttf", format: "truetype" }] },
+    {
+        family: "MyPrimeCV Sans",
+        weight: 400,
+        style: "normal",
+        src: [{ url: "/fonts/LiberationSans-Regular.ttf", format: "truetype" }],
+    },
+    {
+        family: "MyPrimeCV Sans",
+        weight: 700,
+        style: "normal",
+        src: [{ url: "/fonts/LiberationSans-Bold.ttf", format: "truetype" }],
+    },
+    {
+        family: "MyPrimeCV Sans",
+        weight: 400,
+        style: "italic",
+        src: [{ url: "/fonts/LiberationSans-Italic.ttf", format: "truetype" }],
+    },
+    {
+        family: "MyPrimeCV Sans",
+        weight: 700,
+        style: "italic",
+        src: [{ url: "/fonts/LiberationSans-BoldItalic.ttf", format: "truetype" }],
+    },
+    {
+        family: "MyPrimeCV Serif",
+        weight: 400,
+        style: "normal",
+        src: [{ url: "/fonts/LiberationSerif-Regular.ttf", format: "truetype" }],
+    },
+    {
+        family: "MyPrimeCV Serif",
+        weight: 700,
+        style: "normal",
+        src: [{ url: "/fonts/LiberationSerif-Bold.ttf", format: "truetype" }],
+    },
+    {
+        family: "MyPrimeCV Serif",
+        weight: 400,
+        style: "italic",
+        src: [{ url: "/fonts/LiberationSerif-Italic.ttf", format: "truetype" }],
+    },
+    {
+        family: "MyPrimeCV Serif",
+        weight: 700,
+        style: "italic",
+        src: [{ url: "/fonts/LiberationSerif-BoldItalic.ttf", format: "truetype" }],
+    },
 ];
 
 function HideTextOutsidePage(originalPage, copiedPage) {
@@ -24,7 +60,6 @@ function HideTextOutsidePage(originalPage, copiedPage) {
     const originalTexts = [];
     const copiedTexts = [];
 
-    // Collect the text before changing the copied page.
     while (originalWalker.nextNode()) {
         originalTexts.push(originalWalker.currentNode);
     }
@@ -53,7 +88,6 @@ function HideTextOutsidePage(originalPage, copiedPage) {
             continue;
         }
 
-        // Keep words and spaces in place, but hide text belonging to another page.
         const words = originalText.textContent.match(/\s+|\S+/g);
         const fragment = document.createDocumentFragment();
         let textPosition = 0;
@@ -104,7 +138,7 @@ function CopyFontWeight(original, copy) {
     }
 }
 
-export async function ExportPreviewPdf(title) {
+export async function ExportPreviewPdf(title, cvDocument) {
     await document.fonts.ready;
 
     const pages = document.querySelectorAll(".document-preview-pages > .document-preview-page");
@@ -112,7 +146,6 @@ export async function ExportPreviewPdf(title) {
         throw new Error("The document preview is not ready. Please try again.");
     }
 
-    // Load the PDF library only when Download PDF is clicked.
     const pdfLibrary = await import("jspdf");
     const pdf = new pdfLibrary.jsPDF({
         unit: "mm",
@@ -136,6 +169,10 @@ export async function ExportPreviewPdf(title) {
         subject: "MyPrimeCV::platform-pdf::v1",
     });
 
+    if (cvDocument) {
+        pdf.setProperties({ keywords: EncodeEditableCv(cvDocument) });
+    }
+
     for (let pageIndex = 0; pageIndex < pages.length; pageIndex++) {
         if (pageIndex > 0) {
             pdf.addPage();
@@ -148,7 +185,6 @@ export async function ExportPreviewPdf(title) {
         copiedPage.style.boxShadow = "none";
         copiedPage.style.fontFamily = getComputedStyle(originalPage).fontFamily;
 
-        // PDF fonts have regular and bold weights instead of CSS weights such as 850.
         CopyFontWeight(originalPage, copiedPage);
         const originalElements = originalPage.querySelectorAll("*");
         const copiedElements = copiedPage.querySelectorAll("*");
@@ -158,7 +194,6 @@ export async function ExportPreviewPdf(title) {
 
         HideTextOutsidePage(originalPage, copiedPage);
 
-        // Preview zoom must not change the size of the downloaded A4 page.
         const content = copiedPage.querySelector(".document-preview-page-content");
         content.style.zoom = "1";
         content.style.transform = content.style.transform.replace(/scale\([^)]*\)\s*/, "");

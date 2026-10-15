@@ -43,7 +43,25 @@ export function GetWorkspaceDocuments(throwOnError = false) {
     const documents = LoadData(WorkspaceDocumentsKey, [], throwOnError);
 
     if (!Array.isArray(documents)) {
+        if (throwOnError) {
+            throw new Error("The saved workspace is damaged. No documents were changed.");
+        }
         return [];
+    }
+
+    if (throwOnError) {
+        for (let index = 0; index < documents.length; index++) {
+            const document = documents[index];
+            if (
+                !document ||
+                typeof document !== "object" ||
+                Array.isArray(document) ||
+                typeof document.id !== "string" ||
+                (document.type !== "resume" && document.type !== "motivation-letter")
+            ) {
+                throw new Error("The saved workspace contains a damaged document. No documents were changed.");
+            }
+        }
     }
 
     return documents
@@ -197,14 +215,14 @@ export function GetWorkspaceCountsFromDocuments(documents) {
 }
 
 export function CreateWorkspaceBackup() {
-    const activeDocuments = GetWorkspaceDocuments().filter((document) => !document.trashed);
+    const documents = GetWorkspaceDocuments(true);
 
     return {
         format: WorkspaceBackupFormat,
         product: "MyPrimeCV",
         backupSchemaVersion: BackupSchemaVersion,
         exportedAt: GetNow(),
-        documents: activeDocuments,
+        documents: documents,
     };
 }
 

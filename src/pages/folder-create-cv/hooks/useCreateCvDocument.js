@@ -48,7 +48,9 @@ export function useCreateCvDocument() {
     const [document, setDocument] = useState(GetDocumentFromUrl);
     const [saveStatus, setSaveStatus] = useState("Saving...");
     const [saveAttempt, setSaveAttempt] = useState(0);
-    const template = GetCreateCvTemplate(document?.templateId || new URLSearchParams(window.location.search).get("template"));
+    const template = GetCreateCvTemplate(
+        document?.templateId || new URLSearchParams(window.location.search).get("template"),
+    );
 
     useEffect(() => {
         if (!document || !template.isImplemented) {
@@ -94,6 +96,24 @@ export function useCreateCvDocument() {
     function UpdateProfile(value) {
         UpdateCvData((data) => {
             data.profile = value;
+        });
+    }
+
+    function UpdateTools(value) {
+        UpdateCvData((data) => {
+            data.tools = value;
+        });
+    }
+
+    function UpdateFooterNote(value) {
+        UpdateCvData((data) => {
+            data.footerNote = value;
+        });
+    }
+
+    function UpdateStudioImpactField(fieldKey, value) {
+        UpdateCvData((data) => {
+            data.studioImpact[fieldKey] = value;
         });
     }
 
@@ -245,6 +265,9 @@ export function useCreateCvDocument() {
         actions: {
             UpdateBasicsField,
             UpdateProfile,
+            UpdateTools,
+            UpdateFooterNote,
+            UpdateStudioImpactField,
             UpdateAtlasMetricField,
             UpdateSectionTitle,
             AddEmployment,

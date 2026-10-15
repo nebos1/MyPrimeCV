@@ -1,616 +1,1065 @@
 import "../../components/CvEditorSidebar.css";
 import * as Icons from "../../../../folder-lucide-icons/lucide-icons";
 import { useState } from "react";
-
-import {
-    GetDefaultProjectTitle,
-    LanguageLevelOptions,
-    NormalizeAtlasMetrics,
-    NormalizeSkillData,
-    RatingStyleOptions,
-} from "../../create-cv-data";
-
-function TextField({ label, value, onChange, type = "text", wide = false }) {
-    const isDateField = type === "date";
-
-    let fieldClassName;
-    if (wide) {
-        fieldClassName = "create-cv-field create-cv-field-wide";
-    } else {
-        fieldClassName = "create-cv-field";
-    }
-
-    let inputType;
-    if (isDateField) {
-        inputType = "text";
-    } else {
-        inputType = type;
-    }
-
+import { GetDefaultProjectTitle, NormalizeAtlasMetrics, NormalizeSkillData } from "../../create-cv-data";
+function CvEditorSidebar({ cv, templateId, actions }) {
+    const [projectsTitleOpen, SetProjectsTitleOpen] = useState(false);
+    const [mainCustomTitleOpen, SetMainCustomTitleOpen] = useState(false);
+    const [sideCustomTitleOpen, SetSideCustomTitleOpen] = useState(false);
+    const projectTitle = cv.sectionTitles.projects || GetDefaultProjectTitle(templateId);
     return (
-        <div className={fieldClassName}>
-            <div className="field-label-row">
-                <label>{label}</label>
-            </div>
-            <input type={inputType} value={value ?? ""} onChange={(event) => onChange(event.target.value)} />
-        </div>
-    );
-}
-
-function TextAreaField({ label, value, onChange }) {
-    return (
-        <div className="create-cv-field create-cv-field-wide">
-            <div className="field-label-row">
-                <label>{label}</label>
-            </div>
-            <textarea value={value ?? ""} onChange={(event) => onChange(event.target.value)} />
-        </div>
-    );
-}
-
-function SelectField({ label, value, onChange, options }) {
-    return (
-        <label className="create-cv-select-field">
-            <span>{label}</span>
-            <select value={value ?? ""} onChange={(event) => onChange(event.target.value)}>
-                {options.map((option) => {
-                    if (typeof option === "string") {
-                        return (
-                            <option key={option || "empty"} value={option}>
-                                {option || "None"}
-                            </option>
-                        );
-                    } else {
-                        return (
-                            <option key={option.value || "empty"} value={option.value} disabled={option.disabled}>
-                                {option.label}
-                            </option>
-                        );
-                    }
-                })}
-            </select>
-        </label>
-    );
-}
-
-function RatingControls({ item, onChange }) {
-    return (
-        <div className="create-cv-rating-controls">
-            <SelectField
-                label="Knowledge display"
-                value={item.ratingStyle}
-                options={RatingStyleOptions}
-                onChange={(value) => onChange("ratingStyle", value)}
-            />
-            <SelectField
-                label="Level 0-5"
-                value={String(item.rating ?? 0)}
-                options={["0", "1", "2", "3", "4", "5"]}
-                onChange={(value) => onChange("rating", Number(value))}
-            />
-        </div>
-    );
-}
-
-function SidebarSection({ icon: Icon, title, visibleTitle, children, onAdd, onVisibleTitleChange }) {
-    const [isTitleOpen, setIsTitleOpen] = useState(false);
-    const canRename = typeof onVisibleTitleChange === "function";
-
-    let createCvSectionRenameBtnClassName;
-    if (canRename) {
-        if (isTitleOpen) {
-            createCvSectionRenameBtnClassName = "create-cv-section-rename-btn is-open";
-        } else {
-            createCvSectionRenameBtnClassName = "create-cv-section-rename-btn";
-        }
-    }
-
-    return (
-        <section className="create-cv-editor-section">
-            <header className="create-cv-editor-section-header">
-                <span className="create-cv-section-icon">
-                    <Icon />
-                </span>
-                <div className="create-cv-section-heading">
-                    <h2>{title}</h2>
-                    {canRename && (
-                        <button
-                            type="button"
-                            className={createCvSectionRenameBtnClassName}
-                            aria-label={`Rename ${title.toLowerCase()} in CV`}
-                            aria-expanded={isTitleOpen}
-                            onClick={() => setIsTitleOpen((open) => !open)}
+        <aside className="create-cv-editor-sidebar">
+            <section className="create-cv-editor-section">
+                <header className="create-cv-editor-section-header">
+                    <span className="create-cv-section-icon">
+                        <Icons.UserRoundLucideIcon />
+                    </span>
+                    <div className="create-cv-section-heading">
+                        <h2>Personal details</h2>
+                    </div>
+                </header>
+                <div className="create-cv-field-grid">
+                    <div className="create-cv-field">
+                        <div className="document-field-label-row">
+                            <label>First name</label>
+                        </div>
+                        <input
+                            aria-label="First name"
+                            type="text"
+                            value={cv.basics.firstName ?? ""}
+                            onChange={(event) => actions.UpdateBasicsField("firstName", event.target.value)}
+                        />
+                    </div>
+                    <div className="create-cv-field">
+                        <div className="document-field-label-row">
+                            <label>Last name</label>
+                        </div>
+                        <input
+                            aria-label="Last name"
+                            type="text"
+                            value={cv.basics.lastName ?? ""}
+                            onChange={(event) => actions.UpdateBasicsField("lastName", event.target.value)}
+                        />
+                    </div>
+                    <div className="create-cv-field create-cv-field-wide">
+                        <div className="document-field-label-row">
+                            <label>Professional title</label>
+                        </div>
+                        <input
+                            aria-label="Professional title"
+                            type="text"
+                            value={cv.basics.professionalTitle ?? ""}
+                            onChange={(event) => actions.UpdateBasicsField("professionalTitle", event.target.value)}
+                        />
+                    </div>
+                    <div className="create-cv-field">
+                        <div className="document-field-label-row">
+                            <label>Email</label>
+                        </div>
+                        <input
+                            aria-label="Email"
+                            type="email"
+                            value={cv.basics.email ?? ""}
+                            onChange={(event) => actions.UpdateBasicsField("email", event.target.value)}
+                        />
+                    </div>
+                    <div className="create-cv-field">
+                        <div className="document-field-label-row">
+                            <label>Phone</label>
+                        </div>
+                        <input
+                            aria-label="Phone"
+                            type="text"
+                            value={cv.basics.phone ?? ""}
+                            onChange={(event) => actions.UpdateBasicsField("phone", event.target.value)}
+                        />
+                    </div>
+                    <div className="create-cv-field">
+                        <div className="document-field-label-row">
+                            <label>City</label>
+                        </div>
+                        <input
+                            aria-label="City"
+                            type="text"
+                            value={cv.basics.city ?? ""}
+                            onChange={(event) => actions.UpdateBasicsField("city", event.target.value)}
+                        />
+                    </div>
+                    <div className="create-cv-field">
+                        <div className="document-field-label-row">
+                            <label>Country</label>
+                        </div>
+                        <input
+                            aria-label="Country"
+                            type="text"
+                            value={cv.basics.country ?? ""}
+                            onChange={(event) => actions.UpdateBasicsField("country", event.target.value)}
+                        />
+                    </div>
+                    <div className="create-cv-field">
+                        <div className="document-field-label-row">
+                            <label>Date of birth</label>
+                        </div>
+                        <input
+                            aria-label="Date of birth"
+                            type="text"
+                            value={cv.basics.birthDate ?? ""}
+                            onChange={(event) => actions.UpdateBasicsField("birthDate", event.target.value)}
+                        />
+                    </div>
+                    <label className="create-cv-select-field">
+                        <span>Gender</span>
+                        <select
+                            value={cv.basics.gender ?? ""}
+                            onChange={(event) => actions.UpdateBasicsField("gender", event.target.value)}
                         >
-                            <Icons.PencilLucideIcon />
-                        </button>
-                    )}
+                            <option value="">Select gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </label>
                 </div>
-                {onAdd && (
-                    <button
-                        type="button"
-                        className="create-cv-section-add-btn"
-                        onClick={onAdd}
-                        aria-label={`Add ${title.toLowerCase()}`}
-                    >
+            </section>
+
+            <section className="create-cv-editor-section">
+                <header className="create-cv-editor-section-header">
+                    <span className="create-cv-section-icon">
+                        <Icons.NotebookTextLucideIcon />
+                    </span>
+                    <div className="create-cv-section-heading">
+                        <h2>Profile</h2>
+                    </div>
+                </header>
+                <div className="create-cv-field create-cv-field-wide">
+                    <div className="document-field-label-row">
+                        <label>Professional summary</label>
+                    </div>
+                    <textarea
+                        value={cv.profile ?? ""}
+                        onChange={(event) => actions.UpdateProfile(event.target.value)}
+                        aria-label="Professional summary"
+                    />
+                </div>
+            </section>
+
+            <section className="create-cv-editor-section">
+                <header className="create-cv-editor-section-header">
+                    <span className="create-cv-section-icon">
+                        <Icons.ChartNoAxesCombinedLucideIcon />
+                    </span>
+                    <div className="create-cv-section-heading">
+                        <h2>Additional</h2>
+                    </div>
+                </header>
+                <div className="create-cv-atlas-metrics-editor">
+                    {NormalizeAtlasMetrics(cv.atlasMetrics).map((metric, index) => (
+                        <article className="create-cv-atlas-metric" key={`atlas-metric-${index}`}>
+                            <div className="create-cv-field-grid">
+                                <div className="create-cv-field create-cv-field-wide">
+                                    <div className="document-field-label-row">
+                                        <label>Addition</label>
+                                    </div>
+                                    <input
+                                        aria-label="Addition"
+                                        type="text"
+                                        value={metric.addition ?? ""}
+                                        onChange={(event) =>
+                                            actions.UpdateAtlasMetricField(index, "addition", event.target.value)
+                                        }
+                                    />
+                                </div>
+                                <div className="create-cv-field create-cv-field-wide">
+                                    <div className="document-field-label-row">
+                                        <label>Label</label>
+                                    </div>
+                                    <input
+                                        aria-label="Label"
+                                        type="text"
+                                        value={metric.label ?? ""}
+                                        onChange={(event) =>
+                                            actions.UpdateAtlasMetricField(index, "label", event.target.value)
+                                        }
+                                    />
+                                </div>
+                            </div>
+                        </article>
+                    ))}
+                </div>
+            </section>
+
+            <section className="create-cv-editor-section">
+                <header className="create-cv-editor-section-header">
+                    <span className="create-cv-section-icon">
+                        <Icons.BriefcaseBusinessLucideIcon />
+                    </span>
+                    <div className="create-cv-section-heading">
+                        <h2>Employment history</h2>
+                    </div>
+                </header>
+                <div className="create-cv-list-header">
+                    <h3>Roles</h3>
+                    <button type="button" onClick={actions.AddEmployment} aria-label="Add roles">
                         <Icons.PlusLucideIcon />
                     </button>
-                )}
-            </header>
-            {isTitleOpen && (
-                <label className="create-cv-section-title-editor">
-                    <span>Visible title</span>
-                    <input value={visibleTitle ?? ""} onChange={(event) => onVisibleTitleChange(event.target.value)} />
-                </label>
-            )}
-            {children}
-        </section>
-    );
-}
-
-function ListHeader({ title, onAdd }) {
-    return (
-        <div className="create-cv-list-header">
-            <h3>{title}</h3>
-            <button type="button" onClick={onAdd} aria-label={`Add ${title.toLowerCase()}`}>
-                <Icons.PlusLucideIcon />
-            </button>
-        </div>
-    );
-}
-
-function DeleteButton({ label, disabled, onClick }) {
-    return (
-        <button type="button" className="create-cv-delete-btn" aria-label={label} disabled={disabled} onClick={onClick}>
-            <Icons.Trash2LucideIcon />
-        </button>
-    );
-}
-
-function BasicsEditor({ basics, onChange }) {
-    return (
-        <SidebarSection icon={Icons.UserRoundLucideIcon} title="Personal details">
-            <div className="create-cv-field-grid">
-                <TextField
-                    label="First name"
-                    value={basics.firstName}
-                    onChange={(value) => onChange("firstName", value)}
-                />
-                <TextField
-                    label="Last name"
-                    value={basics.lastName}
-                    onChange={(value) => onChange("lastName", value)}
-                />
-                <TextField
-                    label="Professional title"
-                    value={basics.professionalTitle}
-                    onChange={(value) => onChange("professionalTitle", value)}
-                    wide
-                />
-                <TextField
-                    label="Email"
-                    type="email"
-                    value={basics.email}
-                    onChange={(value) => onChange("email", value)}
-                />
-                <TextField label="Phone" value={basics.phone} onChange={(value) => onChange("phone", value)} />
-                <TextField label="City" value={basics.city} onChange={(value) => onChange("city", value)} />
-                <TextField label="Country" value={basics.country} onChange={(value) => onChange("country", value)} />
-                <TextField
-                    label="Date of birth"
-                    type="date"
-                    value={basics.birthDate}
-                    onChange={(value) => onChange("birthDate", value)}
-                />
-                <SelectField
-                    label="Gender"
-                    value={basics.gender}
-                    options={[
-                        { value: "", label: "Select gender" },
-                        { value: "Male", label: "Male" },
-                        { value: "Female", label: "Female" },
-                    ]}
-                    onChange={(value) => onChange("gender", value)}
-                />
-            </div>
-        </SidebarSection>
-    );
-}
-
-function AtlasMetricsEditor({ metrics, onChange }) {
-    const normalizedMetrics = NormalizeAtlasMetrics(metrics);
-
-    return (
-        <SidebarSection icon={Icons.ChartNoAxesCombinedLucideIcon} title="Additional">
-            <div className="create-cv-atlas-metrics-editor">
-                {normalizedMetrics.map((metric, index) => (
-                    <article className="create-cv-atlas-metric" key={`atlas-metric-${index}`}>
+                </div>
+                {cv.employment.map((employmentEntry, employmentEntryIndex) => (
+                    <article
+                        className={
+                            employmentEntryIndex > 0
+                                ? "create-cv-list-item create-cv-list-item-spaced"
+                                : "create-cv-list-item"
+                        }
+                        key={`employment-${employmentEntryIndex}`}
+                    >
+                        <div className="create-cv-list-item-top">
+                            <span>Role {employmentEntryIndex + 1}</span>
+                            <button
+                                type="button"
+                                className="create-cv-delete-btn"
+                                aria-label={`Delete role ${employmentEntryIndex + 1}`}
+                                disabled={cv.employment.length === 1}
+                                onClick={() => actions.RemoveEmployment(employmentEntryIndex)}
+                            >
+                                <Icons.Trash2LucideIcon />
+                            </button>
+                        </div>
                         <div className="create-cv-field-grid">
-                            <TextField
-                                label="Addition"
-                                value={metric.addition}
-                                onChange={(value) => onChange(index, "addition", value)}
-                                wide
-                            />
-                            <TextField
-                                label="Label"
-                                value={metric.label}
-                                onChange={(value) => onChange(index, "label", value)}
-                                wide
-                            />
+                            <div className="create-cv-field">
+                                <div className="document-field-label-row">
+                                    <label>Role title</label>
+                                </div>
+                                <input
+                                    aria-label="Role title"
+                                    type="text"
+                                    value={employmentEntry.role ?? ""}
+                                    onChange={(event) =>
+                                        actions.UpdateEmploymentField(employmentEntryIndex, "role", event.target.value)
+                                    }
+                                />
+                            </div>
+                            <div className="create-cv-field">
+                                <div className="document-field-label-row">
+                                    <label>Company</label>
+                                </div>
+                                <input
+                                    aria-label="Company"
+                                    type="text"
+                                    value={employmentEntry.company ?? ""}
+                                    onChange={(event) =>
+                                        actions.UpdateEmploymentField(
+                                            employmentEntryIndex,
+                                            "company",
+                                            event.target.value,
+                                        )
+                                    }
+                                />
+                            </div>
+                            <div className="create-cv-field">
+                                <div className="document-field-label-row">
+                                    <label>Location</label>
+                                </div>
+                                <input
+                                    aria-label="Location"
+                                    type="text"
+                                    value={employmentEntry.location ?? ""}
+                                    onChange={(event) =>
+                                        actions.UpdateEmploymentField(
+                                            employmentEntryIndex,
+                                            "location",
+                                            event.target.value,
+                                        )
+                                    }
+                                />
+                            </div>
+                            <div className="create-cv-field">
+                                <div className="document-field-label-row">
+                                    <label>Additions</label>
+                                </div>
+                                <input
+                                    aria-label="Additions"
+                                    type="text"
+                                    value={employmentEntry.additions ?? ""}
+                                    onChange={(event) =>
+                                        actions.UpdateEmploymentField(
+                                            employmentEntryIndex,
+                                            "additions",
+                                            event.target.value,
+                                        )
+                                    }
+                                />
+                            </div>
+                            <div className="create-cv-field">
+                                <div className="document-field-label-row">
+                                    <label>Date start</label>
+                                </div>
+                                <input
+                                    aria-label="Date start"
+                                    type="text"
+                                    value={employmentEntry.startDate ?? ""}
+                                    onChange={(event) =>
+                                        actions.UpdateEmploymentField(
+                                            employmentEntryIndex,
+                                            "startDate",
+                                            event.target.value,
+                                        )
+                                    }
+                                />
+                            </div>
+                            <div className="create-cv-field">
+                                <div className="document-field-label-row">
+                                    <label>Date end</label>
+                                </div>
+                                <input
+                                    aria-label="Date end"
+                                    type="text"
+                                    value={employmentEntry.endDate ?? ""}
+                                    onChange={(event) =>
+                                        actions.UpdateEmploymentField(
+                                            employmentEntryIndex,
+                                            "endDate",
+                                            event.target.value,
+                                        )
+                                    }
+                                />
+                            </div>
+                            <div className="create-cv-field create-cv-field-wide">
+                                <div className="document-field-label-row">
+                                    <label>Description / bullet lines</label>
+                                </div>
+                                <textarea
+                                    value={employmentEntry.description ?? ""}
+                                    onChange={(event) =>
+                                        actions.UpdateEmploymentField(
+                                            employmentEntryIndex,
+                                            "description",
+                                            event.target.value,
+                                        )
+                                    }
+                                    aria-label="Description / bullet lines"
+                                />
+                            </div>
                         </div>
                     </article>
                 ))}
-            </div>
-        </SidebarSection>
-    );
-}
+            </section>
 
-function EmploymentEditor({ employment, onAdd, onRemove, onChange }) {
-    return (
-        <SidebarSection icon={Icons.BriefcaseBusinessLucideIcon} title="Employment history">
-            <ListHeader title="Roles" onAdd={onAdd} />
-            {employment.map((item, index) => (
-                <article className="create-cv-list-item" key={`employment-${index}`}>
-                    <div className="create-cv-list-item-top">
-                        <span>Role {index + 1}</span>
-                        <DeleteButton
-                            label={`Delete role ${index + 1}`}
-                            disabled={employment.length === 1}
-                            onClick={() => onRemove(index)}
-                        />
+            <section className="create-cv-editor-section">
+                <header className="create-cv-editor-section-header">
+                    <span className="create-cv-section-icon">
+                        <Icons.GraduationCapLucideIcon />
+                    </span>
+                    <div className="create-cv-section-heading">
+                        <h2>Education</h2>
                     </div>
-                    <div className="create-cv-field-grid">
-                        <TextField
-                            label="Role title"
-                            value={item.role}
-                            onChange={(value) => onChange(index, "role", value)}
-                        />
-                        <TextField
-                            label="Company"
-                            value={item.company}
-                            onChange={(value) => onChange(index, "company", value)}
-                        />
-                        <TextField
-                            label="Location"
-                            value={item.location}
-                            onChange={(value) => onChange(index, "location", value)}
-                        />
-                        <TextField
-                            label="Additions"
-                            value={item.additions}
-                            onChange={(value) => onChange(index, "additions", value)}
-                        />
-                        <TextField
-                            label="Date start"
-                            type="date"
-                            value={item.startDate}
-                            onChange={(value) => onChange(index, "startDate", value)}
-                        />
-                        <TextField
-                            label="Date end"
-                            type="date"
-                            value={item.endDate}
-                            onChange={(value) => onChange(index, "endDate", value)}
-                        />
-                        <TextAreaField
-                            label="Description / bullet lines"
-                            value={item.description}
-                            onChange={(value) => onChange(index, "description", value)}
-                        />
-                    </div>
-                </article>
-            ))}
-        </SidebarSection>
-    );
-}
-
-function EducationEditor({ education, onAdd, onRemove, onChange }) {
-    return (
-        <SidebarSection icon={Icons.GraduationCapLucideIcon} title="Education" onAdd={onAdd}>
-            {education.map((item, index) => (
-                <article className="create-cv-list-item" key={`education-${index}`}>
-                    <div className="create-cv-list-item-top">
-                        <span>Education {index + 1}</span>
-                        <DeleteButton
-                            label={`Delete education ${index + 1}`}
-                            disabled={education.length === 1}
-                            onClick={() => onRemove(index)}
-                        />
-                    </div>
-                    <div className="create-cv-field-grid">
-                        <TextField
-                            label="Degree"
-                            value={item.degree}
-                            onChange={(value) => onChange(index, "degree", value)}
-                        />
-                        <TextField
-                            label="School"
-                            value={item.school}
-                            onChange={(value) => onChange(index, "school", value)}
-                        />
-                        <TextField
-                            label="Location"
-                            value={item.location}
-                            onChange={(value) => onChange(index, "location", value)}
-                        />
-                        <TextField
-                            label="Additions"
-                            value={item.additions}
-                            onChange={(value) => onChange(index, "additions", value)}
-                        />
-                        <TextField
-                            label="Date start"
-                            type="date"
-                            value={item.startDate}
-                            onChange={(value) => onChange(index, "startDate", value)}
-                        />
-                        <TextField
-                            label="Date end"
-                            type="date"
-                            value={item.endDate}
-                            onChange={(value) => onChange(index, "endDate", value)}
-                        />
-                    </div>
-                </article>
-            ))}
-        </SidebarSection>
-    );
-}
-
-function SkillsEditor({ skills, onAdd, onRemove, onChange }) {
-    return (
-        <SidebarSection icon={Icons.WrenchLucideIcon} title="Skills" onAdd={onAdd}>
-            {skills.map((skill, index) => {
-                const item = NormalizeSkillData(skill);
-
-                return (
-                    <article className="create-cv-list-item create-cv-list-item-compact" key={`skill-${index}`}>
+                    <button
+                        type="button"
+                        className="create-cv-section-add-btn"
+                        onClick={actions.AddEducation}
+                        aria-label="Add education"
+                    >
+                        <Icons.PlusLucideIcon />
+                    </button>
+                </header>
+                {cv.education.map((educationEntry, educationEntryIndex) => (
+                    <article
+                        className={
+                            educationEntryIndex > 0
+                                ? "create-cv-list-item create-cv-list-item-spaced"
+                                : "create-cv-list-item"
+                        }
+                        key={`education-${educationEntryIndex}`}
+                    >
                         <div className="create-cv-list-item-top">
-                            <span>Skill {index + 1}</span>
-                            <DeleteButton
-                                label={`Delete skill ${index + 1}`}
-                                disabled={skills.length === 1}
-                                onClick={() => onRemove(index)}
-                            />
+                            <span>Education {educationEntryIndex + 1}</span>
+                            <button
+                                type="button"
+                                className="create-cv-delete-btn"
+                                aria-label={`Delete education ${educationEntryIndex + 1}`}
+                                disabled={cv.education.length === 1}
+                                onClick={() => actions.RemoveEducation(educationEntryIndex)}
+                            >
+                                <Icons.Trash2LucideIcon />
+                            </button>
                         </div>
                         <div className="create-cv-field-grid">
-                            <TextField
-                                label="Skill"
-                                value={item.label}
-                                onChange={(value) => onChange(index, "label", value)}
-                                wide
-                            />
+                            <div className="create-cv-field">
+                                <div className="document-field-label-row">
+                                    <label>Degree</label>
+                                </div>
+                                <input
+                                    aria-label="Degree"
+                                    type="text"
+                                    value={educationEntry.degree ?? ""}
+                                    onChange={(event) =>
+                                        actions.UpdateEducationField(educationEntryIndex, "degree", event.target.value)
+                                    }
+                                />
+                            </div>
+                            <div className="create-cv-field">
+                                <div className="document-field-label-row">
+                                    <label>School</label>
+                                </div>
+                                <input
+                                    aria-label="School"
+                                    type="text"
+                                    value={educationEntry.school ?? ""}
+                                    onChange={(event) =>
+                                        actions.UpdateEducationField(educationEntryIndex, "school", event.target.value)
+                                    }
+                                />
+                            </div>
+                            <div className="create-cv-field">
+                                <div className="document-field-label-row">
+                                    <label>Location</label>
+                                </div>
+                                <input
+                                    aria-label="Location"
+                                    type="text"
+                                    value={educationEntry.location ?? ""}
+                                    onChange={(event) =>
+                                        actions.UpdateEducationField(
+                                            educationEntryIndex,
+                                            "location",
+                                            event.target.value,
+                                        )
+                                    }
+                                />
+                            </div>
+                            <div className="create-cv-field">
+                                <div className="document-field-label-row">
+                                    <label>Additions</label>
+                                </div>
+                                <input
+                                    aria-label="Additions"
+                                    type="text"
+                                    value={educationEntry.additions ?? ""}
+                                    onChange={(event) =>
+                                        actions.UpdateEducationField(
+                                            educationEntryIndex,
+                                            "additions",
+                                            event.target.value,
+                                        )
+                                    }
+                                />
+                            </div>
+                            <div className="create-cv-field">
+                                <div className="document-field-label-row">
+                                    <label>Date start</label>
+                                </div>
+                                <input
+                                    aria-label="Date start"
+                                    type="text"
+                                    value={educationEntry.startDate ?? ""}
+                                    onChange={(event) =>
+                                        actions.UpdateEducationField(
+                                            educationEntryIndex,
+                                            "startDate",
+                                            event.target.value,
+                                        )
+                                    }
+                                />
+                            </div>
+                            <div className="create-cv-field">
+                                <div className="document-field-label-row">
+                                    <label>Date end</label>
+                                </div>
+                                <input
+                                    aria-label="Date end"
+                                    type="text"
+                                    value={educationEntry.endDate ?? ""}
+                                    onChange={(event) =>
+                                        actions.UpdateEducationField(educationEntryIndex, "endDate", event.target.value)
+                                    }
+                                />
+                            </div>
                         </div>
-                        <RatingControls item={item} onChange={(fieldKey, value) => onChange(index, fieldKey, value)} />
                     </article>
-                );
-            })}
-        </SidebarSection>
-    );
-}
+                ))}
+            </section>
 
-function LanguagesEditor({ languages, onAdd, onRemove, onChange }) {
-    return (
-        <SidebarSection icon={Icons.LanguagesLucideIcon} title="Languages" onAdd={onAdd}>
-            {languages.map((item, index) => (
-                <article className="create-cv-list-item create-cv-list-item-compact" key={`language-${index}`}>
-                    <div className="create-cv-list-item-top">
-                        <span>Language {index + 1}</span>
-                        <DeleteButton
-                            label={`Delete language ${index + 1}`}
-                            disabled={languages.length === 1}
-                            onClick={() => onRemove(index)}
-                        />
+            <section className="create-cv-editor-section">
+                <header className="create-cv-editor-section-header">
+                    <span className="create-cv-section-icon">
+                        <Icons.WrenchLucideIcon />
+                    </span>
+                    <div className="create-cv-section-heading">
+                        <h2>Skills</h2>
                     </div>
-                    <div className="create-cv-field-grid">
-                        <TextField
-                            label="Language"
-                            value={item.name}
-                            onChange={(value) => onChange(index, "name", value)}
-                        />
-                        <SelectField
-                            label="Level"
-                            value={item.level}
-                            options={LanguageLevelOptions}
-                            onChange={(value) => onChange(index, "level", value)}
-                        />
+                    <button
+                        type="button"
+                        className="create-cv-section-add-btn"
+                        onClick={actions.AddSkill}
+                        aria-label="Add skills"
+                    >
+                        <Icons.PlusLucideIcon />
+                    </button>
+                </header>
+                {cv.skills.map((skill, skillIndex) => {
+                    const item = NormalizeSkillData(skill);
+                    return (
+                        <article
+                            className={
+                                skillIndex > 0
+                                    ? "create-cv-list-item create-cv-list-item-compact create-cv-list-item-spaced"
+                                    : "create-cv-list-item create-cv-list-item-compact"
+                            }
+                            key={`skill-${skillIndex}`}
+                        >
+                            <div className="create-cv-list-item-top">
+                                <span>Skill {skillIndex + 1}</span>
+                                <button
+                                    type="button"
+                                    className="create-cv-delete-btn"
+                                    aria-label={`Delete skill ${skillIndex + 1}`}
+                                    disabled={cv.skills.length === 1}
+                                    onClick={() => actions.RemoveSkill(skillIndex)}
+                                >
+                                    <Icons.Trash2LucideIcon />
+                                </button>
+                            </div>
+                            <div className="create-cv-field-grid">
+                                <div className="create-cv-field create-cv-field-wide">
+                                    <div className="document-field-label-row">
+                                        <label>Skill</label>
+                                    </div>
+                                    <input
+                                        aria-label="Skill"
+                                        type="text"
+                                        value={item.label ?? ""}
+                                        onChange={(event) =>
+                                            actions.UpdateSkillField(skillIndex, "label", event.target.value)
+                                        }
+                                    />
+                                </div>
+                            </div>
+                            <div className="create-cv-rating-controls">
+                                <label className="create-cv-select-field">
+                                    <span>Knowledge display</span>
+                                    <select
+                                        value={item.ratingStyle ?? ""}
+                                        onChange={(event) =>
+                                            actions.UpdateSkillField(skillIndex, "ratingStyle", event.target.value)
+                                        }
+                                    >
+                                        <option value="none">No rating</option>
+                                        <option value="circle">Circles</option>
+                                        <option value="square">Squares</option>
+                                    </select>
+                                </label>
+                                <label className="create-cv-select-field">
+                                    <span>Level 0-5</span>
+                                    <select
+                                        value={String(item.rating ?? 0) ?? ""}
+                                        onChange={(event) =>
+                                            actions.UpdateSkillField(skillIndex, "rating", Number(event.target.value))
+                                        }
+                                    >
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </article>
+                    );
+                })}
+            </section>
+
+            <section className="create-cv-editor-section">
+                <header className="create-cv-editor-section-header">
+                    <span className="create-cv-section-icon">
+                        <Icons.LanguagesLucideIcon />
+                    </span>
+                    <div className="create-cv-section-heading">
+                        <h2>Languages</h2>
                     </div>
-                    <RatingControls item={item} onChange={(fieldKey, value) => onChange(index, fieldKey, value)} />
-                </article>
-            ))}
-        </SidebarSection>
-    );
-}
+                    <button
+                        type="button"
+                        className="create-cv-section-add-btn"
+                        onClick={actions.AddLanguage}
+                        aria-label="Add languages"
+                    >
+                        <Icons.PlusLucideIcon />
+                    </button>
+                </header>
+                {cv.languages.map((language, languageIndex) => (
+                    <article
+                        className={
+                            languageIndex > 0
+                                ? "create-cv-list-item create-cv-list-item-compact create-cv-list-item-spaced"
+                                : "create-cv-list-item create-cv-list-item-compact"
+                        }
+                        key={`language-${languageIndex}`}
+                    >
+                        <div className="create-cv-list-item-top">
+                            <span>Language {languageIndex + 1}</span>
+                            <button
+                                type="button"
+                                className="create-cv-delete-btn"
+                                aria-label={`Delete language ${languageIndex + 1}`}
+                                disabled={cv.languages.length === 1}
+                                onClick={() => actions.RemoveLanguage(languageIndex)}
+                            >
+                                <Icons.Trash2LucideIcon />
+                            </button>
+                        </div>
+                        <div className="create-cv-field-grid">
+                            <div className="create-cv-field">
+                                <div className="document-field-label-row">
+                                    <label>Language</label>
+                                </div>
+                                <input
+                                    aria-label="Language"
+                                    type="text"
+                                    value={language.name ?? ""}
+                                    onChange={(event) =>
+                                        actions.UpdateLanguageField(languageIndex, "name", event.target.value)
+                                    }
+                                />
+                            </div>
+                            <label className="create-cv-select-field">
+                                <span>Level</span>
+                                <select
+                                    value={language.level ?? ""}
+                                    onChange={(event) =>
+                                        actions.UpdateLanguageField(languageIndex, "level", event.target.value)
+                                    }
+                                >
+                                    <option value="">None</option>
+                                    <option value="A1">A1</option>
+                                    <option value="A2">A2</option>
+                                    <option value="B1">B1</option>
+                                    <option value="B2">B2</option>
+                                    <option value="C1">C1</option>
+                                    <option value="C2">C2</option>
+                                    <option value="Native">Native</option>
+                                </select>
+                            </label>
+                        </div>
+                        <div className="create-cv-rating-controls">
+                            <label className="create-cv-select-field">
+                                <span>Knowledge display</span>
+                                <select
+                                    value={language.ratingStyle ?? ""}
+                                    onChange={(event) =>
+                                        actions.UpdateLanguageField(languageIndex, "ratingStyle", event.target.value)
+                                    }
+                                >
+                                    <option value="none">No rating</option>
+                                    <option value="circle">Circles</option>
+                                    <option value="square">Squares</option>
+                                </select>
+                            </label>
+                            <label className="create-cv-select-field">
+                                <span>Level 0-5</span>
+                                <select
+                                    value={String(language.rating ?? 0) ?? ""}
+                                    onChange={(event) =>
+                                        actions.UpdateLanguageField(languageIndex, "rating", Number(event.target.value))
+                                    }
+                                >
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </label>
+                        </div>
+                    </article>
+                ))}
+            </section>
 
-function LinksEditor({ links, onAdd, onRemove, onChange }) {
-    return (
-        <SidebarSection icon={Icons.LinkLucideIcon} title="Links" onAdd={onAdd}>
-            {links.map((item, index) => (
-                <article className="create-cv-list-item create-cv-list-item-compact" key={`link-${index}`}>
-                    <div className="create-cv-list-item-top">
-                        <span>Link {index + 1}</span>
-                        <DeleteButton
-                            label={`Delete link ${index + 1}`}
-                            disabled={links.length === 1}
-                            onClick={() => onRemove(index)}
-                        />
+            <section className="create-cv-editor-section">
+                <header className="create-cv-editor-section-header">
+                    <span className="create-cv-section-icon">
+                        <Icons.LinkLucideIcon />
+                    </span>
+                    <div className="create-cv-section-heading">
+                        <h2>Links</h2>
                     </div>
-                    <div className="create-cv-field-grid">
-                        <TextField
-                            label="Label"
-                            value={item.label}
-                            onChange={(value) => onChange(index, "label", value)}
-                        />
-                        <TextField label="URL" value={item.url} onChange={(value) => onChange(index, "url", value)} />
+                    <button
+                        type="button"
+                        className="create-cv-section-add-btn"
+                        onClick={actions.AddLink}
+                        aria-label="Add links"
+                    >
+                        <Icons.PlusLucideIcon />
+                    </button>
+                </header>
+                {cv.links.map((link, linkIndex) => (
+                    <article
+                        className={
+                            linkIndex > 0
+                                ? "create-cv-list-item create-cv-list-item-compact create-cv-list-item-spaced"
+                                : "create-cv-list-item create-cv-list-item-compact"
+                        }
+                        key={`link-${linkIndex}`}
+                    >
+                        <div className="create-cv-list-item-top">
+                            <span>Link {linkIndex + 1}</span>
+                            <button
+                                type="button"
+                                className="create-cv-delete-btn"
+                                aria-label={`Delete link ${linkIndex + 1}`}
+                                disabled={cv.links.length === 1}
+                                onClick={() => actions.RemoveLink(linkIndex)}
+                            >
+                                <Icons.Trash2LucideIcon />
+                            </button>
+                        </div>
+                        <div className="create-cv-field-grid">
+                            <div className="create-cv-field">
+                                <div className="document-field-label-row">
+                                    <label>Label</label>
+                                </div>
+                                <input
+                                    aria-label="Label"
+                                    type="text"
+                                    value={link.label ?? ""}
+                                    onChange={(event) =>
+                                        actions.UpdateLinkField(linkIndex, "label", event.target.value)
+                                    }
+                                />
+                            </div>
+                            <div className="create-cv-field">
+                                <div className="document-field-label-row">
+                                    <label>URL</label>
+                                </div>
+                                <input
+                                    aria-label="URL"
+                                    type="text"
+                                    value={link.url ?? ""}
+                                    onChange={(event) => actions.UpdateLinkField(linkIndex, "url", event.target.value)}
+                                />
+                            </div>
+                        </div>
+                    </article>
+                ))}
+            </section>
+
+            <section className="create-cv-editor-section">
+                <header className="create-cv-editor-section-header">
+                    <span className="create-cv-section-icon">
+                        <Icons.SparklesLucideIcon />
+                    </span>
+                    <div className="create-cv-section-heading">
+                        <h2>Selected Case study</h2>
+                        <button
+                            type="button"
+                            className={
+                                projectsTitleOpen
+                                    ? "create-cv-section-rename-btn create-cv-title-open"
+                                    : "create-cv-section-rename-btn"
+                            }
+                            aria-label="Rename selected case study in CV"
+                            aria-expanded={projectsTitleOpen}
+                            onClick={() => SetProjectsTitleOpen(!projectsTitleOpen)}
+                        >
+                            <Icons.PencilLucideIcon />
+                        </button>
                     </div>
-                </article>
-            ))}
-        </SidebarSection>
-    );
-}
-
-function ProjectsEditor({ projects, visibleTitle, onTitleChange, onAdd, onRemove, onChange }) {
-    return (
-        <SidebarSection
-            icon={Icons.SparklesLucideIcon}
-            title="Selected Case study"
-            visibleTitle={visibleTitle}
-            onVisibleTitleChange={onTitleChange}
-            onAdd={onAdd}
-        >
-            {projects.map((item, index) => (
-                <article className="create-cv-list-item" key={`project-${index}`}>
-                    <div className="create-cv-list-item-top">
-                        <span>Project {index + 1}</span>
-                        <DeleteButton
-                            label={`Delete project ${index + 1}`}
-                            disabled={projects.length === 1}
-                            onClick={() => onRemove(index)}
+                    <button
+                        type="button"
+                        className="create-cv-section-add-btn"
+                        onClick={actions.AddProject}
+                        aria-label="Add selected case study"
+                    >
+                        <Icons.PlusLucideIcon />
+                    </button>
+                </header>
+                {projectsTitleOpen && (
+                    <label className="create-cv-section-title-editor">
+                        <span>Visible title</span>
+                        <input
+                            value={projectTitle ?? ""}
+                            onChange={(event) => actions.UpdateSectionTitle("projects", event.target.value)}
                         />
+                    </label>
+                )}
+                {cv.projects.map((project, projectIndex) => (
+                    <article
+                        className={
+                            projectIndex > 0 ? "create-cv-list-item create-cv-list-item-spaced" : "create-cv-list-item"
+                        }
+                        key={`project-${projectIndex}`}
+                    >
+                        <div className="create-cv-list-item-top">
+                            <span>Project {projectIndex + 1}</span>
+                            <button
+                                type="button"
+                                className="create-cv-delete-btn"
+                                aria-label={`Delete project ${projectIndex + 1}`}
+                                disabled={cv.projects.length === 1}
+                                onClick={() => actions.RemoveProject(projectIndex)}
+                            >
+                                <Icons.Trash2LucideIcon />
+                            </button>
+                        </div>
+                        <div className="create-cv-field-grid">
+                            <div className="create-cv-field">
+                                <div className="document-field-label-row">
+                                    <label>Name</label>
+                                </div>
+                                <input
+                                    aria-label="Name"
+                                    type="text"
+                                    value={project.name ?? ""}
+                                    onChange={(event) =>
+                                        actions.UpdateProjectField(projectIndex, "name", event.target.value)
+                                    }
+                                />
+                            </div>
+                            <div className="create-cv-field">
+                                <div className="document-field-label-row">
+                                    <label>Subtitle</label>
+                                </div>
+                                <input
+                                    aria-label="Subtitle"
+                                    type="text"
+                                    value={project.subtitle ?? ""}
+                                    onChange={(event) =>
+                                        actions.UpdateProjectField(projectIndex, "subtitle", event.target.value)
+                                    }
+                                />
+                            </div>
+                            <div className="create-cv-field create-cv-field-wide">
+                                <div className="document-field-label-row">
+                                    <label>Description</label>
+                                </div>
+                                <textarea
+                                    value={project.description ?? ""}
+                                    onChange={(event) =>
+                                        actions.UpdateProjectField(projectIndex, "description", event.target.value)
+                                    }
+                                    aria-label="Description"
+                                />
+                            </div>
+                        </div>
+                    </article>
+                ))}
+            </section>
+
+            <section className="create-cv-editor-section">
+                <header className="create-cv-editor-section-header">
+                    <span className="create-cv-section-icon">
+                        <Icons.SparklesLucideIcon />
+                    </span>
+                    <div className="create-cv-section-heading">
+                        <h2>Main panel custom field</h2>
+                        <button
+                            type="button"
+                            className={
+                                mainCustomTitleOpen
+                                    ? "create-cv-section-rename-btn create-cv-title-open"
+                                    : "create-cv-section-rename-btn"
+                            }
+                            aria-label="Rename main panel custom field in CV"
+                            aria-expanded={mainCustomTitleOpen}
+                            onClick={() => SetMainCustomTitleOpen(!mainCustomTitleOpen)}
+                        >
+                            <Icons.PencilLucideIcon />
+                        </button>
                     </div>
-                    <div className="create-cv-field-grid">
-                        <TextField
-                            label="Name"
-                            value={item.name}
-                            onChange={(value) => onChange(index, "name", value)}
+                    <button
+                        type="button"
+                        className="create-cv-section-add-btn"
+                        onClick={actions.AddMainCustomItem}
+                        aria-label="Add main panel custom field"
+                    >
+                        <Icons.PlusLucideIcon />
+                    </button>
+                </header>
+                {mainCustomTitleOpen && (
+                    <label className="create-cv-section-title-editor">
+                        <span>Visible title</span>
+                        <input
+                            value={cv.sectionTitles.mainCustom ?? ""}
+                            onChange={(event) => actions.UpdateSectionTitle("mainCustom", event.target.value)}
                         />
-                        <TextField
-                            label="Subtitle"
-                            value={item.subtitle}
-                            onChange={(value) => onChange(index, "subtitle", value)}
-                        />
-                        <TextAreaField
-                            label="Description"
-                            value={item.description}
-                            onChange={(value) => onChange(index, "description", value)}
-                        />
+                    </label>
+                )}
+                {cv.mainCustom.map((customEntry, customEntryIndex) => (
+                    <article
+                        className={
+                            customEntryIndex > 0
+                                ? "create-cv-list-item create-cv-list-item-spaced"
+                                : "create-cv-list-item"
+                        }
+                        key={`${"Main panel custom field"}-${customEntryIndex}`}
+                    >
+                        <div className="create-cv-list-item-top">
+                            <span>Item {customEntryIndex + 1}</span>
+                            <button
+                                type="button"
+                                className="create-cv-delete-btn"
+                                aria-label={`Delete item ${customEntryIndex + 1} from ${"Main panel custom field"}`}
+                                disabled={cv.mainCustom.length === 1}
+                                onClick={() => actions.RemoveMainCustomItem(customEntryIndex)}
+                            >
+                                <Icons.Trash2LucideIcon />
+                            </button>
+                        </div>
+                        <div className="create-cv-field-grid">
+                            <div className="create-cv-field">
+                                <div className="document-field-label-row">
+                                    <label>Name</label>
+                                </div>
+                                <input
+                                    aria-label="Name"
+                                    type="text"
+                                    value={customEntry.name ?? ""}
+                                    onChange={(event) =>
+                                        actions.UpdateMainCustomItem(customEntryIndex, "name", event.target.value)
+                                    }
+                                />
+                            </div>
+                            <div className="create-cv-field">
+                                <div className="document-field-label-row">
+                                    <label>Subtitle</label>
+                                </div>
+                                <input
+                                    aria-label="Subtitle"
+                                    type="text"
+                                    value={customEntry.subtitle ?? ""}
+                                    onChange={(event) =>
+                                        actions.UpdateMainCustomItem(customEntryIndex, "subtitle", event.target.value)
+                                    }
+                                />
+                            </div>
+                            <div className="create-cv-field create-cv-field-wide">
+                                <div className="document-field-label-row">
+                                    <label>Description</label>
+                                </div>
+                                <textarea
+                                    value={customEntry.description ?? ""}
+                                    onChange={(event) =>
+                                        actions.UpdateMainCustomItem(
+                                            customEntryIndex,
+                                            "description",
+                                            event.target.value,
+                                        )
+                                    }
+                                    aria-label="Description"
+                                />
+                            </div>
+                        </div>
+                    </article>
+                ))}
+            </section>
+
+            <section className="create-cv-editor-section">
+                <header className="create-cv-editor-section-header">
+                    <span className="create-cv-section-icon">
+                        <Icons.SparklesLucideIcon />
+                    </span>
+                    <div className="create-cv-section-heading">
+                        <h2>Side panel custom field</h2>
+                        <button
+                            type="button"
+                            className={
+                                sideCustomTitleOpen
+                                    ? "create-cv-section-rename-btn create-cv-title-open"
+                                    : "create-cv-section-rename-btn"
+                            }
+                            aria-label="Rename side panel custom field in CV"
+                            aria-expanded={sideCustomTitleOpen}
+                            onClick={() => SetSideCustomTitleOpen(!sideCustomTitleOpen)}
+                        >
+                            <Icons.PencilLucideIcon />
+                        </button>
                     </div>
-                </article>
-            ))}
-        </SidebarSection>
-    );
-}
-
-function CustomSectionEditor({ editorTitle, items, visibleTitle, onTitleChange, onAdd, onRemove, onChange }) {
-    return (
-        <SidebarSection
-            icon={Icons.SparklesLucideIcon}
-            title={editorTitle}
-            visibleTitle={visibleTitle}
-            onVisibleTitleChange={onTitleChange}
-            onAdd={onAdd}
-        >
-            {items.map((item, index) => (
-                <article className="create-cv-list-item" key={`${editorTitle}-${index}`}>
-                    <div className="create-cv-list-item-top">
-                        <span>Item {index + 1}</span>
-                        <DeleteButton
-                            label={`Delete item ${index + 1} from ${editorTitle}`}
-                            disabled={items.length === 1}
-                            onClick={() => onRemove(index)}
+                    <button
+                        type="button"
+                        className="create-cv-section-add-btn"
+                        onClick={actions.AddSideCustomItem}
+                        aria-label="Add side panel custom field"
+                    >
+                        <Icons.PlusLucideIcon />
+                    </button>
+                </header>
+                {sideCustomTitleOpen && (
+                    <label className="create-cv-section-title-editor">
+                        <span>Visible title</span>
+                        <input
+                            value={cv.sectionTitles.sideCustom ?? ""}
+                            onChange={(event) => actions.UpdateSectionTitle("sideCustom", event.target.value)}
                         />
-                    </div>
-                    <div className="create-cv-field-grid">
-                        <TextField
-                            label="Name"
-                            value={item.name}
-                            onChange={(value) => onChange(index, "name", value)}
-                        />
-                        <TextField
-                            label="Subtitle"
-                            value={item.subtitle}
-                            onChange={(value) => onChange(index, "subtitle", value)}
-                        />
-                        <TextAreaField
-                            label="Description"
-                            value={item.description}
-                            onChange={(value) => onChange(index, "description", value)}
-                        />
-                    </div>
-                </article>
-            ))}
-        </SidebarSection>
-    );
-}
-
-function CvEditorSidebar({ cv, templateId, actions }) {
-    const projectTitle = cv.sectionTitles.projects || GetDefaultProjectTitle(templateId);
-
-    return (
-        <aside className="create-cv-editor-sidebar">
-            <BasicsEditor basics={cv.basics} onChange={actions.UpdateBasicsField} />
-
-            <SidebarSection icon={Icons.NotebookTextLucideIcon} title="Profile">
-                <TextAreaField label="Professional summary" value={cv.profile} onChange={actions.UpdateProfile} />
-            </SidebarSection>
-
-            <AtlasMetricsEditor metrics={cv.atlasMetrics} onChange={actions.UpdateAtlasMetricField} />
-
-            <EmploymentEditor
-                employment={cv.employment}
-                onAdd={actions.AddEmployment}
-                onRemove={actions.RemoveEmployment}
-                onChange={actions.UpdateEmploymentField}
-            />
-
-            <EducationEditor
-                education={cv.education}
-                onAdd={actions.AddEducation}
-                onRemove={actions.RemoveEducation}
-                onChange={actions.UpdateEducationField}
-            />
-
-            <SkillsEditor
-                skills={cv.skills}
-                onAdd={actions.AddSkill}
-                onRemove={actions.RemoveSkill}
-                onChange={actions.UpdateSkillField}
-            />
-
-            <LanguagesEditor
-                languages={cv.languages}
-                onAdd={actions.AddLanguage}
-                onRemove={actions.RemoveLanguage}
-                onChange={actions.UpdateLanguageField}
-            />
-
-            <LinksEditor
-                links={cv.links}
-                onAdd={actions.AddLink}
-                onRemove={actions.RemoveLink}
-                onChange={actions.UpdateLinkField}
-            />
-
-            <ProjectsEditor
-                projects={cv.projects}
-                visibleTitle={projectTitle}
-                onTitleChange={(value) => actions.UpdateSectionTitle("projects", value)}
-                onAdd={actions.AddProject}
-                onRemove={actions.RemoveProject}
-                onChange={actions.UpdateProjectField}
-            />
-
-            <CustomSectionEditor
-                editorTitle="Main panel custom field"
-                items={cv.mainCustom}
-                visibleTitle={cv.sectionTitles.mainCustom}
-                onTitleChange={(value) => actions.UpdateSectionTitle("mainCustom", value)}
-                onAdd={actions.AddMainCustomItem}
-                onRemove={actions.RemoveMainCustomItem}
-                onChange={actions.UpdateMainCustomItem}
-            />
-
-            <CustomSectionEditor
-                editorTitle="Side panel custom field"
-                items={cv.sideCustom}
-                visibleTitle={cv.sectionTitles.sideCustom}
-                onTitleChange={(value) => actions.UpdateSectionTitle("sideCustom", value)}
-                onAdd={actions.AddSideCustomItem}
-                onRemove={actions.RemoveSideCustomItem}
-                onChange={actions.UpdateSideCustomItem}
-            />
+                    </label>
+                )}
+                {cv.sideCustom.map((customEntry, customEntryIndex) => (
+                    <article
+                        className={
+                            customEntryIndex > 0
+                                ? "create-cv-list-item create-cv-list-item-spaced"
+                                : "create-cv-list-item"
+                        }
+                        key={`${"Side panel custom field"}-${customEntryIndex}`}
+                    >
+                        <div className="create-cv-list-item-top">
+                            <span>Item {customEntryIndex + 1}</span>
+                            <button
+                                type="button"
+                                className="create-cv-delete-btn"
+                                aria-label={`Delete item ${customEntryIndex + 1} from ${"Side panel custom field"}`}
+                                disabled={cv.sideCustom.length === 1}
+                                onClick={() => actions.RemoveSideCustomItem(customEntryIndex)}
+                            >
+                                <Icons.Trash2LucideIcon />
+                            </button>
+                        </div>
+                        <div className="create-cv-field-grid">
+                            <div className="create-cv-field">
+                                <div className="document-field-label-row">
+                                    <label>Name</label>
+                                </div>
+                                <input
+                                    aria-label="Name"
+                                    type="text"
+                                    value={customEntry.name ?? ""}
+                                    onChange={(event) =>
+                                        actions.UpdateSideCustomItem(customEntryIndex, "name", event.target.value)
+                                    }
+                                />
+                            </div>
+                            <div className="create-cv-field">
+                                <div className="document-field-label-row">
+                                    <label>Subtitle</label>
+                                </div>
+                                <input
+                                    aria-label="Subtitle"
+                                    type="text"
+                                    value={customEntry.subtitle ?? ""}
+                                    onChange={(event) =>
+                                        actions.UpdateSideCustomItem(customEntryIndex, "subtitle", event.target.value)
+                                    }
+                                />
+                            </div>
+                            <div className="create-cv-field create-cv-field-wide">
+                                <div className="document-field-label-row">
+                                    <label>Description</label>
+                                </div>
+                                <textarea
+                                    value={customEntry.description ?? ""}
+                                    onChange={(event) =>
+                                        actions.UpdateSideCustomItem(
+                                            customEntryIndex,
+                                            "description",
+                                            event.target.value,
+                                        )
+                                    }
+                                    aria-label="Description"
+                                />
+                            </div>
+                        </div>
+                    </article>
+                ))}
+            </section>
         </aside>
     );
 }
-
 export default CvEditorSidebar;

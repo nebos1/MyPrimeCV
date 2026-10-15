@@ -113,7 +113,7 @@
     text-transform: uppercase;
 }
 
-.bridge-job + .bridge-job {
+.bridge-job.bridge-job-spaced {
     margin-top: 0.7rem;
     padding-top: 0.65rem;
     border-top: 0.0625rem solid #d9dfdc;
@@ -170,7 +170,7 @@
     padding: 0.75rem;
 }
 
-.bridge-panel + .bridge-panel {
+.bridge-panel.bridge-panel-spaced {
     border-left: 0.0625rem solid #d9dfdc;
 }
 
@@ -279,7 +279,7 @@
     font-size: 0.29rem;
 }
 
-.template-card-preview .bridge-job + .bridge-job {
+.template-card-preview .bridge-job.bridge-job-spaced {
     margin-top: 0.38rem;
     padding-top: 0.34rem;
 }

@@ -1,5 +1,4 @@
 import "./cove.css";
-
 function CoveTemplate() {
     return (
         <article className="cove-template">
@@ -13,7 +12,7 @@ function CoveTemplate() {
                     <p>Sofia, Bulgaria</p>
                 </section>
 
-                <section>
+                <section className="cove-sidebar-section-spaced">
                     <h2>Skills</h2>
                     <strong>Product strategy</strong>
                     <strong>UX research</strong>
@@ -23,7 +22,7 @@ function CoveTemplate() {
                     <strong>Figma</strong>
                 </section>
 
-                <section>
+                <section className="cove-sidebar-section-spaced">
                     <h2>Languages</h2>
                     <div className="cove-pair">
                         <span>Bulgarian</span>
@@ -35,7 +34,7 @@ function CoveTemplate() {
                     </div>
                 </section>
 
-                <section>
+                <section className="cove-sidebar-section-spaced">
                     <h2>Links</h2>
                     <p>maya-petrova.design</p>
                     <p>linkedin.com/in/mayapetrova</p>
@@ -50,7 +49,10 @@ function CoveTemplate() {
 
                 <section className="cove-section">
                     <h2>Professional summary</h2>
-                    <p>Product designer focused on clear, useful and human-centered digital experiences. I combine research, visual design and close collaboration with development teams.</p>
+                    <p>
+                        Product designer focused on clear, useful and human-centered digital experiences. I combine
+                        research, visual design and close collaboration with development teams.
+                    </p>
                 </section>
 
                 <section className="cove-section">
@@ -111,11 +113,13 @@ function CoveTemplate() {
                         <small>2025</small>
                     </div>
 
-                    <p>A service-design concept that simplifies municipal processes through clearer language and fewer steps.</p>
+                    <p>
+                        A service-design concept that simplifies municipal processes through clearer language and fewer
+                        steps.
+                    </p>
                 </section>
             </main>
         </article>
     );
 }
-
 export default CoveTemplate;

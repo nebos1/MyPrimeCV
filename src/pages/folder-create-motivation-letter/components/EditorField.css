@@ -1,4 +1,4 @@
-.editor-field {
+.letter-editor-field {
     display: grid;
     align-content: start;
     align-self: start;
@@ -9,11 +9,11 @@
     font-weight: 850;
 }
 
-.editor-field-wide {
+.letter-editor-field-wide {
     grid-column: 1 / -1;
 }
 
-.editor-field > input {
+.letter-editor-field > input {
     width: 100%;
     border: 0.0625rem solid #d5d7d1;
     border-radius: 0.45rem;
@@ -25,12 +25,12 @@
     font-weight: 500;
 }
 
-.editor-field > input:focus {
+.letter-editor-field > input:focus {
     outline: 0.125rem solid rgba(0, 106, 98, 0.14);
     border-color: #006a62;
 }
 
-.field-label-row {
+.document-field-label-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -38,26 +38,26 @@
     gap: 0.75rem;
 }
 
-.field-label-row label {
+.document-field-label-row label {
     min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-.textarea-shell {
+.letter-textarea-shell {
     overflow: hidden;
     border: 0.0625rem solid #d5d7d1;
     border-radius: 0.45rem;
     background: #ffffff;
 }
 
-.textarea-shell:focus-within {
+.letter-textarea-shell:focus-within {
     outline: 0.125rem solid rgba(0, 106, 98, 0.14);
     border-color: #006a62;
 }
 
-.textarea-shell textarea {
+.letter-textarea-shell textarea {
     display: block;
     width: 100%;
     min-height: 6.8rem;
@@ -70,6 +70,6 @@
     resize: vertical;
 }
 
-.textarea-shell textarea:focus {
+.letter-textarea-shell textarea:focus {
     outline: 0;
 }

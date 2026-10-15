@@ -1,28 +1,22 @@
 import "./MotivationLetterPreview.css";
-
 import { FormatDate } from "../motivation-letter-date";
 import { MakeTextStyle } from "../motivation-letter-style";
-
 function StyledSpan({ value, style }) {
     if (!value?.trim()) {
         return null;
     }
-
     return <span style={MakeTextStyle(style)}>{value}</span>;
 }
-
 function PreviewBlock({ value, style }) {
     if (!value?.trim()) {
         return null;
     }
-
     const textStyle = MakeTextStyle(style);
     const listStyle = style.listStyle ?? "none";
     const lines = value
         .split("\n")
         .map((line) => line.trim())
         .filter(Boolean);
-
     if (listStyle !== "none") {
         let ListTag;
         if (listStyle === "decimal") {
@@ -30,19 +24,23 @@ function PreviewBlock({ value, style }) {
         } else {
             ListTag = "ul";
         }
-
         return (
-            <ListTag className="letter-preview-list" style={Object.assign({}, textStyle, { listStyleType: listStyle })}>
+            <ListTag
+                className="letter-preview-list"
+                style={Object.assign({}, textStyle, {
+                    listStyleType: listStyle,
+                })}
+            >
                 {lines.map((line, index) => (
-                    <li key={`${line}-${index}`}>{line}</li>
+                    <li key={`${line}-${index}`} className={index > 0 ? "letter-preview-list-li-spaced" : ""}>
+                        {line}
+                    </li>
                 ))}
             </ListTag>
         );
     }
-
     return <p style={textStyle}>{value}</p>;
 }
-
 function MotivationLetterPreview({ data }) {
     const values = data.values;
     const styles = data.styles;
@@ -62,7 +60,6 @@ function MotivationLetterPreview({ data }) {
     if (values.SenderBlock.first_name && values.SenderBlock.last_name) {
         nameSeparator = " ";
     }
-
     return (
         <article className="letter-preview-document">
             {hasHeader && (
@@ -115,11 +112,11 @@ function MotivationLetterPreview({ data }) {
 
             {hasBody && (
                 <div className="letter-preview-body">
-                    {values.BodyParagraphBlock.paragraphs.map((paragraph, index) => (
+                    {values.BodyParagraphBlock.paragraphs.map((paragraph, paragraphIndex) => (
                         <PreviewBlock
-                            key={`preview-paragraph-${index}`}
+                            key={`preview-paragraph-${paragraphIndex}`}
                             value={paragraph}
-                            style={styles.BodyParagraphBlock.paragraphs[index]}
+                            style={styles.BodyParagraphBlock.paragraphs[paragraphIndex]}
                         />
                     ))}
                 </div>
@@ -137,5 +134,4 @@ function MotivationLetterPreview({ data }) {
         </article>
     );
 }
-
 export default MotivationLetterPreview;

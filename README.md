@@ -1,5 +1,7 @@
 <h1><img src="./src/folder-logo/logo.png" alt="" width="40" style="vertical-align: middle;" /> MyPrimeCV</h1>
 
+https://myprimecv.com/
+
 ### Create job application documents that feel like yours!
 
 MyPrimeCV is a browser-based CV and motivation letter builder that's **ABSOLUTELY FREE** from your first edit to your final PDF. Create your documents, see the layout as you edit, and export a polished CV PDF with no fees along the way.
@@ -38,5 +40,13 @@ Choose from six templates with working editors:
 - Export a JSON backup to keep a copy of your workspace, or restore one later.
 
 ## <p align="center"><strong>Create, edit, and download your documents absolutely free from beggining to the end!</strong></p>
+
+
+Currently I am aware of some issues happening on mobile devices, such as:
+- hover effects
+- color changes
+- inconsistent btn positions and label alignment
+- navbar positioning
+- icon coloring and positioning
 
 > **Tip:** Clearing browser data can remove locally saved documents. Export a backup to keep a copy.

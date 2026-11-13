@@ -2,6 +2,7 @@ import "../../../../components/folder-document-preview/document-fonts.css";
 import "./studio.css";
 import "../../../folder-create-cv/components/cv-content.css";
 import { FormatCvDate, NormalizeCvData } from "../../../folder-create-cv/create-cv-data";
+import { useLayoutEffect, useRef } from "react";
 
 // The gallery and editor use the same markup. Only the data changes.
 export const StudioSampleData = {
@@ -70,6 +71,35 @@ function StudioTemplate({ data = StudioSampleData }) {
     const cv = NormalizeCvData(data);
     const basics = cv.basics;
     const name = [basics.firstName, basics.lastName].filter(Boolean).join(" ");
+    const nameRef = useRef(null);
+
+    useLayoutEffect(() => {
+        let active = true;
+
+        function MeasureName() {
+            if (!active || !nameRef.current) return;
+            const context = document.createElement("canvas").getContext("2d");
+            if (!context) return;
+            let length = 0;
+
+            for (const part of nameRef.current.children) {
+                const style = getComputedStyle(part);
+                context.font = `${style.fontStyle} ${style.fontWeight} ${style.fontSize} ${style.fontFamily}`;
+                length = Math.max(length, context.measureText(part.textContent).width);
+            }
+
+            nameRef.current.parentElement.style.setProperty("--studio-name-length", Math.ceil(length) + 2 + "px");
+        }
+
+        MeasureName();
+        document.fonts.ready.then(MeasureName);
+        document.fonts.addEventListener("loadingdone", MeasureName);
+        return () => {
+            active = false;
+            document.fonts.removeEventListener("loadingdone", MeasureName);
+        };
+    }, [basics.firstName, basics.lastName]);
+
     const contact = [
         [basics.city, basics.country].filter(Boolean).join(", "),
         basics.email,
@@ -174,7 +204,7 @@ function StudioTemplate({ data = StudioSampleData }) {
                 )}
                 {name && (
                     <div className="studio-name-frame">
-                        <div className="studio-vertical-name">
+                        <div className="studio-vertical-name" ref={nameRef}>
                             {basics.firstName && <span>{basics.firstName}</span>}
                             {basics.lastName && <strong>{basics.lastName}</strong>}
                         </div>

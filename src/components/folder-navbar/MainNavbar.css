@@ -53,6 +53,11 @@
     font-weight: 700;
     text-decoration: none;
     cursor: pointer;
+    gap: 0.5rem;
+}
+
+.main-navbar .workspace-action-icon {
+    flex-shrink: 0;
 }
 
 .main-navbar .cv-templates:hover,
@@ -147,6 +152,9 @@
         white-space: normal;
     }
 
+    .main-navbar .cv-templates,
+    .main-navbar .workspace-motivation-letters,
+    .main-navbar .why-free,
     .main-navbar .my-workspace,
     .main-navbar .create-cv {
         gap: 0.32rem;

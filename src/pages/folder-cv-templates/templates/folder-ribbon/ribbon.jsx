@@ -150,6 +150,10 @@ function RibbonTemplate({ data = RibbonSampleData }) {
             </a>
         );
     }
+    const sectionNumber = (() => {
+        let nextNumber = 0;
+        return () => String(++nextNumber).padStart(2, "0");
+    })();
     return (
         <article className="ribbon-template">
             <header className="ribbon-header">
@@ -180,7 +184,7 @@ function RibbonTemplate({ data = RibbonSampleData }) {
             {employment.length > 0 && (
                 <section className="ribbon-experience">
                     <div className="ribbon-side-title">
-                        <span>01</span>
+                        <span>{sectionNumber()}</span>
                         <h2>Experience</h2>
                     </div>
                     <div className="ribbon-experience-content">
@@ -206,7 +210,7 @@ function RibbonTemplate({ data = RibbonSampleData }) {
                 <section className="ribbon-bottom">
                     {education.length > 0 && (
                         <div className="ribbon-bottom-block">
-                            <span>02</span>
+                            <span>{sectionNumber()}</span>
                             <h2>Education</h2>
                             {education.map((item, index) => (
                                 <div key={index}>
@@ -221,7 +225,7 @@ function RibbonTemplate({ data = RibbonSampleData }) {
                     )}
                     {skills.length > 0 && (
                         <div className="ribbon-bottom-block ribbon-dark-block">
-                            <span>03</span>
+                            <span>{sectionNumber()}</span>
                             <h2>Skills</h2>
                             {skills.map((item, index) => (
                                 <p key={index}>
@@ -235,7 +239,7 @@ function RibbonTemplate({ data = RibbonSampleData }) {
                         <div className="ribbon-bottom-block ribbon-bottom-block-last">
                             {languages.length > 0 && (
                                 <>
-                                    <span>04</span>
+                                    <span>{sectionNumber()}</span>
                                     <h2>Languages</h2>
                                     {languages.map((item, index) => (
                                         <p key={index}>

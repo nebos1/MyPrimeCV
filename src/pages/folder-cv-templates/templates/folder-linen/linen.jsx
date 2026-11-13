@@ -149,6 +149,10 @@ function LinenTemplate({ data = LinenSampleData }) {
             </a>
         );
     }
+    const sectionNumber = (() => {
+        let nextNumber = 0;
+        return () => String(++nextNumber).padStart(2, "0");
+    })();
     return (
         <article className="linen-template">
             {(name || basics.professionalTitle || contact.length > 0) && (
@@ -174,7 +178,7 @@ function LinenTemplate({ data = LinenSampleData }) {
             {employment.length > 0 && (
                 <section className="linen-section">
                     <div className="linen-section-title">
-                        <span>01</span>
+                        <span>{sectionNumber()}</span>
                         <h2>Experience</h2>
                     </div>
                     {employment.map((item, index) => (
@@ -199,7 +203,7 @@ function LinenTemplate({ data = LinenSampleData }) {
             {education.length > 0 && (
                 <section className={employment.length > 0 ? "linen-section linen-section-spaced" : "linen-section"}>
                     <div className="linen-section-title">
-                        <span>02</span>
+                        <span>{sectionNumber()}</span>
                         <h2>Education</h2>
                     </div>
                     {education.map((item, index) => (
@@ -224,7 +228,7 @@ function LinenTemplate({ data = LinenSampleData }) {
                     }
                 >
                     <div className="linen-section-title">
-                        <span>03</span>
+                        <span>{sectionNumber()}</span>
                         <h2>Skills &amp; Languages</h2>
                     </div>
                     <div className="linen-columns">

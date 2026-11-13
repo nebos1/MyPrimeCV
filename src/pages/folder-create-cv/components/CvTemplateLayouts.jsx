@@ -184,7 +184,7 @@ function BuildView(cv, templateId) {
                 styleIndex: index,
             }),
         )
-        .filter((link) => HasText(link.label));
+        .filter((link) => HasText(link.label) || HasText(link.url));
     const employment = (data.employment ?? [])
         .map((item, index) =>
             Object.assign({}, item, {
@@ -383,18 +383,20 @@ function AtlasMetrics({ metrics, show }) {
     );
 }
 function LinkAnchor({ link }) {
+    const url = link.url.trim();
+    const label = HasText(link.label) ? link.label : url;
     let href;
-    if (/^https?:\/\//i.test(link.url)) {
-        href = link.url;
+    if (/^https?:\/\//i.test(url)) {
+        href = url;
     } else {
-        href = `https://${link.url}`;
+        href = `https://${url}`;
     }
-    if (!HasText(link.url)) {
-        return <span>{link.label}</span>;
+    if (!HasText(url)) {
+        return <span>{label}</span>;
     }
     return (
         <a href={href} target="_blank" rel="noreferrer">
-            {link.label}
+            {label}
         </a>
     );
 }

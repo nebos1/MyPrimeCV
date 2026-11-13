@@ -138,6 +138,39 @@ function CopyFontWeight(original, copy) {
     }
 }
 
+function GetPageLinks(page) {
+    const pageBounds = page.getBoundingClientRect();
+    const clipBounds = page.querySelector(".document-preview-page-clip").getBoundingClientRect();
+    const links = [];
+
+    // Every preview page contains the full document. Keep only visible link lines.
+    for (const anchor of page.querySelectorAll("a[href]")) {
+        const url = anchor.href;
+        if (!/^(https?:|mailto:|tel:)/i.test(url)) continue;
+
+        const style = getComputedStyle(anchor);
+        if (style.visibility !== "visible" || style.display === "none") continue;
+
+        for (const line of anchor.getClientRects()) {
+            const left = Math.max(line.left, clipBounds.left, pageBounds.left);
+            const top = Math.max(line.top, clipBounds.top, pageBounds.top);
+            const right = Math.min(line.right, clipBounds.right, pageBounds.right);
+            const bottom = Math.min(line.bottom, clipBounds.bottom, pageBounds.bottom);
+            if (right <= left || bottom <= top) continue;
+
+            links.push({
+                x: (left - pageBounds.left) / pageBounds.width,
+                y: (top - pageBounds.top) / pageBounds.height,
+                width: (right - left) / pageBounds.width,
+                height: (bottom - top) / pageBounds.height,
+                url,
+            });
+        }
+    }
+
+    return links;
+}
+
 export async function ExportPreviewPdf(title, cvDocument) {
     await document.fonts.ready;
 
@@ -179,6 +212,7 @@ export async function ExportPreviewPdf(title, cvDocument) {
         }
 
         const originalPage = pages[pageIndex];
+        const links = GetPageLinks(originalPage);
         const copiedPage = originalPage.cloneNode(true);
         copiedPage.style.width = PageWidth + "px";
         copiedPage.style.height = PageHeight + "px";
@@ -212,6 +246,16 @@ export async function ExportPreviewPdf(title, cvDocument) {
                 windowWidth: 1200,
             },
         });
+
+        // HTML rendering draws the text; PDF annotations preserve its link targets.
+        pdf.setPage(pageIndex + 1);
+        const pageWidth = pdf.internal.pageSize.getWidth();
+        const pageHeight = pdf.internal.pageSize.getHeight();
+        for (const link of links) {
+            pdf.link(link.x * pageWidth, link.y * pageHeight, link.width * pageWidth, link.height * pageHeight, {
+                url: link.url,
+            });
+        }
     }
 
     pdf.save(filename + ".pdf");

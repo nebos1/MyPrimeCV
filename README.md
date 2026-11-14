@@ -42,11 +42,7 @@ Choose from six templates with working editors:
 ## <p align="center"><strong>Create, edit, and download your documents absolutely free from beggining to the end!</strong></p>
 
 
-Currently I am aware of some issues happening on mobile devices, such as:
-- hover effects
-- color changes
-- inconsistent btn positions and label alignment
-- navbar positioning
-- icon coloring and positioning
+*Using dark mode on a browser may change some colors, but the logic and functionalities stay same*
+
 
 > **Tip:** Clearing browser data can remove locally saved documents. Export a backup to keep a copy.

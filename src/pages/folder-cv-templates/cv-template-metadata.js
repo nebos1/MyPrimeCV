@@ -5,12 +5,12 @@ export const CvTemplateMetadata = [
     { id: "linen", name: "Linen", hasPhoto: false, isImplemented: true },
     { id: "studio", name: "Studio", hasPhoto: true, isImplemented: true },
     { id: "ribbon", name: "Ribbon", hasPhoto: false, isImplemented: true },
-    { id: "orbit", name: "Orbit", hasPhoto: true, isImplemented: false },
-    { id: "mosaic", name: "Mosaic", hasPhoto: false, isImplemented: false },
-    { id: "ledger", name: "Ledger", hasPhoto: false, isImplemented: false },
-    { id: "halo", name: "Halo", hasPhoto: false, isImplemented: false },
-    { id: "bridge", name: "Bridge", hasPhoto: false, isImplemented: false },
-    { id: "cove", name: "Cove", hasPhoto: true, isImplemented: false },
+    { id: "orbit", name: "Orbit", hasPhoto: true, isImplemented: true },
+    { id: "mosaic", name: "Mosaic", hasPhoto: false, isImplemented: true },
+    { id: "ledger", name: "Ledger", hasPhoto: false, isImplemented: true },
+    { id: "halo", name: "Halo", hasPhoto: false, isImplemented: true },
+    { id: "bridge", name: "Bridge", hasPhoto: false, isImplemented: true },
+    { id: "cove", name: "Cove", hasPhoto: true, isImplemented: true },
     { id: "facet", name: "Facet", hasPhoto: true, isImplemented: false },
     { id: "terrace", name: "Terrace", hasPhoto: true, isImplemented: false },
     { id: "violet", name: "Violet", hasPhoto: true, isImplemented: false },
@@ -19,9 +19,15 @@ export const CvTemplateMetadata = [
 ];
 
 export function GetCvTemplateMetadata(templateId) {
-    return CvTemplateMetadata.find((template) => template.id === templateId) ?? CvTemplateMetadata[0];
+    for (let index = 0; index < CvTemplateMetadata.length; index++) {
+        const template = CvTemplateMetadata[index];
+        if (template.id === templateId) {
+            return template;
+        }
+    }
+    return CvTemplateMetadata[0];
 }
 
 export function IsCvTemplateImplemented(templateId) {
-    return Boolean(GetCvTemplateMetadata(templateId).isImplemented);
+    return GetCvTemplateMetadata(templateId).isImplemented;
 }

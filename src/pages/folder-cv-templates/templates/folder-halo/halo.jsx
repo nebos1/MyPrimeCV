@@ -1,98 +1,170 @@
-import React from "react";
 import "./halo.css";
-function HaloTemplate() {
+import {
+    Entries,
+    GetTemplateContent,
+    HasText,
+    Knowledge,
+    Link,
+    NextTemplateSampleData,
+} from "../../../folder-create-cv/components/template-content";
+function HaloTemplate({ data = NextTemplateSampleData }) {
+    const view = GetTemplateContent(data);
+    let projectsTitle = view.sectionTitles.projects.trim();
+    if (projectsTitle === "") {
+        projectsTitle = "Selected project";
+    }
+    const hasMain = view.employment.length > 0 || view.mainCustom.length > 0;
+    const hasSide =
+        view.education.length > 0 ||
+        view.skills.length > 0 ||
+        view.languages.length > 0 ||
+        view.projects.length > 0 ||
+        view.sideCustom.length > 0;
+    const contactItems = [];
+    for (let index = 0; index < view.contact.length; index++) {
+        const line = view.contact[index];
+        contactItems.push(<span key={index}>{line}</span>);
+    }
+    const linksItems = [];
+    for (let index = 0; index < view.links.length; index++) {
+        const item = view.links[index];
+        linksItems.push(
+            <span key={index}>
+                <Link item={item} sample={data === NextTemplateSampleData} />
+            </span>,
+        );
+    }
+    const skillsItems = [];
+    for (let index = 0; index < view.skills.length; index++) {
+        const item = view.skills[index];
+        skillsItems.push(<Knowledge item={item} key={index} />);
+    }
+    const languagesItems = [];
+    for (let index = 0; index < view.languages.length; index++) {
+        const item = view.languages[index];
+        languagesItems.push(<Knowledge item={item} key={index} />);
+    }
+    let columnsClassName;
+    if (hasMain && hasSide) {
+        columnsClassName = "halo-columns";
+    } else {
+        columnsClassName = "halo-columns halo-single-column";
+    }
+    let mainCustomSectionClass = "halo-main-section";
+    if (view.employment.length > 0) {
+        mainCustomSectionClass += " halo-main-section-spaced";
+    }
+    let skillsSectionClass = "halo-right-section";
+    if (view.education.length > 0) {
+        skillsSectionClass += " halo-right-section-spaced";
+    }
+    let languagesSectionClass = "halo-right-section";
+    if (view.education.length > 0 || view.skills.length > 0) {
+        languagesSectionClass += " halo-right-section-spaced";
+    }
+    let projectsSectionClass = "halo-right-section";
+    if (view.education.length > 0 || view.skills.length > 0 || view.languages.length > 0) {
+        projectsSectionClass += " halo-right-section-spaced";
+    }
+    let sideCustomSectionClass = "halo-right-section";
+    if (
+        view.education.length > 0 ||
+        view.skills.length > 0 ||
+        view.languages.length > 0 ||
+        view.projects.length > 0
+    ) {
+        sideCustomSectionClass += " halo-right-section-spaced";
+    }
     return (
-        <article className="halo-template">
-            <header className="halo-header">
-                <div className="halo-ring">
-                    <span>Maya</span>
-                    <strong>Petrova</strong>
-                    <small>Product Designer</small>
-                </div>
-
-                <div className="halo-contact">
-                    <span>Sofia, Bulgaria</span>
-                    <span>maya.petrova@email.com</span>
-                    <span>+359 88 123 4567</span>
-                    <span>maya-petrova.design</span>
-                </div>
-            </header>
-
-            <section className="halo-profile">
-                <h2>Profile</h2>
-                <p>
-                    Product designer focused on clear, useful and human-centered digital experiences. I combine
-                    research, visual design and close collaboration with development teams.
-                </p>
-            </section>
-
-            <div className="halo-columns">
-                <section className="halo-left">
-                    <h2>Experience</h2>
-
-                    <article className="halo-job">
-                        <span>2023 — Present</span>
-                        <h3>Senior Product Designer</h3>
-                        <strong>Northline Studio</strong>
-                        <p>
-                            Led product discovery, interaction design and design-system work across multiple SaaS
-                            products.
-                        </p>
-                        <ul>
-                            <li>Improved onboarding completion by 28%.</li>
-                            <li>Built a shared component library for three products.</li>
-                        </ul>
-                    </article>
-
-                    <article className="halo-job">
-                        <span>2021 — 2023</span>
-                        <h3>Product Designer</h3>
-                        <strong>Bright Labs</strong>
-                        <p>Designed responsive web and mobile products from early research to final implementation.</p>
-                    </article>
+        <article className="halo-template cv-next-template">
+            {(view.name ||
+                HasText(view.basics.professionalTitle) ||
+                view.contact.length > 0 ||
+                view.links.length > 0) && (
+                <header className="halo-header">
+                    {(view.name || HasText(view.basics.professionalTitle)) && (
+                        <div className="halo-ring">
+                            <div className="halo-ring-outline" aria-hidden="true"></div>
+                            {HasText(view.basics.firstName) && <span>{view.basics.firstName.trim()}</span>}
+                            {HasText(view.basics.lastName) && <strong>{view.basics.lastName.trim()}</strong>}
+                            {HasText(view.basics.professionalTitle) && (
+                                <small>{view.basics.professionalTitle}</small>
+                            )}
+                        </div>
+                    )}
+                    {(view.contact.length > 0 || view.links.length > 0) && (
+                        <div className="halo-contact">
+                            {contactItems}
+                            {linksItems}
+                        </div>
+                    )}
+                </header>
+            )}
+            {HasText(view.profile) && (
+                <section className="halo-profile">
+                    <h2>Profile</h2>
+                    <p>{view.profile}</p>
                 </section>
-
-                <section className="halo-center">
-                    <div className="halo-center-line"></div>
-                    <span className="halo-dot halo-dot-one"></span>
-                    <span className="halo-dot halo-dot-two"></span>
-                    <span className="halo-dot halo-dot-three"></span>
-                </section>
-
-                <aside className="halo-right">
-                    <section>
-                        <h2>Education</h2>
-                        <h3>BA, Visual Communication</h3>
-                        <p>National Academy of Art</p>
-                        <small>2017 — 2021</small>
-                    </section>
-
-                    <section className="halo-right-section-spaced">
-                        <h2>Skills</h2>
-                        <p>Product strategy</p>
-                        <p>UX research</p>
-                        <p>UI design</p>
-                        <p>Design systems</p>
-                        <p>Prototyping</p>
-                        <p>Figma</p>
-                    </section>
-
-                    <section className="halo-right-section-spaced">
-                        <h2>Languages</h2>
-                        <p>Bulgarian Native</p>
-                        <p>English C1</p>
-                    </section>
-
-                    <section className="halo-right-section-spaced">
-                        <h2>Selected project</h2>
-                        <h3>Civic Path</h3>
-                        <p>
-                            A service-design concept that simplifies municipal processes through clearer language and
-                            fewer steps.
-                        </p>
-                    </section>
-                </aside>
-            </div>
+            )}
+            {(hasMain || hasSide) && (
+                <div className={columnsClassName}>
+                    {hasMain && (
+                        <main className="halo-left">
+                            {view.employment.length > 0 && (
+                                <section className="halo-main-section">
+                                    <h2>Experience</h2>
+                                    <Entries items={view.employment} className="halo-job" />
+                                </section>
+                            )}
+                            {view.mainCustom.length > 0 && (
+                                <section className={mainCustomSectionClass}>
+                                    <h2>{view.sectionTitles.mainCustom}</h2>
+                                    <Entries items={view.mainCustom} className="halo-job" />
+                                </section>
+                            )}
+                        </main>
+                    )}
+                    {hasMain && hasSide && (
+                        <div className="halo-center" aria-hidden="true">
+                            <div className="halo-center-line"></div>
+                        </div>
+                    )}
+                    {hasSide && (
+                        <aside className="halo-right">
+                            {view.education.length > 0 && (
+                                <section className="halo-right-section">
+                                    <h2>Education</h2>
+                                    <Entries items={view.education} />
+                                </section>
+                            )}
+                            {view.skills.length > 0 && (
+                                <section className={skillsSectionClass}>
+                                    <h2>Skills</h2>
+                                    {skillsItems}
+                                </section>
+                            )}
+                            {view.languages.length > 0 && (
+                                <section className={languagesSectionClass}>
+                                    <h2>Languages</h2>
+                                    {languagesItems}
+                                </section>
+                            )}
+                            {view.projects.length > 0 && (
+                                <section className={projectsSectionClass}>
+                                    <h2>{projectsTitle}</h2>
+                                    <Entries items={view.projects} />
+                                </section>
+                            )}
+                            {view.sideCustom.length > 0 && (
+                                <section className={sideCustomSectionClass}>
+                                    <h2>{view.sectionTitles.sideCustom}</h2>
+                                    <Entries items={view.sideCustom} />
+                                </section>
+                            )}
+                        </aside>
+                    )}
+                </div>
+            )}
         </article>
     );
 }

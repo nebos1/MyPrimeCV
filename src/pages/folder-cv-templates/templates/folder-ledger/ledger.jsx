@@ -1,112 +1,160 @@
-import React from "react";
 import "./ledger.css";
-function LedgerTemplate() {
+import {
+    Entries,
+    GetTemplateContent,
+    HasText,
+    Knowledge,
+    Link,
+    NextTemplateSampleData,
+} from "../../../folder-create-cv/components/template-content";
+function LedgerTemplate({ data = NextTemplateSampleData }) {
+    const view = GetTemplateContent(data);
+    const contactItems = [];
+    for (let index = 0; index < view.contact.length; index++) {
+        const line = view.contact[index];
+        contactItems.push(<span key={index}>{line}</span>);
+    }
+    const linkItems = [];
+    for (let index = 0; index < view.links.length; index++) {
+        const item = view.links[index];
+        linkItems.push(
+            <span key={index}>
+                <Link item={item} sample={data === NextTemplateSampleData} />
+            </span>,
+        );
+    }
+    const skillItems = [];
+    for (let index = 0; index < view.skills.length; index++) {
+        const item = view.skills[index];
+        skillItems.push(<Knowledge item={item} key={index} />);
+    }
+    const languageItems = [];
+    for (let index = 0; index < view.languages.length; index++) {
+        const item = view.languages[index];
+        languageItems.push(<Knowledge item={item} key={index} />);
+    }
+    let projectsTitle = view.sectionTitles.projects.trim();
+    if (projectsTitle === "") {
+        projectsTitle = "Selected project";
+    }
+    const rows = [];
+    let sectionNumber = 0;
+    if (HasText(view.profile)) {
+        rows.push(
+            <section className="ledger-row" key={sectionNumber}>
+                <div className="ledger-number">{"0" + sectionNumber}</div>
+                <h2>{"Profile"}</h2>
+                <div className="ledger-content">
+                    <p className="ledger-profile-text">{view.profile}</p>
+                </div>
+            </section>,
+        );
+        sectionNumber++;
+    }
+    if (view.employment.length > 0) {
+        rows.push(
+            <section className="ledger-row" key={sectionNumber}>
+                <div className="ledger-number">{"0" + sectionNumber}</div>
+                <h2>{"Experience"}</h2>
+                <div className="ledger-content">
+                    <Entries items={view.employment} className="ledger-job" />
+                </div>
+            </section>,
+        );
+        sectionNumber++;
+    }
+    if (view.education.length > 0) {
+        rows.push(
+            <section className="ledger-row" key={sectionNumber}>
+                <div className="ledger-number">{"0" + sectionNumber}</div>
+                <h2>{"Education"}</h2>
+                <div className="ledger-content">
+                    <Entries items={view.education} className="ledger-education" />
+                </div>
+            </section>,
+        );
+        sectionNumber++;
+    }
+    if (view.skills.length > 0) {
+        rows.push(
+            <section className="ledger-row" key={sectionNumber}>
+                <div className="ledger-number">{"0" + sectionNumber}</div>
+                <h2>{"Skills"}</h2>
+                <div className="ledger-content">
+                    <div className="ledger-skill-grid">{skillItems}</div>
+                </div>
+            </section>,
+        );
+        sectionNumber++;
+    }
+    if (view.languages.length > 0) {
+        rows.push(
+            <section className="ledger-row" key={sectionNumber}>
+                <div className="ledger-number">{"0" + sectionNumber}</div>
+                <h2>{"Languages"}</h2>
+                <div className="ledger-content">
+                    <div className="ledger-language-row">{languageItems}</div>
+                </div>
+            </section>,
+        );
+        sectionNumber++;
+    }
+    if (view.projects.length > 0) {
+        rows.push(
+            <section className="ledger-row" key={sectionNumber}>
+                <div className="ledger-number">{"0" + sectionNumber}</div>
+                <h2>{projectsTitle}</h2>
+                <div className="ledger-content">
+                    <Entries items={view.projects} className="ledger-job" />
+                </div>
+            </section>,
+        );
+        sectionNumber++;
+    }
+    if (view.mainCustom.length > 0) {
+        rows.push(
+            <section className="ledger-row" key={sectionNumber}>
+                <div className="ledger-number">{"0" + sectionNumber}</div>
+                <h2>{view.sectionTitles.mainCustom}</h2>
+                <div className="ledger-content">
+                    <Entries items={view.mainCustom} className="ledger-job" />
+                </div>
+            </section>,
+        );
+        sectionNumber++;
+    }
+    if (view.sideCustom.length > 0) {
+        rows.push(
+            <section className="ledger-row" key={sectionNumber}>
+                <div className="ledger-number">{"0" + sectionNumber}</div>
+                <h2>{view.sectionTitles.sideCustom}</h2>
+                <div className="ledger-content">
+                    <Entries items={view.sideCustom} className="ledger-job" />
+                </div>
+            </section>,
+        );
+        sectionNumber++;
+    }
     return (
-        <article className="ledger-template">
-            <header className="ledger-header">
-                <div>
-                    <h1>Maya Petrova</h1>
-                    <p>Product Designer</p>
-                </div>
-
-                <div className="ledger-contact">
-                    <span>Sofia, Bulgaria</span>
-                    <span>maya.petrova@email.com</span>
-                    <span>+359 88 123 4567</span>
-                </div>
-            </header>
-
-            <section className="ledger-row ledger-profile">
-                <div className="ledger-number">00</div>
-                <h2>Profile</h2>
-                <p>
-                    Product designer focused on clear, useful and human-centered digital experiences. I combine
-                    research, visual design and close collaboration with development teams.
-                </p>
-            </section>
-
-            <section className="ledger-row">
-                <div className="ledger-number">01</div>
-                <h2>Experience</h2>
-
-                <div className="ledger-content">
-                    <article className="ledger-job">
-                        <div>
-                            <h3>Senior Product Designer</h3>
-                            <span>Northline Studio</span>
-                        </div>
-
-                        <small>2023 — Present</small>
-
-                        <p>
-                            Led product discovery, interaction design and design-system work across multiple SaaS
-                            products.
-                        </p>
-
-                        <ul>
-                            <li>Improved onboarding completion by 28%.</li>
-                            <li>Built a shared component library for three products.</li>
-                            <li>Worked directly with product, development and QA.</li>
-                        </ul>
-                    </article>
-
-                    <article className="ledger-job ledger-job-spaced">
-                        <div>
-                            <h3>Product Designer</h3>
-                            <span>Bright Labs</span>
-                        </div>
-
-                        <small>2021 — 2023</small>
-
-                        <p>Designed responsive web and mobile products from early research to final implementation.</p>
-
-                        <ul>
-                            <li>Created interactive prototypes and user flows.</li>
-                            <li>Introduced lightweight usability testing.</li>
-                        </ul>
-                    </article>
-                </div>
-            </section>
-
-            <section className="ledger-row">
-                <div className="ledger-number">02</div>
-                <h2>Education</h2>
-
-                <div className="ledger-content">
-                    <div className="ledger-education">
-                        <div>
-                            <h3>BA, Visual Communication</h3>
-                            <span>National Academy of Art</span>
-                        </div>
-                        <small>2017 — 2021</small>
+        <article className="ledger-template cv-next-template">
+            {(view.name ||
+                HasText(view.basics.professionalTitle) ||
+                view.contact.length > 0 ||
+                view.links.length > 0) && (
+                <header className="ledger-header">
+                    <div>
+                        {view.name && <h1>{view.name}</h1>}
+                        {HasText(view.basics.professionalTitle) && <p>{view.basics.professionalTitle}</p>}
                     </div>
-                </div>
-            </section>
-
-            <section className="ledger-row">
-                <div className="ledger-number">03</div>
-                <h2>Skills</h2>
-
-                <div className="ledger-content ledger-skill-grid">
-                    <span>Product strategy</span>
-                    <span>UX research</span>
-                    <span>UI design</span>
-                    <span>Design systems</span>
-                    <span>Prototyping</span>
-                    <span>Figma</span>
-                </div>
-            </section>
-
-            <section className="ledger-row">
-                <div className="ledger-number">04</div>
-                <h2>Languages</h2>
-
-                <div className="ledger-content ledger-language-row">
-                    <span>Bulgarian Native</span>
-                    <span>English C1</span>
-                    <span>maya-petrova.design</span>
-                </div>
-            </section>
+                    {(view.contact.length > 0 || view.links.length > 0) && (
+                        <div className="ledger-contact">
+                            {contactItems}
+                            {linkItems}
+                        </div>
+                    )}
+                </header>
+            )}
+            {rows}
         </article>
     );
 }

@@ -1,123 +1,190 @@
-import React from "react";
 import "./orbit.css";
-function OrbitTemplate() {
+import {
+    Dates,
+    Entries,
+    EntryCopy,
+    EntryHeading,
+    GetTemplateContent,
+    HasText,
+    Knowledge,
+    Link,
+    NextTemplateSampleData,
+    Photo,
+} from "../../../folder-create-cv/components/template-content";
+function OrbitTemplate({ data = NextTemplateSampleData }) {
+    const view = GetTemplateContent(data);
+    let educationNumber = "01";
+    if (view.employment.length > 0) {
+        educationNumber = "02";
+    }
+    let projectsTitle = view.sectionTitles.projects.trim();
+    if (projectsTitle === "") {
+        projectsTitle = "Selected project";
+    }
+    const hasMain = view.employment.length > 0 || view.education.length > 0 || view.mainCustom.length > 0;
+    const hasSide =
+        view.skills.length > 0 ||
+        view.languages.length > 0 ||
+        view.projects.length > 0 ||
+        view.sideCustom.length > 0;
+    const contactItems = [];
+    for (let index = 0; index < view.contact.length; index++) {
+        const line = view.contact[index];
+        contactItems.push(<span key={index}>{line}</span>);
+    }
+    const linksItems = [];
+    for (let index = 0; index < view.links.length; index++) {
+        const item = view.links[index];
+        linksItems.push(
+            <span key={index}>
+                <Link item={item} sample={data === NextTemplateSampleData} />
+            </span>,
+        );
+    }
+    const employmentItems = [];
+    for (let index = 0; index < view.employment.length; index++) {
+        const item = view.employment[index];
+        employmentItems.push(
+            <article className="orbit-job" key={index}>
+                <div className="orbit-job-date">
+                    <Dates item={item} />
+                </div>
+                <div>
+                    <EntryHeading item={item} />
+                    <EntryCopy item={item} />
+                </div>
+            </article>,
+        );
+    }
+    const skillsItems = [];
+    for (let index = 0; index < view.skills.length; index++) {
+        const item = view.skills[index];
+        skillsItems.push(<Knowledge item={item} key={index} />);
+    }
+    const languagesItems = [];
+    for (let index = 0; index < view.languages.length; index++) {
+        const item = view.languages[index];
+        languagesItems.push(<Knowledge item={item} key={index} />);
+    }
+    let headerClassName;
+    if (view.initials || view.basics.photo) {
+        headerClassName = "orbit-header";
+    } else {
+        headerClassName = "orbit-header orbit-no-mark";
+    }
+    let layoutClassName;
+    if (hasMain && hasSide) {
+        layoutClassName = "orbit-layout";
+    } else {
+        layoutClassName = "orbit-layout orbit-single-column";
+    }
+    let languagesSectionClass = "orbit-sidebar-section";
+    if (view.skills.length > 0) {
+        languagesSectionClass += " orbit-sidebar-section-spaced";
+    }
+    let projectsSectionClass = "orbit-sidebar-section";
+    if (view.skills.length > 0 || view.languages.length > 0) {
+        projectsSectionClass += " orbit-sidebar-section-spaced";
+    }
+    let customSectionClass = "orbit-sidebar-section";
+    if (view.skills.length > 0 || view.languages.length > 0 || view.projects.length > 0) {
+        customSectionClass += " orbit-sidebar-section-spaced";
+    }
     return (
-        <article className="orbit-template">
-            <header className="orbit-header">
-                <div className="orbit-mark">
-                    <span>MP</span>
+        <article className="orbit-template cv-next-template">
+            {(view.name ||
+                HasText(view.basics.photo) ||
+                HasText(view.basics.professionalTitle) ||
+                view.contact.length > 0 ||
+                view.links.length > 0) && (
+                <header className={headerClassName}>
+                    {(view.initials || HasText(view.basics.photo)) && (
+                        <div className="orbit-mark">
+                            <span className="orbit-ring-outer" aria-hidden="true"></span>
+                            <Photo view={view} />
+                            {!view.hasPhoto && <span className="orbit-ring-inner" aria-hidden="true"></span>}
+                        </div>
+                    )}
+                    <div className="orbit-heading">
+                        {view.name && <h1>{view.name}</h1>}
+                        {HasText(view.basics.professionalTitle) && <p>{view.basics.professionalTitle}</p>}
+                    </div>
+                    {(view.contact.length > 0 || view.links.length > 0) && (
+                        <div className="orbit-contact">
+                            {contactItems}
+                            {linksItems}
+                        </div>
+                    )}
+                </header>
+            )}
+            {HasText(view.profile) && (
+                <section className="orbit-profile">
+                    <span>Profile</span>
+                    <p>{view.profile}</p>
+                </section>
+            )}
+            {(hasMain || hasSide) && (
+                <div className={layoutClassName}>
+                    {hasMain && (
+                        <main className="orbit-main">
+                            {view.employment.length > 0 && (
+                                <section className="orbit-section">
+                                    <div className="orbit-section-title">
+                                        <span>01</span>
+                                        <h2>Employment history</h2>
+                                    </div>
+                                    {employmentItems}
+                                </section>
+                            )}
+                            {view.education.length > 0 && (
+                                <section className="orbit-section orbit-section-spaced">
+                                    <div className="orbit-section-title">
+                                        <span>{educationNumber}</span>
+                                        <h2>Education</h2>
+                                    </div>
+                                    <Entries items={view.education} className="orbit-education" />
+                                </section>
+                            )}
+                            {view.mainCustom.length > 0 && (
+                                <section className="orbit-section orbit-section-spaced">
+                                    <div className="orbit-section-title">
+                                        <h2>{view.sectionTitles.mainCustom}</h2>
+                                    </div>
+                                    <Entries items={view.mainCustom} className="orbit-education" />
+                                </section>
+                            )}
+                        </main>
+                    )}
+                    {hasSide && (
+                        <aside className="orbit-sidebar">
+                            {view.skills.length > 0 && (
+                                <section className="orbit-sidebar-section">
+                                    <h2>Skills</h2>
+                                    <div className="orbit-pills">{skillsItems}</div>
+                                </section>
+                            )}
+                            {view.languages.length > 0 && (
+                                <section className={languagesSectionClass}>
+                                    <h2>Languages</h2>
+                                    {languagesItems}
+                                </section>
+                            )}
+                            {view.projects.length > 0 && (
+                                <section className={projectsSectionClass}>
+                                    <h2>{projectsTitle}</h2>
+                                    <Entries items={view.projects} />
+                                </section>
+                            )}
+                            {view.sideCustom.length > 0 && (
+                                <section className={customSectionClass}>
+                                    <h2>{view.sectionTitles.sideCustom}</h2>
+                                    <Entries items={view.sideCustom} />
+                                </section>
+                            )}
+                        </aside>
+                    )}
                 </div>
-
-                <div className="orbit-heading">
-                    <h1>Maya Petrova</h1>
-                    <p>Product Designer</p>
-                </div>
-
-                <div className="orbit-contact">
-                    <span>Sofia, Bulgaria</span>
-                    <span>maya.petrova@email.com</span>
-                    <span>+359 88 123 4567</span>
-                    <span>maya-petrova.design</span>
-                </div>
-            </header>
-
-            <section className="orbit-profile">
-                <span>Profile</span>
-                <p>
-                    Product designer focused on clear, useful and human-centered digital experiences. I combine
-                    research, visual design and close collaboration with development teams.
-                </p>
-            </section>
-
-            <div className="orbit-layout">
-                <main className="orbit-main">
-                    <section className="orbit-section">
-                        <div className="orbit-section-title">
-                            <span>01</span>
-                            <h2>Employment history</h2>
-                        </div>
-
-                        <article className="orbit-job">
-                            <div className="orbit-job-date">2023 — Present</div>
-
-                            <div>
-                                <h3>Senior Product Designer</h3>
-                                <strong>Northline Studio</strong>
-                                <p>
-                                    Led product discovery, interaction design and design-system work across multiple
-                                    SaaS products.
-                                </p>
-                                <ul>
-                                    <li>Improved onboarding completion by 28%.</li>
-                                    <li>Built a shared component library for three products.</li>
-                                    <li>Worked directly with product, development and QA.</li>
-                                </ul>
-                            </div>
-                        </article>
-
-                        <article className="orbit-job">
-                            <div className="orbit-job-date">2021 — 2023</div>
-
-                            <div>
-                                <h3>Product Designer</h3>
-                                <strong>Bright Labs</strong>
-                                <p>
-                                    Designed responsive web and mobile products from early research to final
-                                    implementation.
-                                </p>
-                                <ul>
-                                    <li>Created interactive prototypes and user flows.</li>
-                                    <li>Introduced lightweight usability testing.</li>
-                                </ul>
-                            </div>
-                        </article>
-                    </section>
-
-                    <section className="orbit-section orbit-section-spaced">
-                        <div className="orbit-section-title">
-                            <span>02</span>
-                            <h2>Education</h2>
-                        </div>
-
-                        <div className="orbit-education">
-                            <div>
-                                <h3>BA, Visual Communication</h3>
-                                <strong>National Academy of Art</strong>
-                            </div>
-                            <small>2017 — 2021</small>
-                        </div>
-                    </section>
-                </main>
-
-                <aside className="orbit-sidebar">
-                    <section>
-                        <h2>Skills</h2>
-                        <div className="orbit-pills">
-                            <span>Product strategy</span>
-                            <span>UX research</span>
-                            <span>UI design</span>
-                            <span>Design systems</span>
-                            <span>Prototyping</span>
-                            <span>Figma</span>
-                        </div>
-                    </section>
-
-                    <section className="orbit-sidebar-section-spaced">
-                        <h2>Languages</h2>
-                        <p>Bulgarian Native</p>
-                        <p>English C1</p>
-                    </section>
-
-                    <section className="orbit-sidebar-section-spaced">
-                        <h2>Selected project</h2>
-                        <h3>Civic Path</h3>
-                        <p>
-                            A service-design concept that simplifies municipal processes through clearer language and
-                            fewer steps.
-                        </p>
-                    </section>
-                </aside>
-            </div>
+            )}
         </article>
     );
 }

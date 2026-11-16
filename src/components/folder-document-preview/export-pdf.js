@@ -52,6 +52,26 @@ const FontFaces = [
     },
 ];
 
+function GetTextParts(text) {
+    const parts = [];
+    let part = "";
+    let previousWasSpace = false;
+    for (let index = 0; index < text.length; index++) {
+        const character = text[index];
+        const isSpace = character.trim() === "";
+        if (part !== "" && isSpace !== previousWasSpace) {
+            parts.push(part);
+            part = "";
+        }
+        part = part + character;
+        previousWasSpace = isSpace;
+    }
+    if (part !== "") {
+        parts.push(part);
+    }
+    return parts;
+}
+
 function HideTextOutsidePage(originalPage, copiedPage) {
     const clip = originalPage.querySelector(".document-preview-page-clip");
     const pageBounds = clip.getBoundingClientRect();
@@ -88,7 +108,7 @@ function HideTextOutsidePage(originalPage, copiedPage) {
             continue;
         }
 
-        const words = originalText.textContent.match(/\s+|\S+/g);
+        const words = GetTextParts(originalText.textContent);
         const fragment = document.createDocumentFragment();
         let textPosition = 0;
         let textGroup = null;
@@ -143,20 +163,35 @@ function GetPageLinks(page) {
     const clipBounds = page.querySelector(".document-preview-page-clip").getBoundingClientRect();
     const links = [];
 
-    // Every preview page contains the full document. Keep only visible link lines.
-    for (const anchor of page.querySelectorAll("a[href]")) {
+    const anchors = page.querySelectorAll("a[href]");
+    for (let anchorIndex = 0; anchorIndex < anchors.length; anchorIndex++) {
+        const anchor = anchors[anchorIndex];
         const url = anchor.href;
-        if (!/^(https?:|mailto:|tel:)/i.test(url)) continue;
+        const lowerUrl = url.toLowerCase();
+        if (
+            !lowerUrl.startsWith("http:") &&
+            !lowerUrl.startsWith("https:") &&
+            !lowerUrl.startsWith("mailto:") &&
+            !lowerUrl.startsWith("tel:")
+        ) {
+            continue;
+        }
 
         const style = getComputedStyle(anchor);
-        if (style.visibility !== "visible" || style.display === "none") continue;
+        if (style.visibility !== "visible" || style.display === "none") {
+            continue;
+        }
 
-        for (const line of anchor.getClientRects()) {
+        const lines = anchor.getClientRects();
+        for (let lineIndex = 0; lineIndex < lines.length; lineIndex++) {
+            const line = lines[lineIndex];
             const left = Math.max(line.left, clipBounds.left, pageBounds.left);
             const top = Math.max(line.top, clipBounds.top, pageBounds.top);
             const right = Math.min(line.right, clipBounds.right, pageBounds.right);
             const bottom = Math.min(line.bottom, clipBounds.bottom, pageBounds.bottom);
-            if (right <= left || bottom <= top) continue;
+            if (right <= left || bottom <= top) {
+                continue;
+            }
 
             links.push({
                 x: (left - pageBounds.left) / pageBounds.width,
@@ -190,7 +225,17 @@ export async function ExportPreviewPdf(title, cvDocument) {
 
     let filename = "MyPrimeCV document";
     if (title) {
-        filename = title.replace(/[\\/:*?"<>|]/g, "-").trim();
+        filename = "";
+        const invalidCharacters = '\\/:*?"<>|';
+        for (let index = 0; index < title.length; index++) {
+            const character = title[index];
+            if (invalidCharacters.includes(character)) {
+                filename = filename + "-";
+            } else {
+                filename = filename + character;
+            }
+        }
+        filename = filename.trim();
     }
     if (filename === "") {
         filename = "MyPrimeCV document";
@@ -214,6 +259,21 @@ export async function ExportPreviewPdf(title, cvDocument) {
         const originalPage = pages[pageIndex];
         const links = GetPageLinks(originalPage);
         const copiedPage = originalPage.cloneNode(true);
+        const photos = copiedPage.querySelectorAll("img");
+        for (let photoIndex = 0; photoIndex < photos.length; photoIndex++) {
+            const photo = photos[photoIndex];
+            if (!photo.src.startsWith("data:image/svg+xml")) {
+                continue;
+            }
+            const image = new Image();
+            image.src = photo.src;
+            await image.decode();
+            const canvas = document.createElement("canvas");
+            canvas.width = image.naturalWidth;
+            canvas.height = image.naturalHeight;
+            canvas.getContext("2d").drawImage(image, 0, 0);
+            photo.src = canvas.toDataURL("image/png");
+        }
         copiedPage.style.width = PageWidth + "px";
         copiedPage.style.height = PageHeight + "px";
         copiedPage.style.boxShadow = "none";
@@ -230,7 +290,10 @@ export async function ExportPreviewPdf(title, cvDocument) {
 
         const content = copiedPage.querySelector(".document-preview-page-content");
         content.style.zoom = "1";
-        content.style.transform = content.style.transform.replace(/scale\([^)]*\)\s*/, "");
+        const translationStart = content.style.transform.indexOf("translateY(");
+        if (translationStart >= 0) {
+            content.style.transform = content.style.transform.slice(translationStart);
+        }
 
         await pdf.html(copiedPage, {
             x: 0,
@@ -247,14 +310,20 @@ export async function ExportPreviewPdf(title, cvDocument) {
             },
         });
 
-        // HTML rendering draws the text; PDF annotations preserve its link targets.
         pdf.setPage(pageIndex + 1);
         const pageWidth = pdf.internal.pageSize.getWidth();
         const pageHeight = pdf.internal.pageSize.getHeight();
-        for (const link of links) {
-            pdf.link(link.x * pageWidth, link.y * pageHeight, link.width * pageWidth, link.height * pageHeight, {
-                url: link.url,
-            });
+        for (let linkIndex = 0; linkIndex < links.length; linkIndex++) {
+            const link = links[linkIndex];
+            pdf.link(
+                link.x * pageWidth,
+                link.y * pageHeight,
+                link.width * pageWidth,
+                link.height * pageHeight,
+                {
+                    url: link.url,
+                },
+            );
         }
     }
 

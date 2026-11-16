@@ -1,46 +1,9 @@
-.bridge-template {
-    position: relative;
-    width: 100%;
-    max-width: 34rem;
-    aspect-ratio: 210 / 297;
-    overflow: hidden;
-    padding: 1.8rem 2rem 2rem;
-    color: #182528;
-    background: #fffdf9;
-    font-family: Inter, "Segoe UI", Arial, sans-serif;
-    box-shadow: 0 1rem 3rem rgba(34, 45, 45, 0.14);
-}
-
-.bridge-band {
-    position: absolute;
-    top: 5.4rem;
-    left: 0;
-    width: 100%;
-    height: 2.4rem;
-    background: #d94e42;
-}
-
-.bridge-header {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    justify-content: space-between;
-    gap: 1.4rem;
-}
-
 .bridge-name small {
     color: #176b62;
     font-size: 0.38rem;
     font-weight: 900;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-}
-
-.bridge-name h1 {
-    margin-top: 0.35rem;
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 1.7rem;
-    line-height: 0.95;
 }
 
 .bridge-name p {
@@ -50,31 +13,9 @@
     font-weight: 850;
 }
 
-.bridge-contact {
-    display: grid;
-    min-width: 9.5rem;
-    padding: 0.7rem;
-    color: #ffffff;
-    background: #182528;
-    box-shadow: 0 0.5rem 1.2rem rgba(24, 37, 40, 0.15);
-    gap: 0.22rem;
-}
-
 .bridge-contact span {
     font-size: 0.36rem;
     text-align: right;
-}
-
-.bridge-profile {
-    position: relative;
-    z-index: 1;
-    display: grid;
-    grid-template-columns: 4.5rem 1fr;
-    margin-top: 1.2rem;
-    padding: 0.75rem 0.9rem;
-    color: #ffffff;
-    background: #d94e42;
-    gap: 0.7rem;
 }
 
 .bridge-profile span {
@@ -89,15 +30,7 @@
     line-height: 1.5;
 }
 
-.bridge-experience {
-    display: grid;
-    grid-template-columns: 5rem 1fr;
-    margin-top: 1.1rem;
-    gap: 1rem;
-}
-
-.bridge-title span,
-.bridge-panel > span {
+.bridge-title span {
     color: #d94e42;
     font-family: Georgia, "Times New Roman", serif;
     font-size: 0.72rem;
@@ -111,12 +44,6 @@
     font-weight: 900;
     letter-spacing: 0.09em;
     text-transform: uppercase;
-}
-
-.bridge-job.bridge-job-spaced {
-    margin-top: 0.7rem;
-    padding-top: 0.65rem;
-    border-top: 0.0625rem solid #d9dfdc;
 }
 
 .bridge-job-top {
@@ -143,13 +70,6 @@
     font-size: 0.35rem;
 }
 
-.bridge-job > p {
-    margin-top: 0.28rem;
-    color: #536164;
-    font-size: 0.39rem;
-    line-height: 1.45;
-}
-
 .bridge-job ul {
     margin: 0.25rem 0 0;
     padding-left: 0.7rem;
@@ -170,10 +90,6 @@
     padding: 0.75rem;
 }
 
-.bridge-panel.bridge-panel-spaced {
-    border-left: 0.0625rem solid #d9dfdc;
-}
-
 .bridge-panel h3 {
     margin-top: 0.45rem;
 }
@@ -187,10 +103,6 @@
 .bridge-panel-dark {
     color: #ffffff;
     background: #182528;
-}
-
-.bridge-panel-dark > span {
-    color: #f1c75b;
 }
 
 .bridge-panel-dark h2 {
@@ -209,132 +121,110 @@
     margin-top: 0.65rem;
 }
 
-.template-card-preview .bridge-template {
-    padding: 1.18rem;
+.bridge-template {
+    position: relative;
+    width: 100%;
+    max-width: 34rem;
+    aspect-ratio: 210 / 297;
+    overflow: hidden;
+    padding: 1.8rem 2rem 2rem;
+    color: #182528;
+    background: #fffdf9;
+    box-shadow: 0 1rem 3rem rgba(34, 45, 45, 0.14);
+    font-family: "MyPrimeCV Sans", Arial, sans-serif;
+}
+.bridge-header {
+    position: relative;
+    z-index: 1;
+    justify-content: space-between;
+    gap: 1.4rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    align-items: start;
+}
+.bridge-name h1 {
+    margin-top: 0.35rem;
+    font-size: 1.7rem;
+    font-family: "MyPrimeCV Serif", Georgia, serif;
+    line-height: 1.25;
+}
+.bridge-header-stacked {
+    grid-template-columns: minmax(0, 1fr);
+}
+.bridge-contact {
+    display: grid;
+    padding: 0.7rem;
+    color: #ffffff;
+    background: #182528;
+    box-shadow: 0 0.5rem 1.2rem rgba(24, 37, 40, 0.15);
+    gap: 0.22rem;
+    min-width: 0;
+}
+.bridge-profile {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    margin-top: 1.2rem;
+    padding: 0.75rem 0.9rem;
+    color: #ffffff;
+    background: #d94e42;
+    gap: 0.7rem;
+    grid-template-columns: 4.5rem minmax(0, 1fr);
+}
+.bridge-experience {
+    display: grid;
+    margin-top: 1.1rem;
+    gap: 1rem;
+    grid-template-columns: 5rem minmax(0, 1fr);
+}
+.bridge-job-spaced {
+    padding-top: 0.65rem;
+    border-top: 0.0625rem solid #d9dfdc;
+}
+.bridge-template .cv-entry-heading strong {
+    display: block;
+    margin-top: 0.1rem;
+    color: #176b62;
+    font-size: 0.4rem;
+}
+.bridge-template .cv-entry-copy {
+    color: #536164;
+}
+.bridge-panel .cv-next-entry {
+    margin-top: 0.45rem;
+}
+.bridge-panel-dark .cv-next-knowledge {
+    color: #d3dcda;
+}
+.bridge-panel-dark .cv-entry-heading strong {
+    color: #85c7b8;
+}
+.bridge-panel-accent .cv-entry-copy {
+    color: #182528;
 }
 
-.template-card-preview .bridge-band {
-    top: 3.9rem;
-    height: 1.65rem;
+.bridge-panel-number {
+    color: #d94e42;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 0.72rem;
+    font-style: italic;
+}
+.bridge-panel-dark .bridge-panel-number {
+    color: #f1c75b;
+}
+.bridge-panel-spaced {
+    border-left: 0.0625rem solid #d9dfdc;
+}
+.bridge-bottom-one {
+    grid-template-columns: minmax(0, 1fr);
+}
+.bridge-bottom-two {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+.bridge-bottom-three {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
 }
 
-.template-card-preview .bridge-header {
-    gap: 0.75rem;
-}
-
-.template-card-preview .bridge-name small {
-    font-size: 0.29rem;
-}
-
-.template-card-preview .bridge-name h1 {
-    margin-top: 0.2rem;
-    font-size: 1.18rem;
-}
-
-.template-card-preview .bridge-name p {
-    margin-top: 0.18rem;
-    font-size: 0.36rem;
-}
-
-.template-card-preview .bridge-contact {
-    min-width: 6.5rem;
-    padding: 0.48rem;
-    gap: 0.12rem;
-}
-
-.template-card-preview .bridge-contact span {
-    font-size: 0.26rem;
-}
-
-.template-card-preview .bridge-profile {
-    grid-template-columns: 3.2rem 1fr;
+.bridge-template .cv-next-entry-spaced {
     margin-top: 0.7rem;
-    padding: 0.45rem 0.55rem;
-    gap: 0.42rem;
-}
-
-.template-card-preview .bridge-profile span {
-    font-size: 0.29rem;
-}
-
-.template-card-preview .bridge-profile p {
-    font-size: 0.3rem;
-    line-height: 1.26;
-}
-
-.template-card-preview .bridge-experience {
-    grid-template-columns: 3.65rem 1fr;
-    margin-top: 0.68rem;
-    gap: 0.6rem;
-}
-
-.template-card-preview .bridge-title span,
-.template-card-preview .bridge-panel > span {
-    font-size: 0.48rem;
-}
-
-.template-card-preview .bridge-title h2,
-.template-card-preview .bridge-panel h2 {
-    margin-top: 0.14rem;
-    font-size: 0.29rem;
-}
-
-.template-card-preview .bridge-job.bridge-job-spaced {
-    margin-top: 0.38rem;
-    padding-top: 0.34rem;
-}
-
-.template-card-preview .bridge-job-top {
-    gap: 0.45rem;
-}
-
-.template-card-preview .bridge-job h3,
-.template-card-preview .bridge-panel h3 {
-    font-size: 0.35rem;
-}
-
-.template-card-preview .bridge-job strong {
-    margin-top: 0.06rem;
-    font-size: 0.28rem;
-}
-
-.template-card-preview .bridge-job small,
-.template-card-preview .bridge-panel small {
-    font-size: 0.25rem;
-}
-
-.template-card-preview .bridge-job > p {
-    margin-top: 0.14rem;
-    font-size: 0.27rem;
-    line-height: 1.22;
-}
-
-.template-card-preview .bridge-job ul {
-    margin-top: 0.12rem;
-    padding-left: 0.48rem;
-    font-size: 0.26rem;
-    line-height: 1.2;
-}
-
-.template-card-preview .bridge-bottom {
-    margin-top: 0.58rem;
-}
-
-.template-card-preview .bridge-panel {
-    min-height: 5.65rem;
-    padding: 0.42rem;
-}
-
-.template-card-preview .bridge-panel h3 {
-    margin-top: 0.24rem;
-}
-
-.template-card-preview .bridge-panel p {
-    margin-top: 0.12rem;
-    font-size: 0.26rem;
-    line-height: 1.18;
-}
-
-.template-card-preview .bridge-panel .bridge-languages-title {
-    margin-top: 0.36rem;
 }

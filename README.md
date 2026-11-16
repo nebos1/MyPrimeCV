@@ -17,7 +17,7 @@ MyPrimeCV is a browser-based CV and motivation letter builder that's **ABSOLUTEL
 
 ## Completed CV templates
 
-Choose from six templates with working editors:
+Choose from twelve templates with working editors:
 
 - **Meadow** — supports a profile photo.
 - **Atlas**
@@ -25,6 +25,12 @@ Choose from six templates with working editors:
 - **Linen**
 - **Studio** — supports a profile photo.
 - **Ribbon**
+- **Orbit** — supports a profile photo.
+- **Mosaic**
+- **Ledger**
+- **Halo**
+- **Bridge**
+- **Cove** — supports a profile photo.
 
 ## How it works
 

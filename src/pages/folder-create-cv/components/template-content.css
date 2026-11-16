@@ -1,0 +1,121 @@
+.cv-next-template {
+    min-height: 769px;
+    height: auto;
+    aspect-ratio: auto;
+    overflow-wrap: anywhere;
+}
+
+.cv-next-template * {
+    min-width: 0;
+    max-width: 100%;
+}
+
+.cv-next-template h1,
+.cv-next-template h2,
+.cv-next-template h3,
+.cv-next-template p,
+.cv-next-template strong,
+.cv-next-template small,
+.cv-next-template li,
+.cv-next-template a,
+.cv-next-template span {
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+    tab-size: 4;
+}
+
+.cv-next-template a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.cv-next-template .cv-entry-copy {
+    grid-column: 1 / -1;
+    min-width: 0;
+    font-size: 0.43rem;
+    line-height: 1.5;
+}
+
+.cv-next-template .cv-entry-copy p {
+    font-size: inherit;
+    line-height: inherit;
+}
+
+.cv-next-template .cv-entry-description {
+    margin-top: 0.3rem;
+    font-size: 0.43rem;
+    line-height: 1.5;
+}
+
+.cv-next-template .cv-next-list {
+    padding-left: 0.85rem;
+}
+
+.cv-next-template .cv-next-list-item-spaced {
+    margin-top: 0.18rem;
+}
+
+.cv-next-template .cv-entry-heading p {
+    margin-top: 0.15rem;
+    font-size: 0.4rem;
+    line-height: 1.4;
+}
+
+.cv-next-template .cv-next-knowledge {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.18rem 0.3rem;
+    margin-top: 0.4rem;
+    font-size: 0.42rem;
+    line-height: 1.5;
+}
+
+.cv-next-template .cv-next-knowledge-label {
+    flex: 1 1 2rem;
+}
+
+.cv-next-template .cv-next-knowledge small {
+    margin: 0;
+    font: inherit;
+}
+
+.cv-next-template .cv-next-knowledge .cv-rating {
+    flex: 0 1 auto;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.cv-next-template .cv-next-knowledge .cv-rating i {
+    flex-shrink: 0;
+}
+
+.cv-next-template .cv-next-entry-spaced {
+    margin-top: 0.7rem;
+}
+
+.cv-next-template .cv-next-entry-top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.25rem 0.6rem;
+}
+
+.cv-next-template .cv-next-entry-top .cv-entry-heading {
+    flex: 1 1 5rem;
+}
+
+.cv-next-template .cv-next-entry-date {
+    flex: 0 1 auto;
+    font-size: 0.38rem;
+}
+
+.template-card-preview .cv-next-template {
+    width: 544px;
+    min-width: 544px;
+    max-width: 544px;
+    height: 769px;
+    min-height: 769px;
+    overflow: hidden;
+}

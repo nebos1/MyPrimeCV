@@ -1,94 +1,154 @@
-import React from "react";
 import "./mosaic.css";
-function MosaicTemplate() {
+import {
+    Entries,
+    GetTemplateContent,
+    HasText,
+    Knowledge,
+    Link,
+    NextTemplateSampleData,
+} from "../../../folder-create-cv/components/template-content";
+function MosaicTemplate({ data = NextTemplateSampleData }) {
+    const view = GetTemplateContent(data);
+    let projectsTitle = view.sectionTitles.projects.trim();
+    if (projectsTitle === "") {
+        projectsTitle = "Selected project";
+    }
+    const hasImpact =
+        HasText(view.studioImpact.label) ||
+        HasText(view.studioImpact.value) ||
+        HasText(view.studioImpact.description);
+    const contactItems = [];
+    for (let index = 0; index < view.contact.length; index++) {
+        const line = view.contact[index];
+        contactItems.push(<p key={index}>{line}</p>);
+    }
+    const linksItems = [];
+    for (let index = 0; index < view.links.length; index++) {
+        const item = view.links[index];
+        linksItems.push(
+            <p key={index}>
+                <Link item={item} sample={data === NextTemplateSampleData} />
+            </p>,
+        );
+    }
+    const skillsItems = [];
+    for (let index = 0; index < view.skills.length; index++) {
+        const item = view.skills[index];
+        skillsItems.push(<Knowledge item={item} key={index} />);
+    }
+    const languagesItems = [];
+    for (let index = 0; index < view.languages.length; index++) {
+        const item = view.languages[index];
+        languagesItems.push(<Knowledge item={item} key={index} />);
+    }
+    let visibleCards = 0;
+    if (view.name || HasText(view.basics.professionalTitle)) {
+        visibleCards++;
+    }
+    if (view.contact.length > 0 || view.links.length > 0) {
+        visibleCards++;
+    }
+    if (HasText(view.profile)) {
+        visibleCards++;
+    }
+    if (hasImpact) {
+        visibleCards++;
+    }
+    if (view.employment.length > 0) {
+        visibleCards++;
+    }
+    if (view.skills.length > 0) {
+        visibleCards++;
+    }
+    if (view.education.length > 0) {
+        visibleCards++;
+    }
+    if (view.projects.length > 0) {
+        visibleCards++;
+    }
+    if (view.languages.length > 0) {
+        visibleCards++;
+    }
+    if (view.mainCustom.length > 0) {
+        visibleCards++;
+    }
+    if (view.sideCustom.length > 0) {
+        visibleCards++;
+    }
+    let templateClassName = "mosaic-template cv-next-template";
+    if (visibleCards === 1) {
+        templateClassName += " mosaic-single-card";
+    }
     return (
-        <article className="mosaic-template">
-            <section className="mosaic-name-card">
-                <h1>Maya Petrova</h1>
-                <p>Product Designer</p>
-            </section>
-
-            <section className="mosaic-contact-card">
-                <h2>Contact</h2>
-                <p>Sofia, Bulgaria</p>
-                <p>maya.petrova@email.com</p>
-                <p>+359 88 123 4567</p>
-                <p>maya-petrova.design</p>
-            </section>
-
-            <section className="mosaic-profile-card">
-                <h2>Profile</h2>
-                <p>
-                    Product designer focused on clear, useful and human-centered digital experiences. I combine
-                    research, visual design and close collaboration with development teams.
-                </p>
-            </section>
-
-            <section className="mosaic-highlight-card">
-                <span>Selected impact</span>
-                <strong>28%</strong>
-                <p>increase in onboarding completion.</p>
-            </section>
-
-            <section className="mosaic-experience-card">
-                <h2>Experience</h2>
-
-                <article>
-                    <div>
-                        <h3>Senior Product Designer</h3>
-                        <span>Northline Studio</span>
-                    </div>
-                    <small>2023 — Present</small>
-                    <p>
-                        Led product discovery, interaction design and design-system work across multiple SaaS products.
-                    </p>
-                    <ul>
-                        <li>Built a shared component library for three products.</li>
-                        <li>Worked directly with product, development and QA.</li>
-                    </ul>
-                </article>
-
-                <article>
-                    <div>
-                        <h3>Product Designer</h3>
-                        <span>Bright Labs</span>
-                    </div>
-                    <small>2021 — 2023</small>
-                    <p>Designed responsive web and mobile products from early research to final implementation.</p>
-                </article>
-            </section>
-
-            <section className="mosaic-skills-card">
-                <h2>Skills</h2>
-                <span>Product strategy</span>
-                <span>UX research</span>
-                <span>UI design</span>
-                <span>Design systems</span>
-                <span>Prototyping</span>
-                <span>Figma</span>
-            </section>
-
-            <section className="mosaic-education-card">
-                <h2>Education</h2>
-                <h3>BA, Visual Communication</h3>
-                <p>National Academy of Art</p>
-                <small>2017 — 2021</small>
-            </section>
-
-            <section className="mosaic-project-card">
-                <h2>Selected project</h2>
-                <h3>Civic Path</h3>
-                <p>
-                    A service-design concept that simplifies municipal processes through clearer language and fewer
-                    steps.
-                </p>
-            </section>
-
-            <section className="mosaic-language-card">
-                <h2>Languages</h2>
-                <p>Bulgarian Native</p>
-                <p>English C1</p>
-            </section>
+        <article className={templateClassName}>
+            {(view.name || HasText(view.basics.professionalTitle)) && (
+                <section className="mosaic-name-card mosaic-card">
+                    {view.name && <h1>{view.name}</h1>}
+                    {HasText(view.basics.professionalTitle) && <p>{view.basics.professionalTitle}</p>}
+                </section>
+            )}
+            {(view.contact.length > 0 || view.links.length > 0) && (
+                <section className="mosaic-contact-card mosaic-card">
+                    <h2>Contact</h2>
+                    {contactItems}
+                    {linksItems}
+                </section>
+            )}
+            {HasText(view.profile) && (
+                <section className="mosaic-profile-card mosaic-card">
+                    <h2>Profile</h2>
+                    <p>{view.profile}</p>
+                </section>
+            )}
+            {hasImpact && (
+                <section className="mosaic-highlight-card mosaic-card">
+                    {HasText(view.studioImpact.label) && <span>{view.studioImpact.label}</span>}
+                    {HasText(view.studioImpact.value) && <strong>{view.studioImpact.value}</strong>}
+                    {HasText(view.studioImpact.description) && <p>{view.studioImpact.description}</p>}
+                </section>
+            )}
+            {view.employment.length > 0 && (
+                <section className="mosaic-experience-card mosaic-card">
+                    <h2>Experience</h2>
+                    <Entries items={view.employment} />
+                </section>
+            )}
+            {view.skills.length > 0 && (
+                <section className="mosaic-skills-card mosaic-card">
+                    <h2>Skills</h2>
+                    {skillsItems}
+                </section>
+            )}
+            {view.education.length > 0 && (
+                <section className="mosaic-education-card mosaic-card">
+                    <h2>Education</h2>
+                    <Entries items={view.education} />
+                </section>
+            )}
+            {view.projects.length > 0 && (
+                <section className="mosaic-project-card mosaic-card">
+                    <h2>{projectsTitle}</h2>
+                    <Entries items={view.projects} />
+                </section>
+            )}
+            {view.languages.length > 0 && (
+                <section className="mosaic-language-card mosaic-card">
+                    <h2>Languages</h2>
+                    {languagesItems}
+                </section>
+            )}
+            {view.mainCustom.length > 0 && (
+                <section className="mosaic-main-custom-card mosaic-card">
+                    <h2>{view.sectionTitles.mainCustom}</h2>
+                    <Entries items={view.mainCustom} />
+                </section>
+            )}
+            {view.sideCustom.length > 0 && (
+                <section className="mosaic-side-custom-card mosaic-card">
+                    <h2>{view.sectionTitles.sideCustom}</h2>
+                    <Entries items={view.sideCustom} />
+                </section>
+            )}
         </article>
     );
 }

@@ -11,6 +11,23 @@ function CreateCV() {
         useCreateCvDocument();
     const TemplateComponent = template.Component;
     const EditorComponent = template.EditorComponent;
+    function ChangeTitle(title) {
+        UpdateDocument({ title: title });
+    }
+    function ZoomOut() {
+        let nextZoom = zoom - 6;
+        if (nextZoom < 54) {
+            nextZoom = 54;
+        }
+        setZoom(nextZoom);
+    }
+    function ZoomIn() {
+        let nextZoom = zoom + 6;
+        if (nextZoom > 200) {
+            nextZoom = 200;
+        }
+        setZoom(nextZoom);
+    }
     if (!template.isImplemented) {
         return (
             <main className="create-cv-unavailable-page">
@@ -30,18 +47,14 @@ function CreateCV() {
                 cvDocument={document}
                 title={document.title}
                 templateName={template.name}
-                onTitleChange={(title) =>
-                    UpdateDocument({
-                        title,
-                    })
-                }
+                onTitleChange={ChangeTitle}
                 onImport={ImportWorkspaceBackup}
                 saveStatus={saveStatus}
                 onRetrySave={RetrySave}
             />
 
             <main className="create-cv-layout">
-                <EditorComponent cv={document.data} templateId={template.id} actions={actions} />
+                <EditorComponent cv={document.data} actions={actions} />
 
                 <section className="create-cv-preview-pane">
                     <div className="create-cv-preview-toolbar">
@@ -52,19 +65,11 @@ function CreateCV() {
                             </small>
                         </div>
                         <div className="create-cv-zoom-options">
-                            <button
-                                type="button"
-                                aria-label="Zoom out"
-                                onClick={() => setZoom((value) => Math.max(54, value - 6))}
-                            >
+                            <button type="button" aria-label="Zoom out" onClick={ZoomOut}>
                                 <Icons.ZoomOutLucideIcon className="create-cv-toolbar-icon" />
                             </button>
                             <span>{zoom}%</span>
-                            <button
-                                type="button"
-                                aria-label="Zoom in"
-                                onClick={() => setZoom((value) => Math.min(200, value + 6))}
-                            >
+                            <button type="button" aria-label="Zoom in" onClick={ZoomIn}>
                                 <Icons.ZoomInLucideIcon className="create-cv-toolbar-icon" />
                             </button>
                         </div>

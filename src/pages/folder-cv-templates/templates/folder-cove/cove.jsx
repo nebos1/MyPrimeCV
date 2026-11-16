@@ -1,123 +1,172 @@
 import "./cove.css";
-function CoveTemplate() {
+import {
+    Entries,
+    GetTemplateContent,
+    HasText,
+    Knowledge,
+    Link,
+    NextTemplateSampleData,
+    Photo,
+} from "../../../folder-create-cv/components/template-content";
+function CoveTemplate({ data = NextTemplateSampleData }) {
+    const view = GetTemplateContent(data);
+    let projectsTitle = view.sectionTitles.projects.trim();
+    if (projectsTitle === "") {
+        projectsTitle = "Selected project";
+    }
+    const hasSide =
+        HasText(view.basics.photo) ||
+        view.initials ||
+        view.contact.length > 0 ||
+        view.skills.length > 0 ||
+        view.languages.length > 0 ||
+        view.links.length > 0 ||
+        view.sideCustom.length > 0;
+    const contactItems = [];
+    for (let index = 0; index < view.contact.length; index++) {
+        const line = view.contact[index];
+        contactItems.push(<p key={index}>{line}</p>);
+    }
+    const skillsItems = [];
+    for (let index = 0; index < view.skills.length; index++) {
+        const item = view.skills[index];
+        skillsItems.push(<Knowledge item={item} key={index} />);
+    }
+    const languagesItems = [];
+    for (let index = 0; index < view.languages.length; index++) {
+        const item = view.languages[index];
+        languagesItems.push(<Knowledge item={item} key={index} />);
+    }
+    const linksItems = [];
+    for (let index = 0; index < view.links.length; index++) {
+        const item = view.links[index];
+        linksItems.push(
+            <p key={index}>
+                <Link item={item} sample={data === NextTemplateSampleData} />
+            </p>,
+        );
+    }
+    let templateClassName;
+    if (hasSide) {
+        templateClassName = "cove-template cv-next-template";
+    } else {
+        templateClassName = "cove-template cv-next-template cove-single-column";
+    }
+    let skillsSectionClass = "cove-sidebar-section";
+    if (view.contact.length > 0) {
+        skillsSectionClass += " cove-sidebar-section-spaced";
+    }
+    let languagesSectionClass = "cove-sidebar-section";
+    if (view.contact.length > 0 || view.skills.length > 0) {
+        languagesSectionClass += " cove-sidebar-section-spaced";
+    }
+    let linksSectionClass = "cove-sidebar-section";
+    if (view.contact.length > 0 || view.skills.length > 0 || view.languages.length > 0) {
+        linksSectionClass += " cove-sidebar-section-spaced";
+    }
+    let customSectionClass = "cove-sidebar-section";
+    if (
+        view.contact.length > 0 ||
+        view.skills.length > 0 ||
+        view.languages.length > 0 ||
+        view.links.length > 0
+    ) {
+        customSectionClass += " cove-sidebar-section-spaced";
+    }
     return (
-        <article className="cove-template">
-            <aside className="cove-sidebar">
-                <div className="cove-avatar">MP</div>
-
-                <section>
-                    <h2>Personal details</h2>
-                    <p>maya.petrova@email.com</p>
-                    <p>+359 88 123 4567</p>
-                    <p>Sofia, Bulgaria</p>
-                </section>
-
-                <section className="cove-sidebar-section-spaced">
-                    <h2>Skills</h2>
-                    <strong>Product strategy</strong>
-                    <strong>UX research</strong>
-                    <strong>UI design</strong>
-                    <strong>Design systems</strong>
-                    <strong>Prototyping</strong>
-                    <strong>Figma</strong>
-                </section>
-
-                <section className="cove-sidebar-section-spaced">
-                    <h2>Languages</h2>
-                    <div className="cove-pair">
-                        <span>Bulgarian</span>
-                        <small>Native</small>
-                    </div>
-                    <div className="cove-pair">
-                        <span>English</span>
-                        <small>C1</small>
-                    </div>
-                </section>
-
-                <section className="cove-sidebar-section-spaced">
-                    <h2>Links</h2>
-                    <p>maya-petrova.design</p>
-                    <p>linkedin.com/in/mayapetrova</p>
-                </section>
-            </aside>
-
+        <article className={templateClassName}>
+            {hasSide && (
+                <aside className="cove-sidebar">
+                    {(view.initials || HasText(view.basics.photo)) && (
+                        <div className="cove-avatar">
+                            <Photo view={view} />
+                        </div>
+                    )}
+                    {view.contact.length > 0 && (
+                        <section className="cove-sidebar-section">
+                            <h2>Personal details</h2>
+                            {contactItems}
+                        </section>
+                    )}
+                    {view.skills.length > 0 && (
+                        <section className={skillsSectionClass}>
+                            <h2>Skills</h2>
+                            {skillsItems}
+                        </section>
+                    )}
+                    {view.languages.length > 0 && (
+                        <section className={languagesSectionClass}>
+                            <h2>Languages</h2>
+                            {languagesItems}
+                        </section>
+                    )}
+                    {view.links.length > 0 && (
+                        <section className={linksSectionClass}>
+                            <h2>Links</h2>
+                            {linksItems}
+                        </section>
+                    )}
+                    {view.sideCustom.length > 0 && (
+                        <section className={customSectionClass}>
+                            <h2>{view.sectionTitles.sideCustom}</h2>
+                            <Entries items={view.sideCustom} />
+                        </section>
+                    )}
+                </aside>
+            )}
             <main className="cove-main">
-                <header className="cove-header">
-                    <h1>Maya Petrova</h1>
-                    <p>Product Designer</p>
-                </header>
-
-                <section className="cove-section">
-                    <h2>Professional summary</h2>
-                    <p>
-                        Product designer focused on clear, useful and human-centered digital experiences. I combine
-                        research, visual design and close collaboration with development teams.
-                    </p>
-                </section>
-
-                <section className="cove-section">
-                    <h2>Employment history</h2>
-
-                    <article className="cove-job">
-                        <div className="cove-job-heading">
-                            <div>
-                                <h3>Senior Product Designer</h3>
-                                <span>Northline Studio</span>
-                            </div>
-                            <small>2023 — Present</small>
-                        </div>
-
-                        <ul>
-                            <li>Improved onboarding completion by 28%.</li>
-                            <li>Built a shared component library for three products.</li>
-                            <li>Worked directly with product, development and QA.</li>
-                        </ul>
-                    </article>
-
-                    <article className="cove-job">
-                        <div className="cove-job-heading">
-                            <div>
-                                <h3>Product Designer</h3>
-                                <span>Bright Labs</span>
-                            </div>
-                            <small>2021 — 2023</small>
-                        </div>
-
-                        <ul>
-                            <li>Created interactive prototypes and user flows.</li>
-                            <li>Introduced lightweight usability testing.</li>
-                        </ul>
-                    </article>
-                </section>
-
-                <section className="cove-section">
-                    <h2>Education</h2>
-
-                    <div className="cove-row">
-                        <div>
-                            <h3>BA, Visual Communication</h3>
-                            <span>National Academy of Art</span>
-                        </div>
-                        <small>2017 — 2021</small>
-                    </div>
-                </section>
-
-                <section className="cove-section">
-                    <h2>Selected project</h2>
-
-                    <div className="cove-project">
-                        <div>
-                            <h3>Civic Path</h3>
-                            <span>Service design and product research</span>
-                        </div>
-                        <small>2025</small>
-                    </div>
-
-                    <p>
-                        A service-design concept that simplifies municipal processes through clearer language and fewer
-                        steps.
-                    </p>
-                </section>
+                {(view.name || HasText(view.basics.professionalTitle)) && (
+                    <header className="cove-header">
+                        {view.name && <h1>{view.name}</h1>}
+                        {HasText(view.basics.professionalTitle) && <p>{view.basics.professionalTitle}</p>}
+                    </header>
+                )}
+                {HasText(view.profile) && (
+                    <section className="cove-section">
+                        <h2>
+                            Professional summary<span className="cove-section-line" aria-hidden="true"></span>
+                        </h2>
+                        <p className="cove-profile-text">{view.profile}</p>
+                    </section>
+                )}
+                {view.employment.length > 0 && (
+                    <section className="cove-section">
+                        <h2>
+                            Employment history<span className="cove-section-line" aria-hidden="true"></span>
+                        </h2>
+                        <Entries
+                            items={view.employment}
+                            className="cove-job"
+                            headingClassName="cove-job-heading"
+                        />
+                    </section>
+                )}
+                {view.education.length > 0 && (
+                    <section className="cove-section">
+                        <h2>
+                            Education<span className="cove-section-line" aria-hidden="true"></span>
+                        </h2>
+                        <Entries items={view.education} className="cove-job" />
+                    </section>
+                )}
+                {view.projects.length > 0 && (
+                    <section className="cove-section">
+                        <h2>
+                            {projectsTitle}
+                            <span className="cove-section-line" aria-hidden="true"></span>
+                        </h2>
+                        <Entries items={view.projects} className="cove-job" />
+                    </section>
+                )}
+                {view.mainCustom.length > 0 && (
+                    <section className="cove-section">
+                        <h2>
+                            {view.sectionTitles.mainCustom}
+                            <span className="cove-section-line" aria-hidden="true"></span>
+                        </h2>
+                        <Entries items={view.mainCustom} className="cove-job" />
+                    </section>
+                )}
             </main>
         </article>
     );

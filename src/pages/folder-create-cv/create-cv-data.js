@@ -2,21 +2,29 @@ export const CvSchemaVersion = 3;
 export const DefaultTemplateId = "meadow";
 export const LanguageLevelOptions = ["", "A1", "A2", "B1", "B2", "C1", "C2", "Native"];
 export const RatingStyleOptions = [
-    { value: "none", label: "No rating" },
-    { value: "circle", label: "Circles" },
-    { value: "square", label: "Squares" },
+    {
+        value: "none",
+        label: "No rating",
+    },
+    {
+        value: "circle",
+        label: "Circles",
+    },
+    {
+        value: "square",
+        label: "Squares",
+    },
 ];
 const AtlasMetricSlotCount = 3;
-
-const DefaultProjectTitles = {
-    atlas: "Selected Case study",
-    studio: "Selected work",
-};
-
 export function GetDefaultProjectTitle(templateId) {
-    return DefaultProjectTitles[templateId] ?? "Selected project";
+    if (templateId === "atlas") {
+        return "Selected Case study";
+    }
+    if (templateId === "studio") {
+        return "Selected work";
+    }
+    return "Selected project";
 }
-
 function NormalizeDateFormat(value) {
     if (value === "year") {
         return "year";
@@ -24,34 +32,63 @@ function NormalizeDateFormat(value) {
         return "full";
     }
 }
-
 function NormalizeTextFields(defaults, source) {
-    const result = Object.assign({}, defaults, source);
-    for (const key of Object.keys(defaults)) {
+    const result = {};
+    const defaultKeys = Object.keys(defaults);
+    for (let index = 0; index < defaultKeys.length; index++) {
+        const key = defaultKeys[index];
+        result[key] = defaults[key];
+    }
+    if (source) {
+        const sourceKeys = Object.keys(source);
+        for (let index = 0; index < sourceKeys.length; index++) {
+            const key = sourceKeys[index];
+            result[key] = source[key];
+        }
+    }
+    for (let index = 0; index < defaultKeys.length; index++) {
+        const key = defaultKeys[index];
         if (typeof defaults[key] === "string" && typeof result[key] !== "string") {
             result[key] = defaults[key];
         }
     }
     return result;
 }
-
 export function FormatCvDate(value, format = "full") {
-    const text = String(value ?? "").trim();
-    const isoMatch = /^(\d{4})-(\d{2})-(\d{2})$/.exec(text);
-
-    if (NormalizeDateFormat(format) === "year") {
-        const fullDateMatch = /^(\d{2})\.(\d{2})\.(\d{4})$/.exec(text);
-
-        return isoMatch?.[1] ?? fullDateMatch?.[3] ?? text;
+    let text = "";
+    if (value !== null && value !== undefined) {
+        text = String(value).trim();
     }
-
-    if (isoMatch) {
-        return `${isoMatch[3]}.${isoMatch[2]}.${isoMatch[1]}`;
-    } else {
+    const isoParts = text.split("-");
+    let isIsoDate = false;
+    if (
+        isoParts.length === 3 &&
+        IsDateDigits(isoParts[0], 4) &&
+        IsDateDigits(isoParts[1], 2) &&
+        IsDateDigits(isoParts[2], 2)
+    ) {
+        isIsoDate = true;
+    }
+    if (format === "year") {
+        if (isIsoDate) {
+            return isoParts[0];
+        }
+        const fullParts = text.split(".");
+        if (
+            fullParts.length === 3 &&
+            IsDateDigits(fullParts[0], 2) &&
+            IsDateDigits(fullParts[1], 2) &&
+            IsDateDigits(fullParts[2], 4)
+        ) {
+            return fullParts[2];
+        }
         return text;
     }
+    if (isIsoDate) {
+        return isoParts[2] + "." + isoParts[1] + "." + isoParts[0];
+    }
+    return text;
 }
-
 export function CreateEmptyCvData() {
     const data = {
         basics: {
@@ -70,7 +107,11 @@ export function CreateEmptyCvData() {
         profile: "",
         tools: "",
         footerNote: "",
-        studioImpact: { label: "", value: "", description: "" },
+        studioImpact: {
+            label: "",
+            value: "",
+            description: "",
+        },
         atlasMetrics: CreateEmptyAtlasMetrics(),
         sectionTitles: {
             linenExpertise: "Expertise",
@@ -88,21 +129,21 @@ export function CreateEmptyCvData() {
         mainCustom: [CreateEmptyCustomItem()],
         sideCustom: [CreateEmptyCustomItem()],
     };
-
     return data;
 }
-
 function CreateEmptyAtlasMetric() {
     return {
         addition: "",
         label: "",
     };
 }
-
 function CreateEmptyAtlasMetrics() {
-    return Array.from({ length: AtlasMetricSlotCount }, () => CreateEmptyAtlasMetric());
+    const metrics = [];
+    for (let index = 0; index < AtlasMetricSlotCount; index++) {
+        metrics.push(CreateEmptyAtlasMetric());
+    }
+    return metrics;
 }
-
 export function CreateEmptyEmployment() {
     return {
         role: "",
@@ -118,7 +159,6 @@ export function CreateEmptyEmployment() {
         summary: "",
     };
 }
-
 export function CreateEmptyEducation() {
     return {
         degree: "",
@@ -131,7 +171,6 @@ export function CreateEmptyEducation() {
         endDateFormat: "full",
     };
 }
-
 export function CreateEmptySkill() {
     return {
         label: "",
@@ -139,7 +178,6 @@ export function CreateEmptySkill() {
         ratingStyle: "none",
     };
 }
-
 export function CreateEmptyLanguage() {
     return {
         name: "",
@@ -148,14 +186,12 @@ export function CreateEmptyLanguage() {
         ratingStyle: "none",
     };
 }
-
 export function CreateEmptyLink() {
     return {
         label: "",
         url: "",
     };
 }
-
 export function CreateEmptyProject() {
     return {
         name: "",
@@ -164,7 +200,6 @@ export function CreateEmptyProject() {
         descriptionListStyle: "disc",
     };
 }
-
 export function CreateEmptyCustomItem() {
     return {
         name: "",
@@ -173,74 +208,91 @@ export function CreateEmptyCustomItem() {
         descriptionListStyle: "none",
     };
 }
-
 export function NormalizeSkillData(skill) {
     if (typeof skill === "string") {
-        return Object.assign({}, CreateEmptySkill(), { label: skill });
+        const result = CreateEmptySkill();
+        result.label = skill;
+        return result;
     }
-
-    return NormalizeTextFields(
-        CreateEmptySkill(),
-        Object.assign({}, skill, {
-            label: skill?.label ?? skill?.name ?? "",
-            rating: Math.max(0, Math.min(5, Number(skill?.rating ?? 0))),
-            ratingStyle: skill?.ratingStyle ?? "none",
-        }),
-    );
+    let source = skill;
+    if (!source) {
+        source = {};
+    }
+    const result = NormalizeTextFields(CreateEmptySkill(), source);
+    let label = source.label;
+    if (label === null || label === undefined) {
+        label = source.name;
+    }
+    result.label = "";
+    if (typeof label === "string") {
+        result.label = label;
+    }
+    result.rating = NormalizeRating(source.rating);
+    return result;
 }
-
 function NormalizeLanguageData(language) {
-    return NormalizeTextFields(
-        CreateEmptyLanguage(),
-        Object.assign({}, language, {
-            rating: Math.max(0, Math.min(5, Number(language?.rating ?? 0))),
-            ratingStyle: language?.ratingStyle ?? "none",
-        }),
-    );
-}
-
-function NormalizeAtlasMetricData(metric) {
-    return NormalizeTextFields(CreateEmptyAtlasMetric(), {
-        addition: metric?.addition ?? "",
-        label: metric?.label ?? "",
-    });
-}
-
-export function NormalizeAtlasMetrics(metrics) {
-    let sourceMetrics;
-    if (Array.isArray(metrics)) {
-        sourceMetrics = metrics;
-    } else {
-        sourceMetrics = [];
+    let source = language;
+    if (!source) {
+        source = {};
     }
-
-    return Array.from({ length: AtlasMetricSlotCount }, (_, index) => NormalizeAtlasMetricData(sourceMetrics[index]));
+    const result = NormalizeTextFields(CreateEmptyLanguage(), source);
+    result.rating = NormalizeRating(source.rating);
+    return result;
 }
-
+function NormalizeAtlasMetricData(metric) {
+    const result = CreateEmptyAtlasMetric();
+    if (metric) {
+        if (typeof metric.addition === "string") {
+            result.addition = metric.addition;
+        }
+        if (typeof metric.label === "string") {
+            result.label = metric.label;
+        }
+    }
+    return result;
+}
+export function NormalizeAtlasMetrics(metrics) {
+    let source = [];
+    if (Array.isArray(metrics)) {
+        source = metrics;
+    }
+    const result = [];
+    for (let index = 0; index < AtlasMetricSlotCount; index++) {
+        result.push(NormalizeAtlasMetricData(source[index]));
+    }
+    return result;
+}
 export function NormalizeCustomItemData(item) {
-    return NormalizeTextFields(CreateEmptyCustomItem(), {
-        name: item?.name ?? "",
-        subtitle: item?.subtitle ?? "",
-        description: item?.description ?? "",
-        descriptionListStyle: item?.descriptionListStyle ?? "none",
-    });
+    const result = CreateEmptyCustomItem();
+    if (item) {
+        if (typeof item.name === "string") {
+            result.name = item.name;
+        }
+        if (typeof item.subtitle === "string") {
+            result.subtitle = item.subtitle;
+        }
+        if (typeof item.description === "string") {
+            result.description = item.description;
+        }
+        if (typeof item.descriptionListStyle === "string") {
+            result.descriptionListStyle = item.descriptionListStyle;
+        }
+    }
+    return result;
 }
-
 export function NormalizeCvData(data) {
     const defaults = CreateEmptyCvData();
-    const source = data || {};
-    const next = Object.assign({}, defaults, source);
-
+    let source = data;
+    if (!source) {
+        source = {};
+    }
+    const next = NormalizeTextFields(defaults, source);
     next.basics = NormalizeTextFields(defaults.basics, source.basics);
-    next.profile = typeof source.profile === "string" ? source.profile : "";
-    next.tools = typeof source.tools === "string" ? source.tools : "";
-    next.footerNote = typeof source.footerNote === "string" ? source.footerNote : "";
     next.studioImpact = NormalizeTextFields(defaults.studioImpact, source.studioImpact);
-    next.basics.birthDateFormat = NormalizeDateFormat(source.basics?.birthDateFormat);
     next.sectionTitles = NormalizeTextFields(defaults.sectionTitles, source.sectionTitles);
+    next.basics.birthDateFormat = NormalizeDateFormat(next.basics.birthDateFormat);
     next.atlasMetrics = NormalizeAtlasMetrics(source.atlasMetrics);
-
-    for (const field of [
+    const fields = [
         "employment",
         "education",
         "skills",
@@ -249,34 +301,61 @@ export function NormalizeCvData(data) {
         "projects",
         "mainCustom",
         "sideCustom",
-    ]) {
-        if (!Array.isArray(next[field]) || next[field].length === 0) next[field] = defaults[field];
+    ];
+    for (let index = 0; index < fields.length; index++) {
+        const field = fields[index];
+        if (!Array.isArray(next[field]) || next[field].length === 0) {
+            next[field] = defaults[field];
+        }
     }
-
-    next.employment = next.employment.map((item) => {
-        const employment = NormalizeTextFields(CreateEmptyEmployment(), item);
-        employment.startDateFormat = NormalizeDateFormat(item?.startDateFormat);
-        employment.endDateFormat = NormalizeDateFormat(item?.endDateFormat);
-        return employment;
-    });
-    next.education = next.education.map((item) => {
-        const education = NormalizeTextFields(CreateEmptyEducation(), item);
-        education.startDateFormat = NormalizeDateFormat(item?.startDateFormat);
-        education.endDateFormat = NormalizeDateFormat(item?.endDateFormat);
-        return education;
-    });
-    next.skills = next.skills.map(NormalizeSkillData);
-    next.languages = next.languages.map(NormalizeLanguageData);
-    next.links = next.links.map((item) => NormalizeTextFields(CreateEmptyLink(), item));
-    next.projects = next.projects.map((item) => {
-        const project = NormalizeTextFields(CreateEmptyProject(), item);
-        return project;
-    });
-    next.mainCustom = next.mainCustom.map(NormalizeCustomItemData);
-    next.sideCustom = next.sideCustom.map(NormalizeCustomItemData);
+    const employment = [];
+    for (let index = 0; index < next.employment.length; index++) {
+        const item = NormalizeTextFields(CreateEmptyEmployment(), next.employment[index]);
+        item.startDateFormat = NormalizeDateFormat(item.startDateFormat);
+        item.endDateFormat = NormalizeDateFormat(item.endDateFormat);
+        employment.push(item);
+    }
+    next.employment = employment;
+    const education = [];
+    for (let index = 0; index < next.education.length; index++) {
+        const item = NormalizeTextFields(CreateEmptyEducation(), next.education[index]);
+        item.startDateFormat = NormalizeDateFormat(item.startDateFormat);
+        item.endDateFormat = NormalizeDateFormat(item.endDateFormat);
+        education.push(item);
+    }
+    next.education = education;
+    const skills = [];
+    for (let index = 0; index < next.skills.length; index++) {
+        skills.push(NormalizeSkillData(next.skills[index]));
+    }
+    next.skills = skills;
+    const languages = [];
+    for (let index = 0; index < next.languages.length; index++) {
+        languages.push(NormalizeLanguageData(next.languages[index]));
+    }
+    next.languages = languages;
+    const links = [];
+    for (let index = 0; index < next.links.length; index++) {
+        links.push(NormalizeTextFields(CreateEmptyLink(), next.links[index]));
+    }
+    next.links = links;
+    const projects = [];
+    for (let index = 0; index < next.projects.length; index++) {
+        projects.push(NormalizeTextFields(CreateEmptyProject(), next.projects[index]));
+    }
+    next.projects = projects;
+    const mainCustom = [];
+    for (let index = 0; index < next.mainCustom.length; index++) {
+        mainCustom.push(NormalizeCustomItemData(next.mainCustom[index]));
+    }
+    next.mainCustom = mainCustom;
+    const sideCustom = [];
+    for (let index = 0; index < next.sideCustom.length; index++) {
+        sideCustom.push(NormalizeCustomItemData(next.sideCustom[index]));
+    }
+    next.sideCustom = sideCustom;
     return next;
 }
-
 export const SampleCvData = {
     basics: {
         firstName: "Maya",
@@ -290,9 +369,18 @@ export const SampleCvData = {
     profile:
         "Product designer focused on clear, useful and human-centered digital experiences. I combine research, visual design and close collaboration with development teams.",
     atlasMetrics: [
-        { addition: "6+", label: "Years experience" },
-        { addition: "3", label: "Design systems" },
-        { addition: "28%", label: "Activation growth" },
+        {
+            addition: "6+",
+            label: "Years experience",
+        },
+        {
+            addition: "3",
+            label: "Design systems",
+        },
+        {
+            addition: "28%",
+            label: "Activation growth",
+        },
     ],
     employment: [
         {
@@ -325,12 +413,24 @@ export const SampleCvData = {
     ],
     skills: ["Product strategy", "UX research", "UI design", "Design systems", "Prototyping", "Figma"],
     languages: [
-        { name: "Bulgarian", level: "Native" },
-        { name: "English", level: "C1" },
+        {
+            name: "Bulgarian",
+            level: "Native",
+        },
+        {
+            name: "English",
+            level: "C1",
+        },
     ],
     links: [
-        { label: "Portfolio", url: "maya-petrova.design" },
-        { label: "LinkedIn", url: "linkedin.com/in/mayapetrova" },
+        {
+            label: "Portfolio",
+            url: "maya-petrova.design",
+        },
+        {
+            label: "LinkedIn",
+            url: "linkedin.com/in/mayapetrova",
+        },
     ],
     projects: [
         {
@@ -341,7 +441,30 @@ export const SampleCvData = {
         },
     ],
 };
-
 export function CloneCvData(data) {
     return JSON.parse(JSON.stringify(data));
+}
+function IsDateDigits(text, length) {
+    if (text.length !== length) {
+        return false;
+    }
+    for (let index = 0; index < text.length; index++) {
+        if (text[index] < "0" || text[index] > "9") {
+            return false;
+        }
+    }
+    return true;
+}
+function NormalizeRating(value) {
+    let rating = Number(value);
+    if (value === undefined || value === null) {
+        rating = 0;
+    }
+    if (rating < 0) {
+        rating = 0;
+    }
+    if (rating > 5) {
+        rating = 5;
+    }
+    return rating;
 }

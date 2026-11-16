@@ -180,38 +180,6 @@ function CvEditorSidebar({ cv, actions }) {
                         />
                     </label>
                     <label className="create-cv-select-field">
-                        <span>Start date display</span>
-                        <select
-                            value={employmentEntry.startDateFormat}
-                            onChange={(event) =>
-                                actions.UpdateEmploymentField(
-                                    employmentEntryIndex,
-                                    "startDateFormat",
-                                    event.target.value,
-                                )
-                            }
-                        >
-                            <option value="full">Full date</option>
-                            <option value="year">Year only</option>
-                        </select>
-                    </label>
-                    <label className="create-cv-select-field">
-                        <span>End date display</span>
-                        <select
-                            value={employmentEntry.endDateFormat}
-                            onChange={(event) =>
-                                actions.UpdateEmploymentField(
-                                    employmentEntryIndex,
-                                    "endDateFormat",
-                                    event.target.value,
-                                )
-                            }
-                        >
-                            <option value="full">Full date</option>
-                            <option value="year">Year only</option>
-                        </select>
-                    </label>
-                    <label className="create-cv-select-field">
                         <span>Description display</span>
                         <select
                             value={employmentEntry.descriptionListStyle}
@@ -345,38 +313,6 @@ function CvEditorSidebar({ cv, actions }) {
                                 )
                             }
                         />
-                    </label>
-                    <label className="create-cv-select-field">
-                        <span>Start date display</span>
-                        <select
-                            value={educationEntry.startDateFormat}
-                            onChange={(event) =>
-                                actions.UpdateEducationField(
-                                    educationEntryIndex,
-                                    "startDateFormat",
-                                    event.target.value,
-                                )
-                            }
-                        >
-                            <option value="full">Full date</option>
-                            <option value="year">Year only</option>
-                        </select>
-                    </label>
-                    <label className="create-cv-select-field">
-                        <span>End date display</span>
-                        <select
-                            value={educationEntry.endDateFormat}
-                            onChange={(event) =>
-                                actions.UpdateEducationField(
-                                    educationEntryIndex,
-                                    "endDateFormat",
-                                    event.target.value,
-                                )
-                            }
-                        >
-                            <option value="full">Full date</option>
-                            <option value="year">Year only</option>
-                        </select>
                     </label>
                 </div>
             </article>,

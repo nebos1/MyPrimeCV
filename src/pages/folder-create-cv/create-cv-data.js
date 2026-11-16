@@ -311,16 +311,16 @@ export function NormalizeCvData(data) {
     const employment = [];
     for (let index = 0; index < next.employment.length; index++) {
         const item = NormalizeTextFields(CreateEmptyEmployment(), next.employment[index]);
-        item.startDateFormat = NormalizeDateFormat(item.startDateFormat);
-        item.endDateFormat = NormalizeDateFormat(item.endDateFormat);
+        item.startDateFormat = "full";
+        item.endDateFormat = "full";
         employment.push(item);
     }
     next.employment = employment;
     const education = [];
     for (let index = 0; index < next.education.length; index++) {
         const item = NormalizeTextFields(CreateEmptyEducation(), next.education[index]);
-        item.startDateFormat = NormalizeDateFormat(item.startDateFormat);
-        item.endDateFormat = NormalizeDateFormat(item.endDateFormat);
+        item.startDateFormat = "full";
+        item.endDateFormat = "full";
         education.push(item);
     }
     next.education = education;

@@ -30,15 +30,12 @@ function MainNavbar() {
                     </span>
                 </a>
                 <a href="/cv-templates" className="cv-templates">
-                    <Icons.FileTextLucideIcon className="workspace-action-icon" aria-hidden="true" />
                     CV templates
                 </a>
                 <button type="button" className="workspace-motivation-letters" onClick={GoToCreateMotivationLetter}>
-                    <Icons.MailLucideIcon className="workspace-action-icon" aria-hidden="true" />
                     Motivation letters
                 </button>
                 <a href="/#why-free" className="why-free" onClick={GoToFreeSection}>
-                    <Icons.GiftLucideIcon className="workspace-action-icon" aria-hidden="true" />
                     Why free?
                 </a>
                 <button type="button" className="my-workspace" onClick={GoToWorkspace}>
